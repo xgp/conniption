@@ -40,6 +40,8 @@ Put these lines in */etc/launchd.conf*
     
 Restart your computer.
 
+Use maven clean install directive to make compile and make sure everythng works. I highly recommend you do not use -DskipTests. The tests will check your connection to TradeKing
+
 ## Usage
 
 If you're just here to use conniption, there are really only a couple classes you need to know about
