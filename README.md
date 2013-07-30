@@ -20,7 +20,7 @@ They all access System environment variables (via [System.getEnv()](http://docs.
 
 ### Linux
 
-Put these lines in /etc/environment.
+Put these lines in */etc/environment*.
 
     API_KEY=<YOUR API KEY HERE>
     API_SECRET=<YOUR API SECRET HERE>
@@ -30,7 +30,7 @@ Put these lines in /etc/environment.
 
 ### Mac
 
-Put these lines in /etc/launchd.conf
+Put these lines in */etc/launchd.conf*
 
     setenv API_KEY <YOUR API KEY HERE>
     setenv API_SECRET <YOUR API SECRET HERE>
@@ -227,6 +227,26 @@ will yield
 
 #### [MarketOrder](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketOrder.java)
 
+You'll need a good understanding of how to use the FIXMLBuilder, which uses FIXML to post orders. If you want to validate your order, use MarketOrderPreview instead.
+
+		FIXMLBuilder builder = new FIXMLBuilder("38580744");
+		builder.timeInForce(TimeInForceField.DAY_ORDER);
+			.symbol("OCQLF");
+			.priceType(PriceType.LIMIT);
+			.securityType(SecurityType.STOCK);
+			.quantity(1);
+			.executionPrice(.01);
+			.side(MarketSideField.BUY);
+		
+		MarketPreviewOrder order = new MarketPreviewOrder("38580744", builder);
+		for(OrderPreviewField f: OrderPreviewField.values())
+		{
+			if(order.hasField(f))
+			{
+				String value = order.getField(f);
+				System.out.println(f+" "+value);
+			}
+		}
 
 ## Warnings
 
