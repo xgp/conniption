@@ -15,7 +15,7 @@ The missing TradeKing API for Java.
 
 ## Installing
 
-To avoid putting these OAuth keys in the code base, and do avoid config files. [TradeKingForeman](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/foreman/TradeKingForeman.java) uses [ForemanConstants](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/foreman/ForemanConstants.java) convience methods.
+To avoid putting these OAuth keys in the code base, and to avoid config files. [TradeKingForeman](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/foreman/TradeKingForeman.java) uses [ForemanConstants](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/foreman/ForemanConstants.java) convience methods.
 They all access System environment variables (via [System.getEnv()](http://docs.oracle.com/javase/1.5.0/docs/api/java/lang/System.html#getenv%28java.lang.String%29)). The following lines should be added to your environment variables.
 
 ### Linux
