@@ -51,11 +51,11 @@ The one without assumes you only have one account attached. You can access the f
 
 Example:
 
-    		Account acc = new Account();
-      for(AccountsField f: AccountsField.values())
-      {
-         System.out.println(f+" "+acc.getField(f));
-      }
+	Account acc = new Account();
+	for(AccountsField f: AccountsField.values())
+	{
+		System.out.println(f+" "+acc.getField(f));
+	}
       
 will yield 
 
@@ -123,14 +123,14 @@ You can learn more about these fields [here](https://developers.tradeking.com/do
 
 Access to the Market's clock. Use ***hasField()*** and ***getField*** to access these values.
   
-    MarketClock clock = new MarketClock();
-    for(MarketClockField f: MarketClockField.values())
-    {
-      if(clock.hasField(f))
-      {
-        System.out.println("\t"+f.name()+"="+clock.getField(f));
-      }
-			 }
+	MarketClock clock = new MarketClock();
+	for(MarketClockField f: MarketClockField.values())
+	{
+		if(clock.hasField(f))
+		{
+        		System.out.println("\t"+f.name()+"="+clock.getField(f));
+      		}
+	}
 
 will yield
 
