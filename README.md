@@ -11,6 +11,7 @@ The missing TradeKing API for Java.
    * An API Secret Key
    * An Access Token
    * A Secret Access Token
+* [Go over the TradeKing API Docs](https://developers.tradeking.com/documentation/getting-started) 
 
 ## Installing
 
@@ -41,6 +42,15 @@ Restart your computer.
 
 ## Usage
 
+If you're just here to use conniption, there are really only a couple classes you need to know about
+
+#### [Account](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/Account.java)
+
+#### [MarketClock](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketClock.java)
+
+#### [MarketQuote](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketQuote.java)
+
+#### [MarketOrder](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketOrder.java)
 
 
 ## Warnings
