@@ -46,6 +46,78 @@ If you're just here to use conniption, there are really only a couple classes yo
 
 #### [Account](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/Account.java)
 
+Access to your TradekingAccount. You'll notice there are two constructors. One which takes your ID as a parameter, one without.
+The one without assumes you only have one account attached. You can access the fields returned by using ***hasField()*** and ***getField()***
+
+Example:
+
+    		Account acc = new Account();
+      for(AccountsField f: AccountsField.values())
+      {
+         System.out.println(f+" "+acc.getField(f));
+      }
+      
+will yield 
+
+    ACCOUNT_TYPE null
+    ACCOUNT_VALUE 0.0
+    ACCRUED_INTEREST 0.0
+    ASSET_CLASS null
+    CASH 10.0
+    CASH_AVAILABLE 0.0
+    CASH_AVAILABLE_FOR_WITHDRAWL null
+    CASH_BALANCE null
+    CASH_MARKET_VALUE null
+    CFI null
+    ASSET_HOLDING_CHANGE null
+    COST_BASIS null
+    INTSTRUMENT_CUSIP null
+    INSTRUMENT_DESCRIPTION null
+    EQUITY_PERCENTAGE null
+    INSTRUMENT_FACTOR null
+    FED_CALL 0.0
+    GAIN_LOSS_OVERALL null
+    HOUSE_CALL 0.0
+    LAST_PRICE null
+    LONG_OPTIONS 0.0
+    LONG_STOCKS 0.0
+    MARGIN_BALANCE 0.0
+    MARGIN_MARKET_VALUE null
+    MARKET_VALUE null
+    MARKET_VALUE_CHANGE null
+    INSTRUMENT_MATURITY_DATE null
+    MONEY_MARKET_FUND 0.0
+    INSTRUMENT_MATURITY_YEAR_MONTH null
+    INSTRUMENT_MULTIPLIER null
+    OPEN_BUY_VALUE null
+    TOTAL_OPTIONS_MARKET_VALUE 0.0
+    OPTIONS_BUYING_POWER null
+    INSTRUMENT_PRICE null
+    PURCHASE_PRICE null
+    PUT_CALL null
+    HOLDING_QUANTITY null
+    INSTRUMENT_SECURITY_TYPE null
+    SHORT_BALANCE null
+    SHORT_MARKET_VALUE null
+    SHORT_OPTIONS_MARKET_VALUE 0.0
+    SHORT_STOCKS_MARKET_VALUE 0.0
+    START_OF_DAY_OPTIONS_BUYING_POWER null
+    START_OF_DAY_STOCK_BUYING_POWER null
+    STOCK_BUYING_POWER null
+    STOCK_MARKET_VALUE 0.0
+    INSTRUMENT_STRIKE_PRICE null
+    INSTRUMENT_UNDERLYING_SYMBOL null
+    HOLDING_UNDERLYING_SYMBOL null
+    TOTAL_CASH_BALANCE 10.0
+    TOTAL_MARKET_VALUE 0.0
+    TOTAL_SECURITIES_MARKET_VALUE null
+    UNCLEARED_DEPOSITS 10.0
+    UNSETTLED_FUNDS 0.0
+    YIELD 0.0
+    ACCOUNT_NUMBER 12345678
+
+
+
 #### [MarketClock](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketClock.java)
 
 #### [MarketQuote](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketQuote.java)
