@@ -253,6 +253,7 @@ You'll need a good understanding of how to use the [FIXMLBuilder](https://github
 
 Conniption assumes the most simpliest of Accounts. Don't use if you're doing complex shit. I also haven't implemented options functionality yet. Use at your own risk.
 
+Streaming GET/POSTs are a work in progress. Assume broken for now.
 ## License, Attribution, etc
 
 
