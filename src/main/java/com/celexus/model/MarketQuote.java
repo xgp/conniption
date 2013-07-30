@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.celexus.foreman.ForemanException;
-import com.celexus.foreman.TradekingForeman;
+import com.celexus.foreman.TradeKingForeman;
 import com.celexus.foreman.util.ResponseFormat;
 import com.celexus.foreman.util.UtilityException;
 import com.celexus.foreman.util.XMLHandler;
@@ -31,7 +31,7 @@ import com.celexus.model.util.MarketQuotesResponseField;
 public class MarketQuote
 {
 	private Map<MarketQuotesResponseField, String> map = new HashMap<MarketQuotesResponseField, String>();
-	private TradekingForeman foreman = new TradekingForeman();
+	private TradeKingForeman foreman = new TradeKingForeman();
 
 	public MarketQuote(String symbol, boolean streaming) throws UtilityException
 	{

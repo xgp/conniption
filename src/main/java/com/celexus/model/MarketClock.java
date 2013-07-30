@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.celexus.foreman.ForemanException;
-import com.celexus.foreman.TradekingForeman;
+import com.celexus.foreman.TradeKingForeman;
 import com.celexus.foreman.util.ResponseFormat;
 import com.celexus.foreman.util.UtilityException;
 import com.celexus.foreman.util.XMLHandler;
@@ -29,7 +29,7 @@ import com.celexus.model.util.MarketClockField;
 public class MarketClock
 {
 	private Map<MarketClockField, String> map = new HashMap<MarketClockField, String>();
-	private TradekingForeman foreman = new TradekingForeman();
+	private TradeKingForeman foreman = new TradeKingForeman();
 
 	public MarketClock() throws UtilityException
 	{

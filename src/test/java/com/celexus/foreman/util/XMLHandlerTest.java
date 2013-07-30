@@ -9,7 +9,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.celexus.foreman.ForemanException;
-import com.celexus.foreman.TradekingForeman;
+import com.celexus.foreman.TradeKingForeman;
 import com.celexus.foreman.util.builder.AccountsBuilder;
 import com.celexus.foreman.util.builder.MarketBuilder;
 import com.celexus.model.util.AccountsField;
@@ -18,7 +18,7 @@ import com.celexus.model.util.MarketQuotesResponseField;
 
 public class XMLHandlerTest
 {
-	TradekingForeman foreman = new TradekingForeman();
+	TradeKingForeman foreman = new TradeKingForeman();
 
 	@Test
 	public void parseAccountTest()

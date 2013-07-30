@@ -15,7 +15,7 @@ public class TradekingForemanTest
 	@Test
 	public void connectionTest()
 	{
-		TradekingForeman foreman = new TradekingForeman();
+		TradeKingForeman foreman = new TradeKingForeman();
 		try
 		{
 			foreman.connect();
@@ -32,7 +32,7 @@ public class TradekingForemanTest
 	@Test
 	public void apiCallTest()
 	{
-		TradekingForeman foreman = new TradekingForeman();
+		TradeKingForeman foreman = new TradeKingForeman();
 		try
 		{
 			foreman.connect();
@@ -47,7 +47,7 @@ public class TradekingForemanTest
 //	@Test
 	public void accountsTest() throws Exception
 	{
-		TradekingForeman forman = new TradekingForeman();
+		TradeKingForeman forman = new TradeKingForeman();
 		forman.connect();
 		// System.out.println(forman.makeAPICall(AccountsBuilder.getAccountBalances(ResponseFormat.XML)));
 		System.out.println(forman.makeAPICall(AccountsBuilder.getAccount("38580744", ResponseFormat.XML)));

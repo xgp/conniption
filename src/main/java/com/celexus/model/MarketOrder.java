@@ -18,7 +18,7 @@ package com.celexus.model;
 import java.util.Map;
 
 import com.celexus.foreman.ForemanException;
-import com.celexus.foreman.TradekingForeman;
+import com.celexus.foreman.TradeKingForeman;
 import com.celexus.foreman.util.ResponseFormat;
 import com.celexus.foreman.util.UtilityException;
 import com.celexus.foreman.util.XMLHandler;
@@ -29,7 +29,7 @@ import com.celexus.model.util.fixml.FIXMLBuilder;
 public class MarketOrder
 {
 
-	private TradekingForeman foreman = new TradekingForeman();
+	private TradeKingForeman foreman = new TradeKingForeman();
 	private Map<OrderField,String> map;
 	
 	public MarketOrder(String id, FIXMLBuilder b) throws UtilityException

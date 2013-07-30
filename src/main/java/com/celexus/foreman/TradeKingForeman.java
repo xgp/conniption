@@ -35,12 +35,12 @@ import com.celexus.application.CertificateInstallerApplication;
 import com.celexus.foreman.util.TradekingAPI;
 import com.celexus.foreman.util.builder.APIBuilder;
 
-public class TradekingForeman
+public class TradeKingForeman
 {
 	private Token accessToken;
 	private OAuthService srv;
-	private Logger log = LoggerFactory.getLogger(TradekingForeman.class);
-	public TradekingForeman()
+	private Logger log = LoggerFactory.getLogger(TradeKingForeman.class);
+	public TradeKingForeman()
 	{
 	}
 
