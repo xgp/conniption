@@ -17,6 +17,13 @@ public class MarketQuoteTest
 		try
 		{
 			MarketQuote quote = new MarketQuote("SIRI",false);
+			for(MarketQuotesResponseField f: MarketQuotesResponseField.values())
+			{
+				if(quote.hasField(f))
+				{
+					System.out.println(f.name()+"="+quote.getField(f));
+				}
+			}
 			assertTrue("Expected Field not in response",quote.hasField(MarketQuotesResponseField.DATE_TIME));
 		}
 		catch (UtilityException e)

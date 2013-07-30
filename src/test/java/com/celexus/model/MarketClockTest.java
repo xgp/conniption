@@ -17,6 +17,13 @@ public class MarketClockTest
 		try
 		{
 			MarketClock clock = new MarketClock();
+			for(MarketClockField f: MarketClockField.values())
+			{
+				if(clock.hasField(f))
+				{
+					System.out.println("\t"+f.name()+"="+clock.getField(f));
+				}
+			}
 			assertTrue("Expected field not in response",clock.hasField(MarketClockField.CURRENT));
 		}
 		catch (UtilityException e)

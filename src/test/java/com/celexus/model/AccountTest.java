@@ -19,7 +19,6 @@ public class AccountTest
 			Account acc = new Account();
 			assertTrue("Expected Field not returned",acc.hasField(AccountsField.ACCOUNT_VALUE));
 			String id = acc.getId();
-			System.out.println(id);
 		
 		}
 		catch (UtilityException e)
