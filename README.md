@@ -130,7 +130,7 @@ Access to the Market's clock. Use ***hasField()*** and ***getField*** to access 
 		if(clock.hasField(f))
 		{
         		System.out.println("\t"+f.name()+"="+clock.getField(f));
-      		}
+		}
 	}
 
 will yield
