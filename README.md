@@ -49,7 +49,6 @@ If you're just here to use conniption, there are really only a couple classes yo
 Access to your TradekingAccount. You'll notice there are two constructors. One which takes your ID as a parameter, one without.
 The one without assumes you only have one account attached. You can access the fields returned by using ***hasField()*** and ***getField()***
 
-Example:
 
 	Account acc = new Account();
 	for(AccountsField f: AccountsField.values())
@@ -250,7 +249,17 @@ You'll need a good understanding of how to use the FIXMLBuilder, which uses FIXM
 
 ## Warnings
 
-
+Conniption assumes the most simpliest of Accounts. Don't use if you're doing complex shit. I also haven't implemented options functionality yet. Use at your own risk.
 
 ## License, Attribution, etc
 
+
+Conniption is licensed under the Apache License, version 2. It is in no way associated with TradeKing or TradeKing Group, Inc.
+
+Please read TradeKing's documentation carefully! Use only as they suggest.
+
+
+I use [scribe-java](https://github.com/fernandezpablo85/scribe-java) for OAuth. It's an awesome project. I recommend you check it out.
+
+
+![Powered by TradeKing](https://developers.tradeking.com/images/logos/PB-TK-small-Blue.gif)
