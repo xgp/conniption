@@ -40,7 +40,7 @@ Put these lines in */etc/launchd.conf*
     
 Restart your computer.
 
-Use maven clean install directive to make compile and make sure everythng works. I highly recommend you do not use -DskipTests. The tests will check your connection to TradeKing
+Use the maven clean install directive to compile and make sure everythng works. I highly recommend you do not use -DskipTests. The tests will check your connection to TradeKing
 
 ## Usage
 
