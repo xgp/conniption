@@ -116,9 +116,30 @@ will yield
     YIELD 0.0
     ACCOUNT_NUMBER 12345678
 
+You can learn more about these fields [here](https://developers.tradeking.com/documentation/accounts-get).
 
 
 #### [MarketClock](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketClock.java)
+
+Access to the Market's clock. Use ***hasField()*** and ***getField*** to access these values.
+  
+    MarketClock clock = new MarketClock();
+    for(MarketClockField f: MarketClockField.values())
+    {
+      if(clock.hasField(f))
+      {
+        System.out.println("\t"+f.name()+"="+clock.getField(f));
+      }
+			 }
+
+will yield
+
+    DATE=2013-07-29 23:05:46.773000
+    CURRENT=closed
+    NEXT=pre
+    CHANGE_AT=08:00:00
+    MESSAGE=Market is open Monday through Friday 9:30AM to 4:00PM EST
+    UNIX_TIME=1375153546
 
 #### [MarketQuote](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketQuote.java)
 
