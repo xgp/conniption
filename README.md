@@ -228,7 +228,7 @@ will yield
 
 #### [MarketOrder](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketOrder.java)
 
-You'll need a good understanding of how to use the FIXMLBuilder, which uses FIXML to post orders. If you want to validate your order, use MarketOrderPreview instead.
+You'll need a good understanding of how to use the [FIXMLBuilder](https://github.com/Ccook/conniption/blob/master/src/test/java/com/celexus/model/util/fixml/FIXMLBuilderTest.java), which uses FIXML to post orders. If you want to validate your order, use MarketOrderPreview instead.
 
 		FIXMLBuilder builder = new FIXMLBuilder("38580744");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
