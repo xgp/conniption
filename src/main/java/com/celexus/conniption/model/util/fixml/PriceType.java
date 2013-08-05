@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.model.util.fixml;
 
-public enum PriceType
+import java.io.Serializable;
+
+public enum PriceType implements Serializable
 {
 	/*
 	 * Price Type as "1" ‐ Market, "2" ‐ Limit", "3" ‐ Stop, "4" Stop Limit, or "P" for trailing stop. 

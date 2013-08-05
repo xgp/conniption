@@ -24,7 +24,7 @@ import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
 public class MarketBuilder extends APIBuilder
 {
-	
+	private static final long serialVersionUID = -7542591696724178699L;
 
 	private MarketBuilder(Verb v)
 	{

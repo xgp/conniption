@@ -1,6 +1,8 @@
 package com.celexus.conniption.model.util;
 
-public enum OrderField
+import java.io.Serializable;
+
+public enum OrderField implements Serializable
 {
 	CLIENT_ORDER_ID("//clientorder"),
 	ORDER_STATUS("//orderstatus"),

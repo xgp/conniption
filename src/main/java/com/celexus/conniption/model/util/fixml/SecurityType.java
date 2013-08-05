@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.model.util.fixml;
 
-public enum SecurityType
+import java.io.Serializable;
+
+public enum SecurityType implements Serializable
 {
 	STOCK("CS"),
 	OPTION("OPT");

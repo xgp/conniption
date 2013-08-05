@@ -16,6 +16,7 @@
 package com.celexus.conniption.foreman.util;
 
 import java.io.ByteArrayInputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -32,8 +33,9 @@ import com.celexus.conniption.model.util.MarketQuotesResponseField;
 import com.celexus.conniption.model.util.OrderField;
 import com.celexus.conniption.model.util.OrderPreviewField;
 
-public class XMLHandler
+public class XMLHandler implements Serializable
 {
+	private static final long serialVersionUID = -720928472060791141L;
 
 	public XMLHandler()
 	{

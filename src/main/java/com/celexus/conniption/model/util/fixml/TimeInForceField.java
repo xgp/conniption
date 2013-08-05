@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.model.util.fixml;
 
-public enum TimeInForceField
+import java.io.Serializable;
+
+public enum TimeInForceField implements Serializable
 {
 	DAY_ORDER("0"),
 	GOOD_TIL_CANCELED("1"), 

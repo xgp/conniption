@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.foreman.util;
 
-public enum ResponseFormat
+import java.io.Serializable;
+
+public enum ResponseFormat implements Serializable
 {
 	XML,
 	JSON;

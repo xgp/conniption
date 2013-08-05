@@ -15,10 +15,13 @@
  */
 package com.celexus.conniption.foreman.util;
 
+import java.io.Serializable;
+
 import org.scribe.model.Verb;
 
-public class APICall
+public class APICall implements Serializable
 {
+	private static final long serialVersionUID = -3600236076708483532L;
 
 	/**
 	 * This call will return detailed balance and holding information for each account associated with a user.
@@ -183,10 +186,10 @@ public class APICall
 	{
 		return MARKET.EXT_QUOTES.resolveString("", format.toString());
 	}
-	
+
 	public static String getStreamingQuote(ResponseFormat format)
 	{
-		return MARKET.STREAM_EXT_QUOTES.resolveString("",format.toString());
+		return MARKET.STREAM_EXT_QUOTES.resolveString("", format.toString());
 	}
 
 	/**
@@ -269,10 +272,7 @@ public class APICall
 
 	public enum MARKET
 	{
-		CLOCK("https://api.tradeking.com/v1/market/clock", "."), 
-		EXT_QUOTES("https://api.tradeking.com/v1/market/ext/quotes", "."),
-		STREAM_EXT_QUOTES("https://stream.tradeking.com/v1/market/quotes","."),
-		NEWS_SEARCH("https://api.tradeking.com/v1/market/news/search", "."), NEWS_ID("https://api.tradeking.com/v1/market/news/", "", "."), OPTIONS_SEARCH("https://api.tradeking.com/v1/market/options/search", "."), OPTIONS_STRIKES("https://api.tradeking.com/v1/market/options/strikes", "."), OPTIONS_EXPIRATIONS("https://api.tradeking.com/v1/market/options/expirations", "."), TIMESALES("https://api.tradeking.com/v1/market/timesales", "."), TOPLISTS_VOLUME("https://api.tradeking.com/v1/market/toplists/topvolume", "."), TOPLISTS_LOSERS_DOLLAR("https://api.tradeking.com/v1/market/toplists/toplosers", "."), TOPLISTS_LOSERS_PERCENTAGE("https://api.tradeking.com/v1/market/toplists/toppctlosers", "."), TOPLISTS_ACTIVE("https://api.tradeking.com/v1/market/toplists/topactive", "."), TOPLISTS_GAINERS_DOLLAR_AMT("https://api.tradeking.com/v1/market/toplists/topgainers", "."), TOPLISTS_GAINERS_PERCENTAGE("https://api.tradeking.com/v1/market/toplists/toppctgainers", "."), TOPLISTS_GAINERS_ACTIVE_DOLLAR_AMT("https://api.tradeking.com/v1/market/toplists/topactivegainersbydollarvalue", ".");
+		CLOCK("https://api.tradeking.com/v1/market/clock", "."), EXT_QUOTES("https://api.tradeking.com/v1/market/ext/quotes", "."), STREAM_EXT_QUOTES("https://stream.tradeking.com/v1/market/quotes", "."), NEWS_SEARCH("https://api.tradeking.com/v1/market/news/search", "."), NEWS_ID("https://api.tradeking.com/v1/market/news/", "", "."), OPTIONS_SEARCH("https://api.tradeking.com/v1/market/options/search", "."), OPTIONS_STRIKES("https://api.tradeking.com/v1/market/options/strikes", "."), OPTIONS_EXPIRATIONS("https://api.tradeking.com/v1/market/options/expirations", "."), TIMESALES("https://api.tradeking.com/v1/market/timesales", "."), TOPLISTS_VOLUME("https://api.tradeking.com/v1/market/toplists/topvolume", "."), TOPLISTS_LOSERS_DOLLAR("https://api.tradeking.com/v1/market/toplists/toplosers", "."), TOPLISTS_LOSERS_PERCENTAGE("https://api.tradeking.com/v1/market/toplists/toppctlosers", "."), TOPLISTS_ACTIVE("https://api.tradeking.com/v1/market/toplists/topactive", "."), TOPLISTS_GAINERS_DOLLAR_AMT("https://api.tradeking.com/v1/market/toplists/topgainers", "."), TOPLISTS_GAINERS_PERCENTAGE("https://api.tradeking.com/v1/market/toplists/toppctgainers", "."), TOPLISTS_GAINERS_ACTIVE_DOLLAR_AMT("https://api.tradeking.com/v1/market/toplists/topactivegainersbydollarvalue", ".");
 
 		private String[] urlStrings;
 

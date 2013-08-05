@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.model.util;
 
-public enum OrderPreviewField
+import java.io.Serializable;
+
+public enum OrderPreviewField implements Serializable
 {
 	ESTIMATED_COMISSION("estcommission"),
 	MARGIN_REQUIREMENT("marginrequirement"),

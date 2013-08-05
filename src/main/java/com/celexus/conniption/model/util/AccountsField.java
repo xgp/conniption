@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.model.util;
 
-public enum AccountsField
+import java.io.Serializable;
+
+public enum AccountsField implements Serializable
 {
 	/**
 	 * accounttype Holdings attribute for where asset as held, "1"= cash, "2"= margin long, "5"=margin short.

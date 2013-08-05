@@ -15,13 +15,16 @@
  */
 package com.celexus.conniption.foreman.util.builder;
 
+import java.io.Serializable;
+
 import org.scribe.model.Verb;
 
 import com.celexus.conniption.foreman.util.APICall;
 import com.celexus.conniption.foreman.util.ResponseFormat;
 
-public class AccountsBuilder extends APIBuilder
+public class AccountsBuilder extends APIBuilder implements Serializable
 {
+	private static final long serialVersionUID = 7982141126897931034L;
 
 	private AccountsBuilder(Verb v)
 	{

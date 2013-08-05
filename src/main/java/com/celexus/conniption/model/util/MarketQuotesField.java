@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.model.util;
 
-public enum MarketQuotesField
+import java.io.Serializable;
+
+public enum MarketQuotesField implements Serializable
 {
 	SYMBOLS("symbols"), FIDS("fids");
 	

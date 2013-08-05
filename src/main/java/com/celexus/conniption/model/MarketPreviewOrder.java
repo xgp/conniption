@@ -15,6 +15,7 @@
  */
 package com.celexus.conniption.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import com.celexus.conniption.foreman.ForemanException;
@@ -26,16 +27,17 @@ import com.celexus.conniption.foreman.util.builder.OrdersBuilder;
 import com.celexus.conniption.model.util.OrderPreviewField;
 import com.celexus.conniption.model.util.fixml.FIXMLBuilder;
 
-public class MarketPreviewOrder
+public class MarketPreviewOrder implements Serializable
 {
 
-	private TradeKingForeman foreman = new TradeKingForeman();
+	private static final long serialVersionUID = -3555216843532994045L;
 	private Map<OrderPreviewField, String> map;
 
 	public MarketPreviewOrder(String id, FIXMLBuilder b) throws UtilityException
 	{
+		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
-		connectForeman();
+		connectForeman(foreman);
 		map = handler.parseMarketOrderPreview(foreman.makeAPICall(OrdersBuilder.preview(id, b.build().toString(), ResponseFormat.XML)));
 	}
 	
@@ -50,7 +52,7 @@ public class MarketPreviewOrder
 
 	}
 
-	private void connectForeman() throws UtilityException
+	private void connectForeman(TradeKingForeman foreman) throws UtilityException
 	{
 		try
 		{

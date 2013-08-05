@@ -17,6 +17,7 @@ package com.celexus.conniption.foreman;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -35,11 +36,13 @@ import com.celexus.conniption.application.CertificateInstallerApplication;
 import com.celexus.conniption.foreman.util.TradekingAPI;
 import com.celexus.conniption.foreman.util.builder.APIBuilder;
 
-public class TradeKingForeman
+public class TradeKingForeman implements Serializable
 {
+	private static final long serialVersionUID = 7830844282343108561L;
 	private Token accessToken;
 	private OAuthService srv;
 	private Logger log = LoggerFactory.getLogger(TradeKingForeman.class);
+
 	public TradeKingForeman()
 	{
 	}
@@ -55,9 +58,7 @@ public class TradeKingForeman
 		{
 			throw new ForemanException("Could not install Certificates", e);
 		}
-		srv = new ServiceBuilder().provider(TradekingAPI.class)
-					.apiKey(ForemanConstants.API_KEY.toString())
-					.apiSecret(ForemanConstants.API_SECRET.toString()).build();
+		srv = new ServiceBuilder().provider(TradekingAPI.class).apiKey(ForemanConstants.API_KEY.toString()).apiSecret(ForemanConstants.API_SECRET.toString()).build();
 		log.debug("\t ... Service built!");
 		accessToken = new Token(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());
 		log.debug("\t ... Access Token built!");
@@ -67,13 +68,13 @@ public class TradeKingForeman
 	public String makeAPICall(APIBuilder b)
 	{
 		log.trace("Making an API Call");
-		log.trace("\t ... Verb:"+b.getVerb());
-		log.trace("\t ... Resource URL:"+b.getResourceURL());
-		log.trace("\t ... Body:"+b.getBody());
-		log.trace("\t ... Parameters:"+!b.getParameters().isEmpty());
+		log.trace("\t ... Verb:" + b.getVerb());
+		log.trace("\t ... Resource URL:" + b.getResourceURL());
+		log.trace("\t ... Body:" + b.getBody());
+		log.trace("\t ... Parameters:" + !b.getParameters().isEmpty());
 		return sendRequest(makeRequest(b.getVerb(), b.getResourceURL(), b.getParameters(), b.getBody()));
 	}
-	
+
 	public BufferedReader makeAPICallStream(APIBuilder b)
 	{
 		return getStream(makeRequest(b.getVerb(), b.getResourceURL(), b.getParameters(), b.getBody()));
@@ -111,14 +112,14 @@ public class TradeKingForeman
 		Response response = request.send();
 		return response.getBody();
 	}
-	
+
 	private BufferedReader getStream(Request request)
 	{
 		request.setConnectionKeepAlive(true);
 		Response response = request.send();
-	
-        // Create a reader to read Twitter's stream
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getStream()));
+
+		// Create a reader to read Twitter's stream
+		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getStream()));
 		return reader;
 	}
 

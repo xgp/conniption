@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.foreman;
 
-public enum ForemanConstants
+import java.io.Serializable;
+
+public enum ForemanConstants implements Serializable
 {
 	API_KEY(System.getenv("API_KEY")),
 	API_SECRET(System.getenv("API_SECRET")),

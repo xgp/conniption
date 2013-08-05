@@ -15,6 +15,7 @@
  */
 package com.celexus.conniption.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,15 +27,16 @@ import com.celexus.conniption.foreman.util.XMLHandler;
 import com.celexus.conniption.foreman.util.builder.MarketBuilder;
 import com.celexus.conniption.model.util.MarketClockField;
 
-public class MarketClock
+public class MarketClock implements Serializable
 {
+	private static final long serialVersionUID = 4825597509929315969L;
 	private Map<MarketClockField, String> map = new HashMap<MarketClockField, String>();
-	private TradeKingForeman foreman = new TradeKingForeman();
-
+	
 	public MarketClock() throws UtilityException
 	{
+		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
-		connectForeman();
+		connectForeman(foreman);
 		map = handler.parseMarketClock(foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML)));
 	}
 
@@ -54,7 +56,7 @@ public class MarketClock
 
 	}
 
-	private void connectForeman() throws UtilityException
+	private void connectForeman(TradeKingForeman foreman) throws UtilityException
 	{
 		try
 		{

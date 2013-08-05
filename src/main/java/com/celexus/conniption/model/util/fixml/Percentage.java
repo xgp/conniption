@@ -15,8 +15,11 @@
  */
 package com.celexus.conniption.model.util.fixml;
 
-public class Percentage
+import java.io.Serializable;
+
+public class Percentage implements Serializable
 {
+	private static final long serialVersionUID = 8346807684978297530L;
 	private double percentage = 0;
 	public Percentage(double d)
 	{

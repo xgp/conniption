@@ -22,6 +22,7 @@ import com.celexus.conniption.foreman.util.ResponseFormat;
 
 public class OrdersBuilder extends APIBuilder
 {
+	private static final long serialVersionUID = 4913476469409758292L;
 
 	private OrdersBuilder(Verb v)
 	{

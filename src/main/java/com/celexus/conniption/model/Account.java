@@ -15,6 +15,7 @@
  */
 package com.celexus.conniption.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,22 +27,24 @@ import com.celexus.conniption.foreman.util.XMLHandler;
 import com.celexus.conniption.foreman.util.builder.AccountsBuilder;
 import com.celexus.conniption.model.util.AccountsField;
 
-public class Account
+public class Account implements Serializable
 {
+	private static final long serialVersionUID = -3038944208566900477L;
 	private Map<AccountsField, String> map = new HashMap<AccountsField, String>();
-	private TradeKingForeman foreman = new TradeKingForeman();
 
 	public Account(String id) throws UtilityException
 	{
+		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
-		connectForeman();
+		connectForeman(foreman);
 		map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccount(id, ResponseFormat.XML)));
 	}
 	
 	public Account() throws UtilityException
 	{
+		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
-		connectForeman();
+		connectForeman(foreman);
 		map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccounts(ResponseFormat.XML)));
 	}
 	
@@ -66,7 +69,7 @@ public class Account
 
 	}
 
-	private void connectForeman() throws UtilityException
+	private void connectForeman(TradeKingForeman foreman) throws UtilityException
 	{
 		try
 		{

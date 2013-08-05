@@ -15,8 +15,11 @@
  */
 package com.celexus.conniption.model.util.fixml;
 
-public class FIXML
+import java.io.Serializable;
+
+public class FIXML implements Serializable
 {
+	private static final long serialVersionUID = -1634940482369566168L;
 	private String source = "";
 	public FIXML(String fixmlSource)
 	{

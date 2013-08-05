@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.model.util;
 
-public enum MarketClockField
+import java.io.Serializable;
+
+public enum MarketClockField implements Serializable
 {
 	/**
 	 * Current date and time in the format of YYYY-MM-DD HH:MM:SS.

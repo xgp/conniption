@@ -17,6 +17,7 @@ package com.celexus.conniption.model;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,15 +29,16 @@ import com.celexus.conniption.foreman.util.XMLHandler;
 import com.celexus.conniption.foreman.util.builder.MarketBuilder;
 import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
-public class MarketQuote
+public class MarketQuote implements Serializable
 {
+	private static final long serialVersionUID = 3574007890139251515L;
 	private Map<MarketQuotesResponseField, String> map = new HashMap<MarketQuotesResponseField, String>();
-	private TradeKingForeman foreman = new TradeKingForeman();
 
 	public MarketQuote(String symbol, boolean streaming) throws UtilityException
 	{
+		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
-		connectForeman();
+		connectForeman(foreman);
 		if (streaming)
 		{
 			handleStream(foreman.makeAPICallStream(MarketBuilder.getStreamingQuotes(ResponseFormat.XML, new String[] { symbol.trim().toUpperCase() })));
@@ -80,7 +82,8 @@ public class MarketQuote
 	public MarketQuote(String symbol, boolean streaming, MarketQuotesResponseField... fields) throws UtilityException
 	{
 		XMLHandler handler = new XMLHandler();
-		connectForeman();
+		TradeKingForeman foreman = new TradeKingForeman();
+		connectForeman(foreman);
 		if (streaming)
 		{
 
@@ -102,7 +105,7 @@ public class MarketQuote
 
 	}
 
-	private void connectForeman() throws UtilityException
+	private void connectForeman(TradeKingForeman foreman) throws UtilityException
 	{
 		try
 		{

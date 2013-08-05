@@ -15,13 +15,15 @@
  */
 package com.celexus.conniption.foreman.util.builder;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.scribe.model.Verb;
 
-public abstract class APIBuilder
+public abstract class APIBuilder implements Serializable
 {
+	private static final long serialVersionUID = 5364934694744835663L;
 	protected Verb verb;
 	protected Map<String, String> params = new HashMap<String, String>();
 	protected String resourceURL;

@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.model.util.fixml;
 
-public enum FIXMLField
+import java.io.Serializable;
+
+public enum FIXMLField implements Serializable
 {
 	/**
 	 * Acct Account number needs to be passed with all order requests.

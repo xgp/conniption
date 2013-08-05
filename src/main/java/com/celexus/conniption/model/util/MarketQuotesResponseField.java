@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.model.util;
 
-public enum MarketQuotesResponseField
+import java.io.Serializable;
+
+public enum MarketQuotesResponseField implements Serializable
 {
 	/**
 	 * adp_100 Stock, Average Daily Price - 100 day

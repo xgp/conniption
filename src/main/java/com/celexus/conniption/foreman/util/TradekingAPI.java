@@ -15,11 +15,14 @@
  */
 package com.celexus.conniption.foreman.util;
 
+import java.io.Serializable;
+
 import org.scribe.builder.api.DefaultApi10a;
 import org.scribe.model.Token;
 
-public class TradekingAPI extends DefaultApi10a
+public class TradekingAPI extends DefaultApi10a implements Serializable
 {
+	private static final long serialVersionUID = 4355447429052389540L;
 
 	@Override
 	public String getRequestTokenEndpoint()
@@ -38,6 +41,5 @@ public class TradekingAPI extends DefaultApi10a
 	{
 		return "https://developers.tradeking.com/oauth/authorize?oauth_token=%s";
 	}
-
 
 }

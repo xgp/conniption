@@ -15,13 +15,16 @@
  */
 package com.celexus.conniption.model.util.fixml;
 
+import java.io.Serializable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.celexus.conniption.foreman.util.UtilityException;
 
-public class FIXMLBuilder
+public class FIXMLBuilder implements Serializable
 {
+	private static final long serialVersionUID = 7606325661660023305L;
 	private Logger log = LoggerFactory.getLogger(FIXMLBuilder.class);
 	private String id;
 	private String symbol;

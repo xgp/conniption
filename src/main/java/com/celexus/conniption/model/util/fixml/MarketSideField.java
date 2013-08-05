@@ -15,7 +15,9 @@
  */
 package com.celexus.conniption.model.util.fixml;
 
-public enum MarketSideField
+import java.io.Serializable;
+
+public enum MarketSideField implements Serializable
 {
 	BUY("1"),
 	SELL("2"),
