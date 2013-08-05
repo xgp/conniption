@@ -53,7 +53,6 @@ public class MarketQuote
 		new Thread(new Runnable()
 		{
 
-			@Override
 			public void run()
 			{
 				String line;
