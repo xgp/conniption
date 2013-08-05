@@ -25,7 +25,6 @@ import com.celexus.conniption.foreman.util.UtilityException;
 public class FIXMLBuilder implements Serializable
 {
 	private static final long serialVersionUID = 7606325661660023305L;
-	private Logger log = LoggerFactory.getLogger(FIXMLBuilder.class);
 	private String id;
 	private String symbol;
 	private int quantity = 0;

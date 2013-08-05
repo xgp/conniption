@@ -39,7 +39,7 @@ public class Account implements Serializable
 		connectForeman(foreman);
 		map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccount(id, ResponseFormat.XML)));
 	}
-	
+
 	public Account() throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
@@ -47,7 +47,7 @@ public class Account implements Serializable
 		connectForeman(foreman);
 		map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccounts(ResponseFormat.XML)));
 	}
-	
+
 	public String getId()
 	{
 		return this.getField(AccountsField.ACCOUNT_NUMBER);
@@ -79,5 +79,34 @@ public class Account implements Serializable
 		{
 			throw new UtilityException("Unable to connect to the TradekingForeman", e);
 		}
+	}
+
+	@Override
+	public boolean equals(Object other)
+	{
+		if (other == null)
+		{
+			return false;
+		}
+		if (other instanceof Account)
+		{
+			Account otherA = (Account) other;
+			for (AccountsField f : AccountsField.values())
+			{
+				if (this.hasField(f) == otherA.hasField(f) && this.hasField(f))
+				{
+					this.getField(f).equals(otherA.getField(f));
+				}
+				else if (this.hasField(f) || otherA.hasField(f))
+				{
+					return false;
+				}
+			}
+		}
+		else
+		{
+			return false;
+		}
+		return true;
 	}
 }
