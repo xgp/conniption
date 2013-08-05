@@ -4,7 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.celexus.foreman.util.UtilityException;
+import com.celexus.conniption.foreman.util.UtilityException;
+import com.celexus.conniption.model.util.fixml.FIXMLBuilder;
+import com.celexus.conniption.model.util.fixml.MarketSideField;
+import com.celexus.conniption.model.util.fixml.Percentage;
+import com.celexus.conniption.model.util.fixml.PriceType;
+import com.celexus.conniption.model.util.fixml.SecurityType;
+import com.celexus.conniption.model.util.fixml.TimeInForceField;
 
 public class FIXMLBuilderTest
 {

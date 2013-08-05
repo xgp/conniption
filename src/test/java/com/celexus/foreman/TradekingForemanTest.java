@@ -5,9 +5,11 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.celexus.foreman.util.ResponseFormat;
-import com.celexus.foreman.util.builder.AccountsBuilder;
-import com.celexus.foreman.util.builder.MarketBuilder;
+import com.celexus.conniption.foreman.ForemanException;
+import com.celexus.conniption.foreman.TradeKingForeman;
+import com.celexus.conniption.foreman.util.ResponseFormat;
+import com.celexus.conniption.foreman.util.builder.AccountsBuilder;
+import com.celexus.conniption.foreman.util.builder.MarketBuilder;
 
 public class TradekingForemanTest
 {

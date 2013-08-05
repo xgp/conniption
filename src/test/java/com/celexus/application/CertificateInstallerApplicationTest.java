@@ -4,6 +4,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import com.celexus.conniption.application.ApplicationException;
+import com.celexus.conniption.application.CertificateInstallerApplication;
+
 public class CertificateInstallerApplicationTest
 {
 

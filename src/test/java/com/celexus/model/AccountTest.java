@@ -5,8 +5,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.celexus.foreman.util.UtilityException;
-import com.celexus.model.util.AccountsField;
+import com.celexus.conniption.foreman.util.UtilityException;
+import com.celexus.conniption.model.Account;
+import com.celexus.conniption.model.util.AccountsField;
 
 public class AccountTest
 {

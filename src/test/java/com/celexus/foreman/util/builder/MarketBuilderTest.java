@@ -6,7 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.celexus.foreman.util.ResponseFormat;
+import com.celexus.conniption.foreman.util.ResponseFormat;
+import com.celexus.conniption.foreman.util.builder.APIBuilder;
+import com.celexus.conniption.foreman.util.builder.MarketBuilder;
 
 public class MarketBuilderTest
 {

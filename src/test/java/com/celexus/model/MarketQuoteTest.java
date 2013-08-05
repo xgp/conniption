@@ -5,8 +5,9 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.celexus.foreman.util.UtilityException;
-import com.celexus.model.util.MarketQuotesResponseField;
+import com.celexus.conniption.foreman.util.UtilityException;
+import com.celexus.conniption.model.MarketQuote;
+import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
 public class MarketQuoteTest
 {

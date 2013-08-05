@@ -2,13 +2,14 @@ package com.celexus.model;
 
 import org.junit.Test;
 
-import com.celexus.foreman.util.UtilityException;
-import com.celexus.model.util.OrderPreviewField;
-import com.celexus.model.util.fixml.FIXMLBuilder;
-import com.celexus.model.util.fixml.MarketSideField;
-import com.celexus.model.util.fixml.PriceType;
-import com.celexus.model.util.fixml.SecurityType;
-import com.celexus.model.util.fixml.TimeInForceField;
+import com.celexus.conniption.foreman.util.UtilityException;
+import com.celexus.conniption.model.MarketPreviewOrder;
+import com.celexus.conniption.model.util.OrderPreviewField;
+import com.celexus.conniption.model.util.fixml.FIXMLBuilder;
+import com.celexus.conniption.model.util.fixml.MarketSideField;
+import com.celexus.conniption.model.util.fixml.PriceType;
+import com.celexus.conniption.model.util.fixml.SecurityType;
+import com.celexus.conniption.model.util.fixml.TimeInForceField;
 
 public class MarketPreviewOrderTest
 {

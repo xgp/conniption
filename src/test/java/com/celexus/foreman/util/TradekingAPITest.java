@@ -9,6 +9,8 @@ import java.net.URLConnection;
 
 import org.junit.Test;
 
+import com.celexus.conniption.foreman.util.TradekingAPI;
+
 public class TradekingAPITest
 {
 

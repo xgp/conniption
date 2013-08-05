@@ -8,13 +8,16 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.celexus.foreman.ForemanException;
-import com.celexus.foreman.TradeKingForeman;
-import com.celexus.foreman.util.builder.AccountsBuilder;
-import com.celexus.foreman.util.builder.MarketBuilder;
-import com.celexus.model.util.AccountsField;
-import com.celexus.model.util.MarketClockField;
-import com.celexus.model.util.MarketQuotesResponseField;
+import com.celexus.conniption.foreman.ForemanException;
+import com.celexus.conniption.foreman.TradeKingForeman;
+import com.celexus.conniption.foreman.util.ResponseFormat;
+import com.celexus.conniption.foreman.util.UtilityException;
+import com.celexus.conniption.foreman.util.XMLHandler;
+import com.celexus.conniption.foreman.util.builder.AccountsBuilder;
+import com.celexus.conniption.foreman.util.builder.MarketBuilder;
+import com.celexus.conniption.model.util.AccountsField;
+import com.celexus.conniption.model.util.MarketClockField;
+import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
 public class XMLHandlerTest
 {

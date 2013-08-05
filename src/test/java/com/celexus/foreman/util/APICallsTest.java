@@ -8,7 +8,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.celexus.foreman.util.APICall.TopList;
+import com.celexus.conniption.foreman.util.APICall;
+import com.celexus.conniption.foreman.util.ResponseFormat;
+import com.celexus.conniption.foreman.util.APICall.TopList;
 
 public class APICallsTest
 {

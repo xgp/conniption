@@ -2,8 +2,8 @@ package com.celexus.foreman.util;
 
 import org.junit.Test;
 
-import com.celexus.model.MarketQuote;
-import com.celexus.model.util.MarketQuotesResponseField;
+import com.celexus.conniption.model.MarketQuote;
+import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
 public class Dom4JTest
 {

@@ -4,7 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.celexus.foreman.ForemanException;
+import com.celexus.conniption.application.ApplicationException;
+import com.celexus.conniption.foreman.ForemanException;
 
 public class ApplicationExceptionTest
 {
