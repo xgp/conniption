@@ -230,7 +230,7 @@ will yield
 
 You'll need a good understanding of how to use the [FIXMLBuilder](https://github.com/Ccook/conniption/blob/master/src/test/java/com/celexus/model/util/fixml/FIXMLBuilderTest.java), which uses FIXML to post orders. If you want to validate your order, use MarketOrderPreview instead.
 
-		FIXMLBuilder builder = new FIXMLBuilder("38580744");
+		FIXMLBuilder builder = new FIXMLBuilder("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 			.symbol("OCQLF");
 			.priceType(PriceType.LIMIT);
@@ -239,7 +239,7 @@ You'll need a good understanding of how to use the [FIXMLBuilder](https://github
 			.executionPrice(.01);
 			.side(MarketSideField.BUY);
 		
-		MarketPreviewOrder order = new MarketPreviewOrder("38580744", builder);
+		MarketPreviewOrder order = new MarketPreviewOrder("12345678", builder);
 		for(OrderPreviewField f: OrderPreviewField.values())
 		{
 			if(order.hasField(f))
