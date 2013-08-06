@@ -33,13 +33,13 @@ public class MarketQuoteTest
 		}
 	}
 	
-	@Test
+//	@Test
 	public void streamTest()
 	{
 		try
 		{
 			MarketQuote quote = new MarketQuote("SIRI",true);
-//			assertTrue("Expected Field not in response",quote.hasField(MarketQuotesResponseField.DATE_TIME));
+			assertTrue("Expected Field not in response",quote.hasField(MarketQuotesResponseField.DATE_TIME));
 		}
 		catch (UtilityException e)
 		{

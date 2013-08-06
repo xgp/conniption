@@ -17,10 +17,8 @@ package com.celexus.conniption.model.util.fixml;
 
 import java.io.Serializable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.celexus.conniption.foreman.util.UtilityException;
+import com.celexus.conniption.model.Account;
 
 public class FIXMLBuilder implements Serializable
 {
@@ -37,9 +35,15 @@ public class FIXMLBuilder implements Serializable
 	private Percentage percentage;
 	private double stop = 0;
 
-	public FIXMLBuilder(String id)
+	public FIXMLBuilder(Account a)
+	{
+		this.id = a.getId();
+	}
+
+	public FIXMLBuilder id(String id)
 	{
 		this.id = id;
+		return this;
 	}
 
 	public FIXMLBuilder symbol(String sym)

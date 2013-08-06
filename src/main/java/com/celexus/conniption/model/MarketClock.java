@@ -31,7 +31,7 @@ public class MarketClock implements Serializable
 {
 	private static final long serialVersionUID = 4825597509929315969L;
 	private Map<MarketClockField, String> map = new HashMap<MarketClockField, String>();
-	
+
 	public MarketClock() throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
@@ -54,6 +54,36 @@ public class MarketClock implements Serializable
 	{
 		return map.get(f);
 
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj == null)
+		{
+			return false;
+		}
+		if (obj instanceof MarketClock)
+		{
+			MarketClock other = (MarketClock) obj;
+			for (MarketClockField f : MarketClockField.values())
+			{
+				if (this.hasField(f) == other.hasField(f) && this.hasField(f))
+				{
+					this.getField(f).equals(other.getField(f));
+				}
+				else if (this.hasField(f) || other.hasField(f))
+				{
+					return false;
+				}
+			}
+		}
+		else
+		{
+			return false;
+		}
+		
+		return true;
 	}
 
 	private void connectForeman(TradeKingForeman foreman) throws UtilityException

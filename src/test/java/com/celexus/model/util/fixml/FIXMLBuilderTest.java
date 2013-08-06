@@ -2,9 +2,11 @@ package com.celexus.model.util.fixml;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.celexus.conniption.foreman.util.UtilityException;
+import com.celexus.conniption.model.Account;
 import com.celexus.conniption.model.util.fixml.FIXMLBuilder;
 import com.celexus.conniption.model.util.fixml.MarketSideField;
 import com.celexus.conniption.model.util.fixml.Percentage;
@@ -14,7 +16,13 @@ import com.celexus.conniption.model.util.fixml.TimeInForceField;
 
 public class FIXMLBuilderTest
 {
-
+	private static Account a = null;
+	
+	@BeforeClass
+	public static void before() throws Exception
+	{
+		a = new Account();
+	}
 	/**
 	 * <FIXML xmlns="http://www.fixprotocol.org/FIXML-5-0-SP2"> <Order TmInForce="0" Typ="1" Side="1" Acct="12345678"> <Instrmt SecTyp="CS" Sym="F"/> <OrdQty Qty="1"/> </Order> </FIXML> Place a day
 	 * order to buy 1 share of F at market price on account 12345678.
@@ -22,7 +30,7 @@ public class FIXMLBuilderTest
 	@Test
 	public void simpleBuyTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);builder.id("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("F");
 		builder.priceType(PriceType.MARKET);
@@ -49,7 +57,7 @@ public class FIXMLBuilderTest
 	@Test
 	public void simpleSellTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);builder.id("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("F");
 		builder.priceType(PriceType.MARKET);
@@ -79,7 +87,7 @@ public class FIXMLBuilderTest
 	@Test
 	public void sellShortAtExecutionPriceTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);builder.id("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("F");
 		builder.priceType(PriceType.LIMIT);
@@ -111,7 +119,7 @@ public class FIXMLBuilderTest
 	@Test
 	public void buyToCoverAtExecutionPriceTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);builder.id("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("F");
 		builder.priceType(PriceType.LIMIT);
@@ -139,7 +147,7 @@ public class FIXMLBuilderTest
 	@Test
 	public void buyTrailingStopTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);builder.id("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("IBM");
 		builder.priceType(PriceType.TRAILING_STOP);
@@ -169,7 +177,7 @@ public class FIXMLBuilderTest
 	@Test
 	public void buyTrailingStopPercentageTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);builder.id("12345678");
 		builder.timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
 		builder.symbol("COST");
 		builder.priceType(PriceType.TRAILING_STOP);
@@ -200,7 +208,7 @@ public class FIXMLBuilderTest
 	@Test
 	public void marketTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);builder.id("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("F");
 		builder.priceType(PriceType.MARKET);
@@ -227,7 +235,7 @@ public class FIXMLBuilderTest
 	@Test
 	public void limitTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);builder.id("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("F");
 		builder.priceType(PriceType.LIMIT);
@@ -255,7 +263,7 @@ public class FIXMLBuilderTest
 	@Test
 	public void stopTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);builder.id("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("F");
 		builder.priceType(PriceType.STOP);
@@ -287,7 +295,7 @@ public class FIXMLBuilderTest
 	@Test
 	public void stopLimitTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);builder.id("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("F");
 		builder.priceType(PriceType.STOP_LIMIT);
@@ -319,7 +327,8 @@ public class FIXMLBuilderTest
 	@Test
 	public void dayOrderTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);
+		builder.id("12345678");
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("F");
 		builder.priceType(PriceType.MARKET);
@@ -348,7 +357,8 @@ public class FIXMLBuilderTest
 	public void marketOnCloseTest() throws UtilityException
 	{
 
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);
+		builder.id("12345678");
 		builder.timeInForce(TimeInForceField.MARKET_CLOSE);
 		builder.symbol("F");
 		builder.priceType(PriceType.MARKET);
@@ -379,7 +389,8 @@ public class FIXMLBuilderTest
 	@Test
 	public void gtcTest() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("12345678");
+		FIXMLBuilder builder = new FIXMLBuilder(a);
+		builder.id("12345678");
 		builder.timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
 		builder.symbol("F");
 		builder.priceType(PriceType.MARKET);

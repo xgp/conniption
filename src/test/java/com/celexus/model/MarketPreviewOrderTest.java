@@ -1,8 +1,7 @@
 package com.celexus.model;
 
-import org.junit.Test;
-
 import com.celexus.conniption.foreman.util.UtilityException;
+import com.celexus.conniption.model.Account;
 import com.celexus.conniption.model.MarketPreviewOrder;
 import com.celexus.conniption.model.util.OrderPreviewField;
 import com.celexus.conniption.model.util.fixml.FIXMLBuilder;
@@ -14,10 +13,11 @@ import com.celexus.conniption.model.util.fixml.TimeInForceField;
 public class MarketPreviewOrderTest
 {
 
-	@Test
+//	@Test
 	public void test() throws UtilityException
 	{
-		FIXMLBuilder builder = new FIXMLBuilder("38580744");
+		Account a = new Account();
+		FIXMLBuilder builder = new FIXMLBuilder(a);
 		builder.timeInForce(TimeInForceField.DAY_ORDER);
 		builder.symbol("OCQLF");
 		builder.priceType(PriceType.LIMIT);
@@ -25,7 +25,7 @@ public class MarketPreviewOrderTest
 		builder.quantity(1);
 		builder.executionPrice(.01);
 		builder.side(MarketSideField.BUY);
-		MarketPreviewOrder order = new MarketPreviewOrder("38580744", builder);
+		MarketPreviewOrder order = new MarketPreviewOrder(new Account(), builder);
 		for(OrderPreviewField f: OrderPreviewField.values())
 		{
 			if(order.hasField(f))

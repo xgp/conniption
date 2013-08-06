@@ -33,14 +33,14 @@ public class MarketPreviewOrder implements Serializable
 	private static final long serialVersionUID = -3555216843532994045L;
 	private Map<OrderPreviewField, String> map;
 
-	public MarketPreviewOrder(String id, FIXMLBuilder b) throws UtilityException
+	public MarketPreviewOrder(Account a, FIXMLBuilder b) throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
 		connectForeman(foreman);
-		map = handler.parseMarketOrderPreview(foreman.makeAPICall(OrdersBuilder.preview(id, b.build().toString(), ResponseFormat.XML)));
+		map = handler.parseMarketOrderPreview(foreman.makeAPICall(OrdersBuilder.preview(a.getId(), b.build().toString(), ResponseFormat.XML)));
 	}
-	
+
 	public boolean hasField(OrderPreviewField f)
 	{
 		return map.containsKey(f);

@@ -32,13 +32,13 @@ public class MarketOrder implements Serializable
 	private static final long serialVersionUID = -6031612547592870127L;
 	private Map<OrderField, String> map;
 
-	public MarketOrder(String id, FIXMLBuilder b) throws UtilityException
+	public MarketOrder(Account account, FIXMLBuilder b) throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
 		connectForeman(foreman);
 
-		map = handler.parseMarketOrder(foreman.makeAPICall(OrdersBuilder.postOrder(id, b.build().toString(), ResponseFormat.XML)));
+		map = handler.parseMarketOrder(foreman.makeAPICall(OrdersBuilder.postOrder(account.getId(), b.build().toString(), ResponseFormat.XML)));
 	}
 
 	public boolean hasField(OrderField f)
