@@ -1,14 +1,12 @@
 package com.celexus.foreman.util;
 
-import org.junit.Test;
-
 import com.celexus.conniption.model.MarketQuote;
 import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
 public class Dom4JTest
 {
 
-	@Test
+//	@Test
 	public void test() throws Exception
 	{
 //		MarketClock returned  = new MarketClock(ResponseFormat.XML);
@@ -19,7 +17,7 @@ public class Dom4JTest
 //				System.out.println(f+" "+returned.getField(f));
 //			}
 //		}
-		MarketQuote quote = new MarketQuote( "SIRI",false, MarketQuotesResponseField.SYMBOL);
+		MarketQuote quote = new MarketQuote( "SIRI", MarketQuotesResponseField.SYMBOL);
 		for(MarketQuotesResponseField f: MarketQuotesResponseField.values())
 		{
 			if (quote.hasField(f))

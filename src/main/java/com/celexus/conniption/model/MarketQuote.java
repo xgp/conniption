@@ -15,8 +15,6 @@
  */
 package com.celexus.conniption.model;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,64 +32,21 @@ public class MarketQuote implements Serializable
 	private static final long serialVersionUID = 3574007890139251515L;
 	private Map<MarketQuotesResponseField, String> map = new HashMap<MarketQuotesResponseField, String>();
 
-	public MarketQuote(String symbol, boolean streaming) throws UtilityException
+	public MarketQuote(String symbol) throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
 		connectForeman(foreman);
-		if (streaming)
-		{
-			handleStream(foreman.makeAPICallStream(MarketBuilder.getStreamingQuotes(ResponseFormat.XML, new String[] { symbol.trim().toUpperCase() })));
-		}
-		else
-		{
-			map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.trim().toUpperCase())));
-
-		}
-	}
-
-	private void handleStream(final BufferedReader reader)
-	{
-		new Thread(new Runnable()
-		{
-
-			public void run()
-			{
-				String line;
-				try
-				{
-					while (true)
-					{
-						line = reader.readLine();
-						if(line != null)
-						{
-						}
-					}
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-		}).start();
+		map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.trim().toUpperCase())));
 
 	}
 
-	public MarketQuote(String symbol, boolean streaming, MarketQuotesResponseField... fields) throws UtilityException
+	public MarketQuote(String symbol, MarketQuotesResponseField... fields) throws UtilityException
 	{
 		XMLHandler handler = new XMLHandler();
 		TradeKingForeman foreman = new TradeKingForeman();
 		connectForeman(foreman);
-		if (streaming)
-		{
-
-		}
-		else
-		{
-			map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.trim().toUpperCase() }, fields)));
-		}
+		map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.trim().toUpperCase() }, fields)));
 	}
 
 	public boolean hasField(MarketQuotesResponseField f)

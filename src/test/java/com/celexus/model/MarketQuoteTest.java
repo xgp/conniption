@@ -17,7 +17,7 @@ public class MarketQuoteTest
 	{
 		try
 		{
-			MarketQuote quote = new MarketQuote("SIRI",false);
+			MarketQuote quote = new MarketQuote("SIRI");
 			for(MarketQuotesResponseField f: MarketQuotesResponseField.values())
 			{
 				if(quote.hasField(f))
@@ -25,20 +25,6 @@ public class MarketQuoteTest
 					System.out.println(f.name()+"="+quote.getField(f));
 				}
 			}
-			assertTrue("Expected Field not in response",quote.hasField(MarketQuotesResponseField.DATE_TIME));
-		}
-		catch (UtilityException e)
-		{
-			fail();
-		}
-	}
-	
-//	@Test
-	public void streamTest()
-	{
-		try
-		{
-			MarketQuote quote = new MarketQuote("SIRI",true);
 			assertTrue("Expected Field not in response",quote.hasField(MarketQuotesResponseField.DATE_TIME));
 		}
 		catch (UtilityException e)
