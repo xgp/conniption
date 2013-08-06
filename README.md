@@ -15,7 +15,7 @@ The missing TradeKing API for Java.
 
 ## Installing
 
-To avoid putting these OAuth keys in the code base, and to avoid config files. [TradeKingForeman](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/foreman/TradeKingForeman.java) uses [ForemanConstants](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/foreman/ForemanConstants.java) convience methods.
+To avoid putting these OAuth keys in the code base, and to avoid config files. [TradeKingForeman](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/foreman/TradeKingForeman.java) uses [ForemanConstants](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/foreman/ForemanConstants.java) convience methods.
 They all access System environment variables (via [System.getEnv()](http://docs.oracle.com/javase/1.5.0/docs/api/java/lang/System.html#getenv%28java.lang.String%29)). The following lines should be added to your environment variables.
 
 ### Linux
@@ -46,9 +46,9 @@ Use the maven clean install directive to compile and make sure everythng works. 
 
 If you're just here to use conniption, there are really only a couple classes you need to know about
 
-#### [Account](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/Account.java)
+#### [Account](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/model/Account.java)
 
-Access to your TradekingAccount. You'll notice there are two constructors. One which takes your ID as a parameter, one without.
+Access to your Tradeking Account. You'll notice there are two constructors. One which takes your ID as a parameter, one without.
 The one without assumes you only have one account attached. You can access the fields returned by using ***hasField()*** and ***getField()***
 
 
@@ -120,7 +120,7 @@ will yield
 You can learn more about these fields [here](https://developers.tradeking.com/documentation/accounts-get).
 
 
-#### [MarketClock](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketClock.java)
+#### [MarketClock](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/model/MarketClock.java)
 
 Access to the Market's clock. Use ***hasField()*** and ***getField*** to access these values.
   
@@ -142,7 +142,7 @@ will yield
     MESSAGE=Market is open Monday through Friday 9:30AM to 4:00PM EST
     UNIX_TIME=1375153546
 
-#### [MarketQuote](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketQuote.java)
+#### [MarketQuote](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/model/MarketQuote.java)
 
 Get information on stocks. 
 
@@ -226,9 +226,9 @@ will yield
 	YEAR_LOW=2.0800
 	YEAR_LOW_DATE=20120726
 
-#### [MarketOrder](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/model/MarketOrder.java)
+#### [MarketOrder](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/model/MarketOrder.java)
 
-You'll need a good understanding of how to use the [FIXMLBuilder](https://github.com/Ccook/conniption/blob/master/src/test/java/com/celexus/model/util/fixml/FIXMLBuilderTest.java), which uses FIXML to post orders. If you want to validate your order, use MarketOrderPreview instead.
+You'll need a good understanding of how to use the [FIXMLBuilder](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/model/util/fixml/FIXMLBuilder.java), which uses FIXML to post orders. If you want to validate your order, use MarketOrderPreview instead.
 
 		Account a = new Account();
 		FIXMLBuilder builder = new FIXMLBuilder(a);
