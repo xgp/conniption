@@ -249,6 +249,37 @@ You'll need a good understanding of how to use the [FIXMLBuilder](https://github
 				System.out.println(f+" "+value);
 			}
 		}
+#### [StreamingMarketQuote (Experimental)](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/model/stream/StreamingMarketQuote.java)
+
+Streaming APIs allow you to maintain a tradeking connection. This reduces the number of API calls you have to make.
+
+Each StreamingMarketQuote requires a ContentExchange Object. The one provided below simply prints the response (conniption has the functions to parse these responses, I just don't know what to do with them yet).
+
+
+		StreamingMarketQuote quote = new StreamingMarketQuote();
+		
+		ContentExchange ex = new ContentExchange(true)
+		{
+			// tell me what kind of response code we got
+			protected void onResponseComplete() throws IOException
+			{
+				int status = getResponseStatus();
+				if (status == 200)
+					System.out.println("Successfully connected");
+				else
+					System.out.println("Error Code Received: " + status);
+			}
+
+			// print out any response data we get along the stream
+			protected void onResponseContent(Buffer data)
+			{
+				System.out.println(data);
+			}
+		};
+		
+		ContentExchange request = quote.stream(ex, "IBM");
+		// Be careful! this line is blocking!
+		//request.waitForDone();
 
 ## Warnings
 
