@@ -279,7 +279,7 @@ Each StreamingMarketQuote requires a ContentExchange Object. The one provided be
 		
 		ContentExchange request = quote.stream(ex, "IBM");
 		// Be careful! this line is blocking!
-		//request.waitForDone();
+		request.waitForDone();
 
 ## Warnings
 
