@@ -42,18 +42,10 @@ public class MarketBuilder extends APIBuilder
 	{
 		return getQuotes(format,symbols, new MarketQuotesResponseField[]{});
 	}
-	
-	public static MarketBuilder getQuotes(ResponseFormat format, String[] symbols, MarketQuotesResponseField ... fields)
-	{
-		return getQuotes(format,symbols,fields,false);
-	}
-	
-	public static MarketBuilder getStreamingQuotes(ResponseFormat format, String[] symbols, MarketQuotesResponseField ... fields)
-	{
-		return getQuotes(format,symbols,fields,true);
-	}
 
-	private static MarketBuilder getQuotes(ResponseFormat format, String[] symbols, MarketQuotesResponseField[] fields, boolean streaming)
+	
+
+	public static MarketBuilder getQuotes(ResponseFormat format, String[] symbols, MarketQuotesResponseField[] fields)
 	{
 		StringBuilder sb = new StringBuilder();
 		for(String sym:symbols)
@@ -66,16 +58,8 @@ public class MarketBuilder extends APIBuilder
 			fids.append(f.toString()+" ");
 		}
 		MarketBuilder b = new MarketBuilder(Verb.POST);
-		if(streaming)
-		{
-			b.resourceURL = APICall.getStreamingQuote(format);
-		}
-		else
-		{
-			b.resourceURL = APICall.getQuote(format);
-		}
 		b.params.put(MarketQuotesField.SYMBOLS.toString(), sb.toString().trim().replace(" ", ","));
-		b.streaming  = streaming;
+		b.resourceURL = APICall.getQuote(ResponseFormat.XML);
 		if(!fids.toString().isEmpty())
 		{
 			b.params.put(MarketQuotesField.FIDS.toString(), fids.toString().trim().replace(" ", ","));
