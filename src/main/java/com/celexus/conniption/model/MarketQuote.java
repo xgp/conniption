@@ -48,11 +48,14 @@ public class MarketQuote implements Serializable
 		connectForeman(foreman);
 		map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.getSymbol() }, fields)));
 	}
-	
-	public MarketQuote(String response, ResponseFormat format) throws UtilityException 
+
+	public MarketQuote(String response, ResponseFormat format) throws UtilityException
 	{
 		XMLHandler handler = new XMLHandler();
-		if(!format.equals(ResponseFormat.XML)){throw new UtilityException("Format:"+format.name()+" not supported");}
+		if (!format.equals(ResponseFormat.XML))
+		{
+			throw new UtilityException("Format:" + format.name() + " not supported");
+		}
 		map = handler.parseMarketQuote(response);
 	}
 
@@ -65,6 +68,11 @@ public class MarketQuote implements Serializable
 	{
 		return map.get(f);
 
+	}
+
+	public Symbol getSymbol()
+	{
+		return new Symbol(this.getField(MarketQuotesResponseField.SYMBOL));
 	}
 
 	private void connectForeman(TradeKingForeman foreman) throws UtilityException
