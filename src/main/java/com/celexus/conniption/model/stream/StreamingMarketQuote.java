@@ -25,11 +25,12 @@ import org.scribe.model.Verb;
 import com.celexus.conniption.foreman.ForemanConstants;
 import com.celexus.conniption.foreman.util.APICall;
 import com.celexus.conniption.foreman.util.ResponseFormat;
+import com.celexus.conniption.model.Symbol;
 
 public class StreamingMarketQuote
 {
 
-	public ContentExchange stream(ContentExchange ex, String... symbols) throws Exception
+	public ContentExchange stream(ContentExchange ex, Symbol ... symbols) throws Exception
 	{
 		OAuthConsumer consumer = new JettyOAuthConsumer(ForemanConstants.API_KEY.toString(), ForemanConstants.API_SECRET.toString());
 		consumer.setTokenWithSecret(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());
@@ -47,10 +48,10 @@ public class StreamingMarketQuote
 		return ex;
 	}
 
-	private String getParameters(String[] symbols)
+	private String getParameters(Symbol[] symbols)
 	{
 		StringBuilder sb = new StringBuilder("?symbols=");
-		for (String sym : symbols)
+		for (Symbol sym : symbols)
 		{
 			sb.append(sym).append(",");
 		}

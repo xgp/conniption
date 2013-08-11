@@ -11,4 +11,10 @@ public class Symbol
 	{
 		return symbol;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return symbol;
+	}
 }

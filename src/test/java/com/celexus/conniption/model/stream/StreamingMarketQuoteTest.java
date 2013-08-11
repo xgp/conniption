@@ -17,9 +17,10 @@ package com.celexus.conniption.model.stream;
 
 import java.io.IOException;
 
-import org.junit.Test;
 import org.mortbay.io.Buffer;
 import org.mortbay.jetty.client.ContentExchange;
+
+import com.celexus.conniption.model.Symbol;
 
 public class StreamingMarketQuoteTest
 {
@@ -48,7 +49,7 @@ public class StreamingMarketQuoteTest
 			}
 		};
 		
-		ContentExchange request = quote.stream(ex, "IBM");
+		ContentExchange request = quote.stream(ex, new Symbol("IBM"));
 //		request.waitForDone();
 	}
 
