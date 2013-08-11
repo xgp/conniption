@@ -34,13 +34,14 @@ public class MarketOrder implements Serializable
 	private Map<OrderField, String> map;
 	private TKResponse response;
 
+	private Account account;
+	private FIXMLBuilder b;
+
 	public MarketOrder(Account account, FIXMLBuilder b) throws UtilityException
 	{
-		TradeKingForeman foreman = new TradeKingForeman();
-		XMLHandler handler = new XMLHandler();
-		connectForeman(foreman);
-		response = foreman.makeAPICall(OrdersBuilder.postOrder(account.getId(), b.build().toString(), ResponseFormat.XML));
-		map = handler.parseMarketOrder(response.toString());
+		this.account = account;
+		this.b = b;
+		update();
 	}
 
 	public boolean hasField(OrderField f)
@@ -57,6 +58,15 @@ public class MarketOrder implements Serializable
 	public TKResponse getTKResponse()
 	{
 		return response;
+	}
+
+	public void update() throws UtilityException
+	{
+		TradeKingForeman foreman = new TradeKingForeman();
+		XMLHandler handler = new XMLHandler();
+		connectForeman(foreman);
+		response = foreman.makeAPICall(OrdersBuilder.postOrder(account.getId(), b.build().toString(), ResponseFormat.XML));
+		map = handler.parseMarketOrder(response.toString());
 	}
 
 	private void connectForeman(TradeKingForeman foreman) throws UtilityException

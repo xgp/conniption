@@ -36,16 +36,7 @@ public class MarketClock implements Serializable
 
 	public MarketClock() throws UtilityException
 	{
-		TradeKingForeman foreman = new TradeKingForeman();
-		XMLHandler handler = new XMLHandler();
-		connectForeman(foreman);
-		response = foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML));
-		map = handler.parseMarketClock(response.toString());
-	}
-
-	public MarketClock(Map<MarketClockField, String> fields)
-	{
-		this.map = fields;
+		update();
 	}
 
 	public boolean hasField(MarketClockField f)
@@ -92,6 +83,15 @@ public class MarketClock implements Serializable
 		}
 
 		return true;
+	}
+
+	public void update() throws UtilityException
+	{
+		TradeKingForeman foreman = new TradeKingForeman();
+		XMLHandler handler = new XMLHandler();
+		connectForeman(foreman);
+		response = foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML));
+		map = handler.parseMarketClock(response.toString());
 	}
 
 	private void connectForeman(TradeKingForeman foreman) throws UtilityException

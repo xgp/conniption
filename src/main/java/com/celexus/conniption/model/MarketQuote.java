@@ -33,34 +33,49 @@ public class MarketQuote implements Serializable
 	private static final long serialVersionUID = 3574007890139251515L;
 	private Map<MarketQuotesResponseField, String> map = new HashMap<MarketQuotesResponseField, String>();
 	private TKResponse response;
+	private Symbol symbol;
+	private MarketQuotesResponseField[] fields;
 
 	public MarketQuote(Symbol symbol) throws UtilityException
 	{
-		TradeKingForeman foreman = new TradeKingForeman();
-		XMLHandler handler = new XMLHandler();
-		connectForeman(foreman);
-		response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.getSymbol()));
-		map = handler.parseMarketQuote(response.toString());
-
+		this.symbol = symbol;
+		update();
 	}
 
 	public MarketQuote(Symbol symbol, MarketQuotesResponseField... fields) throws UtilityException
 	{
-		XMLHandler handler = new XMLHandler();
-		TradeKingForeman foreman = new TradeKingForeman();
-		connectForeman(foreman);
-		response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.getSymbol() }, fields));
-		map = handler.parseMarketQuote(response.toString());
+		this.symbol = symbol;
+		this.fields = fields;
+		update();
 	}
 
-	public MarketQuote(String response, ResponseFormat format) throws UtilityException
+	public MarketQuote(TKResponse response, ResponseFormat format) throws UtilityException
 	{
+		this.response = response;
 		XMLHandler handler = new XMLHandler();
 		if (!format.equals(ResponseFormat.XML))
 		{
 			throw new UtilityException("Format:" + format.name() + " not supported");
 		}
-		map = handler.parseMarketQuote(response);
+		map = handler.parseMarketQuote(response.toString());
+		this.symbol = getSymbol();
+	}
+
+	public void update() throws UtilityException
+	{
+		TradeKingForeman foreman = new TradeKingForeman();
+		XMLHandler handler = new XMLHandler();
+		connectForeman(foreman);
+		if (fields != null)
+		{
+			response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.getSymbol() }, fields));
+			map = handler.parseMarketQuote(response.toString());
+		}
+		else
+		{
+			response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.getSymbol()));
+			map = handler.parseMarketQuote(response.toString());
+		}
 	}
 
 	public boolean hasField(MarketQuotesResponseField f)

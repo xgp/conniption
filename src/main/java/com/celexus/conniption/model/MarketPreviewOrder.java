@@ -34,14 +34,12 @@ public class MarketPreviewOrder implements Serializable
 	private static final long serialVersionUID = -3555216843532994045L;
 	private Map<OrderPreviewField, String> map;
 	private TKResponse response;
+	private Account a;
+	private FIXMLBuilder b;
 
 	public MarketPreviewOrder(Account a, FIXMLBuilder b) throws UtilityException
 	{
-		TradeKingForeman foreman = new TradeKingForeman();
-		XMLHandler handler = new XMLHandler();
-		connectForeman(foreman);
-		response = foreman.makeAPICall(OrdersBuilder.preview(a.getId(), b.build().toString(), ResponseFormat.XML));
-		map = handler.parseMarketOrderPreview(response.toString());
+		update();
 	}
 
 	public boolean hasField(OrderPreviewField f)
@@ -58,6 +56,15 @@ public class MarketPreviewOrder implements Serializable
 	public TKResponse getTKResponse()
 	{
 		return response;
+	}
+
+	public void update() throws UtilityException
+	{
+		TradeKingForeman foreman = new TradeKingForeman();
+		XMLHandler handler = new XMLHandler();
+		connectForeman(foreman);
+		response = foreman.makeAPICall(OrdersBuilder.preview(a.getId(), b.build().toString(), ResponseFormat.XML));
+		map = handler.parseMarketOrderPreview(response.toString());
 	}
 
 	private void connectForeman(TradeKingForeman foreman) throws UtilityException

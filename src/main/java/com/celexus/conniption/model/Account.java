@@ -33,22 +33,17 @@ public class Account implements Serializable
 	private static final long serialVersionUID = -3038944208566900477L;
 	private Map<AccountsField, String> map = new HashMap<AccountsField, String>();
 	private TKResponse response;
+	private String id;
+
 	public Account(String id) throws UtilityException
 	{
-		TradeKingForeman foreman = new TradeKingForeman();
-		XMLHandler handler = new XMLHandler();
-		connectForeman(foreman);
-		response = foreman.makeAPICall(AccountsBuilder.getAccount(id, ResponseFormat.XML));
-		map = handler.parseAccount(response.toString());
+		this.id = id;
+		update();
 	}
 
 	public Account() throws UtilityException
 	{
-		TradeKingForeman foreman = new TradeKingForeman();
-		XMLHandler handler = new XMLHandler();
-		connectForeman(foreman);
-		response = foreman.makeAPICall(AccountsBuilder.getAccounts(ResponseFormat.XML));
-		map = handler.parseAccount(response.toString());
+		update();
 	}
 
 	public String getId()
@@ -70,22 +65,10 @@ public class Account implements Serializable
 	{
 		return map.get(f);
 	}
-	
+
 	public TKResponse getTKResponse()
 	{
 		return response;
-	}
-
-	private void connectForeman(TradeKingForeman foreman) throws UtilityException
-	{
-		try
-		{
-			foreman.connect();
-		}
-		catch (ForemanException e)
-		{
-			throw new UtilityException("Unable to connect to the TradekingForeman", e);
-		}
 	}
 
 	@Override
@@ -116,4 +99,34 @@ public class Account implements Serializable
 		}
 		return true;
 	}
+
+	public void update() throws UtilityException
+	{
+		TradeKingForeman foreman = new TradeKingForeman();
+		XMLHandler handler = new XMLHandler();
+		connectForeman(foreman);
+		if (id == null)
+		{
+			response = foreman.makeAPICall(AccountsBuilder.getAccounts(ResponseFormat.XML));
+			map = handler.parseAccount(response.toString());
+		}
+		else
+		{
+			response = foreman.makeAPICall(AccountsBuilder.getAccount(id, ResponseFormat.XML));
+			map = handler.parseAccount(response.toString());
+		}
+	}
+
+	private void connectForeman(TradeKingForeman foreman) throws UtilityException
+	{
+		try
+		{
+			foreman.connect();
+		}
+		catch (ForemanException e)
+		{
+			throw new UtilityException("Unable to connect to the TradekingForeman", e);
+		}
+	}
+
 }
