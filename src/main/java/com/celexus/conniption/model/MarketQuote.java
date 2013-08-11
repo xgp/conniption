@@ -32,21 +32,28 @@ public class MarketQuote implements Serializable
 	private static final long serialVersionUID = 3574007890139251515L;
 	private Map<MarketQuotesResponseField, String> map = new HashMap<MarketQuotesResponseField, String>();
 
-	public MarketQuote(String symbol) throws UtilityException
+	public MarketQuote(Symbol symbol) throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
 		connectForeman(foreman);
-		map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.trim().toUpperCase())));
+		map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.getSymbol())));
 
 	}
 
-	public MarketQuote(String symbol, MarketQuotesResponseField... fields) throws UtilityException
+	public MarketQuote(Symbol symbol, MarketQuotesResponseField... fields) throws UtilityException
 	{
 		XMLHandler handler = new XMLHandler();
 		TradeKingForeman foreman = new TradeKingForeman();
 		connectForeman(foreman);
-		map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.trim().toUpperCase() }, fields)));
+		map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.getSymbol() }, fields)));
+	}
+	
+	public MarketQuote(String response, ResponseFormat format) throws UtilityException 
+	{
+		XMLHandler handler = new XMLHandler();
+		if(!format.equals(ResponseFormat.XML)){throw new UtilityException("Format:"+format.name()+" not supported");}
+		map = handler.parseMarketQuote(response);
 	}
 
 	public boolean hasField(MarketQuotesResponseField f)

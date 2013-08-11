@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.celexus.conniption.foreman.util.UtilityException;
 import com.celexus.conniption.model.MarketQuote;
+import com.celexus.conniption.model.Symbol;
 import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
 public class MarketQuoteTest
@@ -17,7 +18,7 @@ public class MarketQuoteTest
 	{
 		try
 		{
-			MarketQuote quote = new MarketQuote("SIRI");
+			MarketQuote quote = new MarketQuote(new Symbol("SIRI"));
 			for(MarketQuotesResponseField f: MarketQuotesResponseField.values())
 			{
 				if(quote.hasField(f))
