@@ -104,7 +104,7 @@ public class MarketQuote implements Serializable
 
 	public Symbol getSymbol()
 	{
-		return new Symbol(this.getField(MarketQuotesResponseField.SYMBOL));
+		return symbol;
 	}
 
 	public TKResponse getTKResponse()
