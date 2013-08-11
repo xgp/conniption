@@ -79,6 +79,11 @@ public class MarketQuote implements Serializable
 		return new Symbol(this.getField(MarketQuotesResponseField.SYMBOL));
 	}
 
+	public TKResponse getTKResponse()
+	{
+		return response;
+	}
+
 	@Override
 	public boolean equals(Object obj)
 	{

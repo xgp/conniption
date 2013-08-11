@@ -69,7 +69,11 @@ public class Account implements Serializable
 	public String getField(AccountsField f)
 	{
 		return map.get(f);
-
+	}
+	
+	public TKResponse getTKResponse()
+	{
+		return response;
 	}
 
 	private void connectForeman(TradeKingForeman foreman) throws UtilityException

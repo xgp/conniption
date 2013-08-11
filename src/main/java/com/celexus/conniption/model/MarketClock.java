@@ -59,6 +59,11 @@ public class MarketClock implements Serializable
 
 	}
 
+	public TKResponse getTKResponse()
+	{
+		return response;
+	}
+
 	@Override
 	public boolean equals(Object obj)
 	{

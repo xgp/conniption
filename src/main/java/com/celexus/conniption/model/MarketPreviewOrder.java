@@ -55,6 +55,11 @@ public class MarketPreviewOrder implements Serializable
 
 	}
 
+	public TKResponse getTKResponse()
+	{
+		return response;
+	}
+
 	private void connectForeman(TradeKingForeman foreman) throws UtilityException
 	{
 		try
