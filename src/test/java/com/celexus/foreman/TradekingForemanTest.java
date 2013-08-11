@@ -1,7 +1,6 @@
 package com.celexus.foreman;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -18,31 +17,15 @@ public class TradekingForemanTest
 	public void connectionTest()
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
-		try
-		{
-			foreman.connect();
-		}
-		catch (ForemanException e)
-		{
-			fail();
-		}
 
-		assertTrue("Foreman does not have OAuth Service", foreman.hasOAuth());
-		assertTrue("Foreman does not have Access Token", foreman.hasAccessToken());
+		assertTrue("Foreman does not have OAuth Service", !foreman.hasOAuth());
+		assertTrue("Foreman does not have Access Token", !foreman.hasAccessToken());
 	}
 
 	@Test
-	public void apiCallTest()
+	public void apiCallTest() throws ForemanException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
-		try
-		{
-			foreman.connect();
-		}
-		catch (ForemanException e)
-		{
-			fail();
-		}
 		assertTrue("Foreman didn't recognize API reponse",foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML)).toString().contains("<message>"));
 	}
 
@@ -50,7 +33,6 @@ public class TradekingForemanTest
 	public void accountsTest() throws Exception
 	{
 		TradeKingForeman forman = new TradeKingForeman();
-		forman.connect();
 		// System.out.println(forman.makeAPICall(AccountsBuilder.getAccountBalances(ResponseFormat.XML)));
 		System.out.println(forman.makeAPICall(AccountsBuilder.getAccount("38580744", ResponseFormat.XML)));
 		// System.out.println(forman.makeAPICall(AccountsBuilder.getAccountBalance("38580744",ResponseFormat.XML)));

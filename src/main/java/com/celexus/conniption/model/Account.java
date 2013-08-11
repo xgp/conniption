@@ -104,29 +104,31 @@ public class Account implements Serializable
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
-		connectForeman(foreman);
 		if (id == null)
 		{
-			response = foreman.makeAPICall(AccountsBuilder.getAccounts(ResponseFormat.XML));
+			try
+			{
+				response = foreman.makeAPICall(AccountsBuilder.getAccounts(ResponseFormat.XML));
+			}
+			catch (ForemanException e)
+			{
+				throw new UtilityException("Make API Call",e);
+			}
 			map = handler.parseAccount(response.toString());
 		}
 		else
 		{
-			response = foreman.makeAPICall(AccountsBuilder.getAccount(id, ResponseFormat.XML));
+			try
+			{
+				response = foreman.makeAPICall(AccountsBuilder.getAccount(id, ResponseFormat.XML));
+			}
+			catch (ForemanException e)
+			{
+				throw new UtilityException("Make API Call",e);
+			}
 			map = handler.parseAccount(response.toString());
 		}
 	}
 
-	private void connectForeman(TradeKingForeman foreman) throws UtilityException
-	{
-		try
-		{
-			foreman.connect();
-		}
-		catch (ForemanException e)
-		{
-			throw new UtilityException("Unable to connect to the TradekingForeman", e);
-		}
-	}
 
 }

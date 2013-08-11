@@ -8,10 +8,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.celexus.conniption.foreman.ForemanException;
 import com.celexus.conniption.foreman.TradeKingForeman;
 import com.celexus.conniption.foreman.util.ResponseFormat;
-import com.celexus.conniption.foreman.util.UtilityException;
 import com.celexus.conniption.foreman.util.XMLHandler;
 import com.celexus.conniption.foreman.util.builder.AccountsBuilder;
 import com.celexus.conniption.foreman.util.builder.MarketBuilder;
@@ -27,16 +25,16 @@ public class XMLHandlerTest
 	public void parseAccountTest()
 	{
 		XMLHandler handler = new XMLHandler();
-		connectForeman();
 		Map<AccountsField, String> map = null;
 		try
 		{
 			 map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccount("38580744", ResponseFormat.XML)).toString());
 		}
-		catch (UtilityException e)
+		catch (Exception e)
 		{
 			fail();
 		}
+
 		assertTrue("Response failed to get results",!map.isEmpty());
 		assertNotNull("Response did not include expected results",map.get(AccountsField.ACCOUNT_NUMBER));
 	}
@@ -45,13 +43,12 @@ public class XMLHandlerTest
 	public void marketClockTest()
 	{
 		XMLHandler handler = new XMLHandler();
-		connectForeman();
 		Map<MarketClockField, String> map = null;
 		try
 		{
 			map = handler.parseMarketClock(foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML)).toString());
 		}
-		catch (UtilityException e)
+		catch (Exception e)
 		{
 			fail();
 		}	
@@ -63,14 +60,13 @@ public class XMLHandlerTest
 	public void marketQuoteTest()
 	{
 		XMLHandler handler = new XMLHandler();
-		connectForeman();
 		Map<MarketQuotesResponseField, String> map = null;
 		
 		try
 		{
 			map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, "SIRI")).toString());
 		}
-		catch (UtilityException e)
+		catch (Exception e)
 		{
 			fail();
 		}
@@ -78,16 +74,6 @@ public class XMLHandlerTest
 		assertTrue("Response failed to get results",!map.isEmpty());
 		assertNotNull("Response did not include expected results",map.get(MarketQuotesResponseField.SYMBOL));
 	}
-	private void connectForeman()
-	{
-		try
-		{
-			foreman.connect();
-		}
-		catch (ForemanException e)
-		{
-			fail();
-		}
-	}
+
 
 }

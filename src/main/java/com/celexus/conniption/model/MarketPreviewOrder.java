@@ -62,20 +62,15 @@ public class MarketPreviewOrder implements Serializable
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
-		connectForeman(foreman);
-		response = foreman.makeAPICall(OrdersBuilder.preview(a.getId(), b.build().toString(), ResponseFormat.XML));
-		map = handler.parseMarketOrderPreview(response.toString());
-	}
-
-	private void connectForeman(TradeKingForeman foreman) throws UtilityException
-	{
 		try
 		{
-			foreman.connect();
+			response = foreman.makeAPICall(OrdersBuilder.preview(a.getId(), b.build().toString(), ResponseFormat.XML));
 		}
 		catch (ForemanException e)
 		{
-			throw new UtilityException("Unable to connect to the TradekingForeman", e);
+			throw new UtilityException("Make API Call",e);
 		}
+		map = handler.parseMarketOrderPreview(response.toString());
 	}
+
 }

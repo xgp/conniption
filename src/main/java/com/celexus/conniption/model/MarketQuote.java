@@ -65,15 +65,28 @@ public class MarketQuote implements Serializable
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
-		connectForeman(foreman);
 		if (fields != null)
 		{
-			response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.getSymbol() }, fields));
+			try
+			{
+				response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.getSymbol() }, fields));
+			}
+			catch (ForemanException e)
+			{
+				throw new UtilityException("Make API Call",e);
+			}
 			map = handler.parseMarketQuote(response.toString());
 		}
 		else
 		{
-			response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.getSymbol()));
+			try
+			{
+				response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.getSymbol()));
+			}
+			catch (ForemanException e)
+			{
+				throw new UtilityException("Make API Call",e);
+			}
 			map = handler.parseMarketQuote(response.toString());
 		}
 	}
@@ -130,15 +143,4 @@ public class MarketQuote implements Serializable
 		return true;
 	}
 
-	private void connectForeman(TradeKingForeman foreman) throws UtilityException
-	{
-		try
-		{
-			foreman.connect();
-		}
-		catch (ForemanException e)
-		{
-			throw new UtilityException("Unable to connect to the TradekingForeman", e);
-		}
-	}
 }

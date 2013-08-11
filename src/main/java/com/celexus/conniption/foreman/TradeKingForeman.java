@@ -44,7 +44,7 @@ public class TradeKingForeman implements Serializable
 	{
 	}
 
-	public void connect() throws ForemanException
+	private void connect() throws ForemanException
 	{
 		log.debug("Connecting to Tradeking");
 		try
@@ -62,8 +62,12 @@ public class TradeKingForeman implements Serializable
 		log.debug("Connection Established");
 	}
 
-	public TKResponse makeAPICall(APIBuilder b)
+	public TKResponse makeAPICall(APIBuilder b) throws ForemanException
 	{
+		if (!this.isConnected())
+		{
+			this.connect();
+		}
 		log.trace("Making an API Call");
 		log.trace("\t ... Verb:" + b.getVerb());
 		log.trace("\t ... Resource URL:" + b.getResourceURL());
@@ -80,6 +84,11 @@ public class TradeKingForeman implements Serializable
 	public boolean hasAccessToken()
 	{
 		return this.accessToken != null;
+	}
+
+	public boolean isConnected()
+	{
+		return hasOAuth() && hasAccessToken();
 	}
 
 	private Request makeRequest(Verb verb, String resourceURL, Map<String, String> parameters, String payload)
