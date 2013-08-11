@@ -75,6 +75,36 @@ public class MarketQuote implements Serializable
 		return new Symbol(this.getField(MarketQuotesResponseField.SYMBOL));
 	}
 
+	@Override
+	public boolean equals(Object obj)
+	{
+
+		if (obj == null)
+		{
+			return false;
+		}
+		if (obj instanceof MarketQuote)
+		{
+			MarketQuote other = (MarketQuote) obj;
+			for (MarketQuotesResponseField f : MarketQuotesResponseField.values())
+			{
+				if (this.hasField(f) == other.hasField(f) && this.hasField(f))
+				{
+					this.getField(f).equals(other.getField(f));
+				}
+				else if (this.hasField(f) || other.hasField(f))
+				{
+					return false;
+				}
+			}
+		}
+		else
+		{
+			return false;
+		}
+		
+		return true;
+	}
 	private void connectForeman(TradeKingForeman foreman) throws UtilityException
 	{
 		try
