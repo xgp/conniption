@@ -15,8 +15,6 @@
  */
 package com.celexus.conniption.foreman;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,7 +22,6 @@ import java.util.Map.Entry;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Request;
-import org.scribe.model.Response;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
@@ -65,7 +62,7 @@ public class TradeKingForeman implements Serializable
 		log.debug("Connection Established");
 	}
 
-	public String makeAPICall(APIBuilder b)
+	public TKResponse makeAPICall(APIBuilder b)
 	{
 		log.trace("Making an API Call");
 		log.trace("\t ... Verb:" + b.getVerb());
@@ -73,11 +70,6 @@ public class TradeKingForeman implements Serializable
 		log.trace("\t ... Body:" + b.getBody());
 		log.trace("\t ... Parameters:" + !b.getParameters().isEmpty());
 		return sendRequest(makeRequest(b.getVerb(), b.getResourceURL(), b.getParameters(), b.getBody()));
-	}
-
-	public BufferedReader makeAPICallStream(APIBuilder b)
-	{
-		return getStream(makeRequest(b.getVerb(), b.getResourceURL(), b.getParameters(), b.getBody()));
 	}
 
 	public boolean hasOAuth()
@@ -107,20 +99,10 @@ public class TradeKingForeman implements Serializable
 		return request;
 	}
 
-	private String sendRequest(Request request)
+	private TKResponse sendRequest(Request request)
 	{
-		Response response = request.send();
-		return response.getBody();
-	}
-
-	private BufferedReader getStream(Request request)
-	{
-		request.setConnectionKeepAlive(true);
-		Response response = request.send();
-
-		// Create a reader to read Twitter's stream
-		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getStream()));
-		return reader;
+		TKResponse response = new TKResponse(request);
+		return response;
 	}
 
 }

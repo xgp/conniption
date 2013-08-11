@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.celexus.conniption.foreman.ForemanException;
+import com.celexus.conniption.foreman.TKResponse;
 import com.celexus.conniption.foreman.TradeKingForeman;
 import com.celexus.conniption.foreman.util.ResponseFormat;
 import com.celexus.conniption.foreman.util.UtilityException;
@@ -31,13 +32,15 @@ public class MarketClock implements Serializable
 {
 	private static final long serialVersionUID = 4825597509929315969L;
 	private Map<MarketClockField, String> map = new HashMap<MarketClockField, String>();
+	private TKResponse response;
 
 	public MarketClock() throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
 		connectForeman(foreman);
-		map = handler.parseMarketClock(foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML)));
+		response = foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML));
+		map = handler.parseMarketClock(response.toString());
 	}
 
 	public MarketClock(Map<MarketClockField, String> fields)
@@ -82,7 +85,7 @@ public class MarketClock implements Serializable
 		{
 			return false;
 		}
-		
+
 		return true;
 	}
 

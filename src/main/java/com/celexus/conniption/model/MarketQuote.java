@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.celexus.conniption.foreman.ForemanException;
+import com.celexus.conniption.foreman.TKResponse;
 import com.celexus.conniption.foreman.TradeKingForeman;
 import com.celexus.conniption.foreman.util.ResponseFormat;
 import com.celexus.conniption.foreman.util.UtilityException;
@@ -31,13 +32,15 @@ public class MarketQuote implements Serializable
 {
 	private static final long serialVersionUID = 3574007890139251515L;
 	private Map<MarketQuotesResponseField, String> map = new HashMap<MarketQuotesResponseField, String>();
+	private TKResponse response;
 
 	public MarketQuote(Symbol symbol) throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
 		connectForeman(foreman);
-		map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.getSymbol())));
+		response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.getSymbol()));
+		map = handler.parseMarketQuote(response.toString());
 
 	}
 
@@ -46,7 +49,8 @@ public class MarketQuote implements Serializable
 		XMLHandler handler = new XMLHandler();
 		TradeKingForeman foreman = new TradeKingForeman();
 		connectForeman(foreman);
-		map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.getSymbol() }, fields)));
+		response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.getSymbol() }, fields));
+		map = handler.parseMarketQuote(response.toString());
 	}
 
 	public MarketQuote(String response, ResponseFormat format) throws UtilityException
@@ -102,9 +106,10 @@ public class MarketQuote implements Serializable
 		{
 			return false;
 		}
-		
+
 		return true;
 	}
+
 	private void connectForeman(TradeKingForeman foreman) throws UtilityException
 	{
 		try

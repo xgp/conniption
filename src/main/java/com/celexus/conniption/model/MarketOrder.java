@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 import com.celexus.conniption.foreman.ForemanException;
+import com.celexus.conniption.foreman.TKResponse;
 import com.celexus.conniption.foreman.TradeKingForeman;
 import com.celexus.conniption.foreman.util.ResponseFormat;
 import com.celexus.conniption.foreman.util.UtilityException;
@@ -31,14 +32,15 @@ public class MarketOrder implements Serializable
 {
 	private static final long serialVersionUID = -6031612547592870127L;
 	private Map<OrderField, String> map;
+	private TKResponse response;
 
 	public MarketOrder(Account account, FIXMLBuilder b) throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
 		connectForeman(foreman);
-
-		map = handler.parseMarketOrder(foreman.makeAPICall(OrdersBuilder.postOrder(account.getId(), b.build().toString(), ResponseFormat.XML)));
+		response = foreman.makeAPICall(OrdersBuilder.postOrder(account.getId(), b.build().toString(), ResponseFormat.XML));
+		map = handler.parseMarketOrder(response.toString());
 	}
 
 	public boolean hasField(OrderField f)

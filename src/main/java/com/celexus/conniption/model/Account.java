@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.celexus.conniption.foreman.ForemanException;
+import com.celexus.conniption.foreman.TKResponse;
 import com.celexus.conniption.foreman.TradeKingForeman;
 import com.celexus.conniption.foreman.util.ResponseFormat;
 import com.celexus.conniption.foreman.util.UtilityException;
@@ -31,13 +32,14 @@ public class Account implements Serializable
 {
 	private static final long serialVersionUID = -3038944208566900477L;
 	private Map<AccountsField, String> map = new HashMap<AccountsField, String>();
-
+	private TKResponse response;
 	public Account(String id) throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
 		connectForeman(foreman);
-		map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccount(id, ResponseFormat.XML)));
+		response = foreman.makeAPICall(AccountsBuilder.getAccount(id, ResponseFormat.XML));
+		map = handler.parseAccount(response.toString());
 	}
 
 	public Account() throws UtilityException
@@ -45,7 +47,8 @@ public class Account implements Serializable
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
 		connectForeman(foreman);
-		map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccounts(ResponseFormat.XML)));
+		response = foreman.makeAPICall(AccountsBuilder.getAccounts(ResponseFormat.XML));
+		map = handler.parseAccount(response.toString());
 	}
 
 	public String getId()

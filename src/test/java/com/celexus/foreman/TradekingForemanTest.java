@@ -43,7 +43,7 @@ public class TradekingForemanTest
 		{
 			fail();
 		}
-		assertTrue("Foreman didn't recognize API reponse",foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML)).contains("<message>"));
+		assertTrue("Foreman didn't recognize API reponse",foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML)).toString().contains("<message>"));
 	}
 
 //	@Test

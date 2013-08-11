@@ -31,7 +31,7 @@ public class XMLHandlerTest
 		Map<AccountsField, String> map = null;
 		try
 		{
-			 map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccount("38580744", ResponseFormat.XML)));
+			 map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccount("38580744", ResponseFormat.XML)).toString());
 		}
 		catch (UtilityException e)
 		{
@@ -49,7 +49,7 @@ public class XMLHandlerTest
 		Map<MarketClockField, String> map = null;
 		try
 		{
-			map = handler.parseMarketClock(foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML)));
+			map = handler.parseMarketClock(foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML)).toString());
 		}
 		catch (UtilityException e)
 		{
@@ -68,7 +68,7 @@ public class XMLHandlerTest
 		
 		try
 		{
-			map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, "SIRI")));
+			map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, "SIRI")).toString());
 		}
 		catch (UtilityException e)
 		{

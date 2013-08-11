@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 import com.celexus.conniption.foreman.ForemanException;
+import com.celexus.conniption.foreman.TKResponse;
 import com.celexus.conniption.foreman.TradeKingForeman;
 import com.celexus.conniption.foreman.util.ResponseFormat;
 import com.celexus.conniption.foreman.util.UtilityException;
@@ -32,13 +33,15 @@ public class MarketPreviewOrder implements Serializable
 
 	private static final long serialVersionUID = -3555216843532994045L;
 	private Map<OrderPreviewField, String> map;
+	private TKResponse response;
 
 	public MarketPreviewOrder(Account a, FIXMLBuilder b) throws UtilityException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
 		connectForeman(foreman);
-		map = handler.parseMarketOrderPreview(foreman.makeAPICall(OrdersBuilder.preview(a.getId(), b.build().toString(), ResponseFormat.XML)));
+		response = foreman.makeAPICall(OrdersBuilder.preview(a.getId(), b.build().toString(), ResponseFormat.XML));
+		map = handler.parseMarketOrderPreview(response.toString());
 	}
 
 	public boolean hasField(OrderPreviewField f)
