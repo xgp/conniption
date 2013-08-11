@@ -146,7 +146,7 @@ will yield
 
 Get information on stocks. 
 
-	MarketQuote quote = new MarketQuote("SIRI");
+	MarketQuote quote = new MarketQuote(new Symbol("SIRI"));
 	for(MarketQuotesResponseField f: MarketQuotesResponseField.values())
 	{
 		if(quote.hasField(f))
