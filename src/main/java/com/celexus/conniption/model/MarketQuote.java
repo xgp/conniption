@@ -58,14 +58,7 @@ public class MarketQuote implements Serializable
 			throw new UtilityException("Format:" + format.name() + " not supported");
 		}
 		map = handler.parseMarketQuote(response.toString());
-		if (map.containsKey(MarketQuotesResponseField.SYMBOL))
-		{
-			this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
-		}
-		else if (map.containsKey(MarketQuotesResponseField.ALT_SYMBOL))
-		{
-			this.symbol = new Symbol(map.get(MarketQuotesResponseField.ALT_SYMBOL));
-		}
+		this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
 	}
 
 	public void update() throws UtilityException

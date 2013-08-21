@@ -178,10 +178,28 @@ public class XMLHandler implements Serializable
 		Map<MarketQuotesResponseField, String> toReturn = new HashMap<MarketQuotesResponseField, String>();
 		for (MarketQuotesResponseField f : MarketQuotesResponseField.values())
 		{
-			String path = f.getPath();
+			String[] paths = f.getPaths();
 			if (f.equals(MarketQuotesResponseField.ERROR))
 			{
-				if (path != null)
+				if (paths != null)
+				{
+					for (String path : paths)
+					{
+						List<DefaultElement> list = doc.selectNodes(path);
+
+						for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
+						{
+							DefaultElement attribute = iter.next();
+							String url = attribute.getText();
+							throw new UtilityException(url);
+						}
+					}
+
+				}
+			}
+			if (paths != null)
+			{
+				for (String path : paths)
 				{
 					List<DefaultElement> list = doc.selectNodes(path);
 
@@ -189,20 +207,8 @@ public class XMLHandler implements Serializable
 					{
 						DefaultElement attribute = iter.next();
 						String url = attribute.getText();
-						throw new UtilityException(url);
+						toReturn.put(f, url);
 					}
-
-				}
-			}
-			if (path != null)
-			{
-				List<DefaultElement> list = doc.selectNodes(path);
-
-				for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
-				{
-					DefaultElement attribute = iter.next();
-					String url = attribute.getText();
-					toReturn.put(f, url);
 				}
 
 			}
