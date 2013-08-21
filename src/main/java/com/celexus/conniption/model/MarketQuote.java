@@ -58,7 +58,14 @@ public class MarketQuote implements Serializable
 			throw new UtilityException("Format:" + format.name() + " not supported");
 		}
 		map = handler.parseMarketQuote(response.toString());
-		this.symbol = getSymbol();
+		if (map.containsKey(MarketQuotesResponseField.SYMBOL))
+		{
+			this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
+		}
+		else if (map.containsKey(MarketQuotesResponseField.ALT_SYMBOL))
+		{
+			this.symbol = new Symbol(map.get(MarketQuotesResponseField.ALT_SYMBOL));
+		}
 	}
 
 	public void update() throws UtilityException
@@ -73,7 +80,7 @@ public class MarketQuote implements Serializable
 			}
 			catch (ForemanException e)
 			{
-				throw new UtilityException("Make API Call",e);
+				throw new UtilityException("Make API Call", e);
 			}
 			map = handler.parseMarketQuote(response.toString());
 		}
@@ -85,7 +92,7 @@ public class MarketQuote implements Serializable
 			}
 			catch (ForemanException e)
 			{
-				throw new UtilityException("Make API Call",e);
+				throw new UtilityException("Make API Call", e);
 			}
 			map = handler.parseMarketQuote(response.toString());
 		}

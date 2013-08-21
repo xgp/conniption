@@ -47,14 +47,6 @@ public class TradeKingForeman implements Serializable
 	private void connect() throws ForemanException
 	{
 		log.debug("Connecting to Tradeking");
-//		try
-//		{
-////			CertificateInstallerApplication.main(null);
-//		}
-//		catch (ApplicationException e)
-//		{
-//			throw new ForemanException("Could not install Certificates", e);
-//		}
 		srv = new ServiceBuilder().provider(TradekingAPI.class).apiKey(ForemanConstants.API_KEY.toString()).apiSecret(ForemanConstants.API_SECRET.toString()).build();
 		log.debug("\t ... Service built!");
 		accessToken = new Token(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());

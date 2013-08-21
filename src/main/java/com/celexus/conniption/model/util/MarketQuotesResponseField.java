@@ -394,6 +394,11 @@ public enum MarketQuotesResponseField implements Serializable
 	 * symbol Stock, Option Symbol from data provider
 	 */
 	SYMBOL("symbol"),
+	
+	/**
+	 * Equivalent to symbol, with a different path
+	 */
+	ALT_SYMBOL("symbol","//trade/"),
 
 	/**
 	 * tcond Stock, Option Trade condition code – (H) halted or (R) resumed
@@ -508,10 +513,16 @@ public enum MarketQuotesResponseField implements Serializable
 	private String tag;
 	private String path = "";
 
-	MarketQuotesResponseField(String tag)
+	MarketQuotesResponseField(String tag,String ...altPath)
 	{
 		this.tag = tag;
-		path = "//quote/" + tag;
+		if(altPath.length == 0) {
+			path = "//quote/" + tag;
+		}
+		else
+		{
+			path = altPath[0]+tag;
+		}
 	}
 
 	@Override
@@ -519,6 +530,7 @@ public enum MarketQuotesResponseField implements Serializable
 	{
 		return tag;
 	}
+
 
 	public String getPath()
 	{
