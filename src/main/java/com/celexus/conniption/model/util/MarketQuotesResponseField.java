@@ -528,4 +528,16 @@ public enum MarketQuotesResponseField implements Serializable
 	{
 		return paths;
 	}
+
+	public static MarketQuotesResponseField getFieldByName(String cq)
+	{
+		for (MarketQuotesResponseField f : MarketQuotesResponseField.values())
+		{
+			if (f.name().toLowerCase().equals(cq.toLowerCase()))
+			{
+				return f;
+			}
+		}
+		return null;
+	}
 }
