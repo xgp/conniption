@@ -50,7 +50,7 @@ public class StreamingMarketQuoteTest
 		};
 		
 		ContentExchange request = quote.stream(ex, new Symbol("IBM"));
-//		request.waitForDone();
+		request.waitForDone();
 	}
 
 }

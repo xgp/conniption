@@ -28,8 +28,6 @@ import org.scribe.oauth.OAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.celexus.conniption.application.ApplicationException;
-import com.celexus.conniption.application.CertificateInstallerApplication;
 import com.celexus.conniption.foreman.util.TradekingAPI;
 import com.celexus.conniption.foreman.util.builder.APIBuilder;
 
@@ -46,12 +44,12 @@ public class TradeKingForeman implements Serializable
 
 	private void connect() throws ForemanException
 	{
-		log.debug("Connecting to Tradeking");
+		log.trace("Connecting to Tradeking");
 		srv = new ServiceBuilder().provider(TradekingAPI.class).apiKey(ForemanConstants.API_KEY.toString()).apiSecret(ForemanConstants.API_SECRET.toString()).build();
-		log.debug("\t ... Service built!");
+		log.trace("\t ... Service built!");
 		accessToken = new Token(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());
-		log.debug("\t ... Access Token built!");
-		log.debug("Connection Established");
+		log.trace("\t ... Access Token built!");
+		log.trace("Connection Established");
 	}
 
 	public TKResponse makeAPICall(APIBuilder b) throws ForemanException

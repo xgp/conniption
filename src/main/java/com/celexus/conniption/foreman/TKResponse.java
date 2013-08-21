@@ -55,7 +55,7 @@ public class TKResponse implements Serializable
 		this.response = response.getBody();
 	}
 
-	public TKResponse(String req)
+	public TKResponse(String req, Integer... limits)
 	{
 		this.response = req;
 	}

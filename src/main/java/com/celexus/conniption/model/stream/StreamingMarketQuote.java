@@ -20,17 +20,19 @@ import oauth.signpost.jetty.JettyOAuthConsumer;
 
 import org.mortbay.jetty.client.ContentExchange;
 import org.mortbay.jetty.client.HttpClient;
+import org.mortbay.thread.QueuedThreadPool;
 import org.scribe.model.Verb;
 
 import com.celexus.conniption.foreman.ForemanConstants;
 import com.celexus.conniption.foreman.util.APICall;
 import com.celexus.conniption.foreman.util.ResponseFormat;
+import com.celexus.conniption.model.ModelException;
 import com.celexus.conniption.model.Symbol;
 
 public class StreamingMarketQuote
 {
 
-	public ContentExchange stream(ContentExchange ex, Symbol ... symbols) throws Exception
+	public ContentExchange stream(ContentExchange ex, Symbol... symbols) throws ModelException
 	{
 		OAuthConsumer consumer = new JettyOAuthConsumer(ForemanConstants.API_KEY.toString(), ForemanConstants.API_SECRET.toString());
 		consumer.setTokenWithSecret(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());
@@ -39,11 +41,20 @@ public class StreamingMarketQuote
 		ex.setURL(APICall.getStreamingQuote(ResponseFormat.XML) + getParameters(symbols));
 
 		// sign the request
-		consumer.sign(ex);
-
-		HttpClient client = new HttpClient();
-		client.start();
-		client.send(ex);
+		try
+		{
+			consumer.sign(ex);
+			HttpClient client = new HttpClient();
+			client.setThreadPool(new QueuedThreadPool(250));
+			client.setConnectorType(HttpClient.CONNECTOR_SELECT_CHANNEL);
+			client.setMaxConnectionsPerAddress(200); // max 200 concurrent connections to every address
+			client.start();
+			client.send(ex);
+		}
+		catch (Exception e)
+		{
+			throw new ModelException("", e);
+		}
 
 		return ex;
 	}
@@ -53,7 +64,7 @@ public class StreamingMarketQuote
 		StringBuilder sb = new StringBuilder("?symbols=");
 		for (Symbol sym : symbols)
 		{
-			sb.append(sym).append(",");
+			sb.append(sym.toString().replace("^", "%5E")).append(",");
 		}
 
 		return sb.toString().replaceAll(",$", "");
