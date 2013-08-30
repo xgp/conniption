@@ -15,7 +15,12 @@
  */
 package com.celexus.conniption.model.stream;
 
+import java.io.IOException;
+
 import oauth.signpost.OAuthConsumer;
+import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthExpectationFailedException;
+import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.jetty.JettyOAuthConsumer;
 
 import org.mortbay.jetty.client.ContentExchange;
@@ -31,6 +36,22 @@ import com.celexus.conniption.model.Symbol;
 
 public class StreamingMarketQuote
 {
+	HttpClient client = new HttpClient();
+
+	public StreamingMarketQuote() throws ModelException
+	{
+		client.setThreadPool(new QueuedThreadPool(250));
+		client.setConnectorType(HttpClient.CONNECTOR_SELECT_CHANNEL);
+		client.setMaxConnectionsPerAddress(500); // max 200 concurrent connections to every address
+		try
+		{
+			client.start();
+		}
+		catch (Exception e)
+		{
+			throw new ModelException("Start HTTP Client", e);
+		}
+	}
 
 	public ContentExchange stream(ContentExchange ex, Symbol... symbols) throws ModelException
 	{
@@ -44,16 +65,11 @@ public class StreamingMarketQuote
 		try
 		{
 			consumer.sign(ex);
-			HttpClient client = new HttpClient();
-			client.setThreadPool(new QueuedThreadPool(250));
-			client.setConnectorType(HttpClient.CONNECTOR_SELECT_CHANNEL);
-			client.setMaxConnectionsPerAddress(200); // max 200 concurrent connections to every address
-			client.start();
 			client.send(ex);
 		}
-		catch (Exception e)
+		catch (IOException | OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException e)
 		{
-			throw new ModelException("", e);
+			throw new ModelException("Sent Exchange to Client", e);
 		}
 
 		return ex;
