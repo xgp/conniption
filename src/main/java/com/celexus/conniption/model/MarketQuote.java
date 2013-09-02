@@ -18,6 +18,7 @@ package com.celexus.conniption.model;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.celexus.conniption.foreman.ForemanException;
 import com.celexus.conniption.foreman.TKResponse;
@@ -58,6 +59,12 @@ public class MarketQuote implements Serializable
 			throw new UtilityException("Format:" + format.name() + " not supported");
 		}
 		map = handler.parseMarketQuote(response.toString());
+		this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
+	}
+	
+	private MarketQuote(Map<MarketQuotesResponseField,String> map)
+	{
+		this.map = map;
 		this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
 	}
 
@@ -141,6 +148,17 @@ public class MarketQuote implements Serializable
 		}
 
 		return true;
+	}
+
+	public static MarketQuote modify(MarketQuote q, MarketQuotesResponseField key, String value)
+	{
+		Map<MarketQuotesResponseField, String> copy = new HashMap<MarketQuotesResponseField, String>();
+		for(Entry<MarketQuotesResponseField,String> ent: q.map.entrySet())
+		{
+			copy.put(ent.getKey(), ent.getValue());
+		}
+		copy.put(key, value);
+		return new MarketQuote(copy);
 	}
 
 }
