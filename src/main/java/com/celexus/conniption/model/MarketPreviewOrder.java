@@ -37,7 +37,7 @@ public class MarketPreviewOrder implements Serializable
 	private Account a;
 	private FIXMLBuilder b;
 
-	public MarketPreviewOrder(Account a, FIXMLBuilder b) throws UtilityException
+	public MarketPreviewOrder(Account a, FIXMLBuilder b) throws ModelException
 	{
 		update();
 	}
@@ -58,7 +58,7 @@ public class MarketPreviewOrder implements Serializable
 		return response;
 	}
 
-	public void update() throws UtilityException
+	public void update() throws ModelException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
 		XMLHandler handler = new XMLHandler();
@@ -66,11 +66,19 @@ public class MarketPreviewOrder implements Serializable
 		{
 			response = foreman.makeAPICall(OrdersBuilder.preview(a.getId(), b.build().toString(), ResponseFormat.XML));
 		}
-		catch (ForemanException e)
+		catch (ForemanException | UtilityException e)
 		{
-			throw new UtilityException("Make API Call",e);
+			throw new ModelException("Make API Call", e);
 		}
-		map = handler.parseMarketOrderPreview(response.toString());
+
+		try
+		{
+			map = handler.parseMarketOrderPreview(response.toString());
+		}
+		catch (UtilityException e)
+		{
+			throw new ModelException("", e);
+		}
 	}
 
 }

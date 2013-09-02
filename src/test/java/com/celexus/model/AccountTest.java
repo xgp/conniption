@@ -5,8 +5,8 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.celexus.conniption.foreman.util.UtilityException;
 import com.celexus.conniption.model.Account;
+import com.celexus.conniption.model.ModelException;
 import com.celexus.conniption.model.util.AccountsField;
 
 public class AccountTest
@@ -21,7 +21,7 @@ public class AccountTest
 			assertTrue("Expected Field not returned",acc.hasField(AccountsField.ACCOUNT_VALUE));
 		
 		}
-		catch (UtilityException e)
+		catch (ModelException e)
 		{
 			fail();
 		}

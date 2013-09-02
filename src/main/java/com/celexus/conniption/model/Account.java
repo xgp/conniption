@@ -35,13 +35,13 @@ public class Account implements Serializable
 	private TKResponse response;
 	private String id;
 
-	public Account(String id) throws UtilityException
+	public Account(String id) throws ModelException
 	{
 		this.id = id;
 		update();
 	}
 
-	public Account() throws UtilityException
+	public Account() throws ModelException
 	{
 		update();
 	}
@@ -100,10 +100,9 @@ public class Account implements Serializable
 		return true;
 	}
 
-	public void update() throws UtilityException
+	public void update() throws ModelException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
-		XMLHandler handler = new XMLHandler();
 		if (id == null)
 		{
 			try
@@ -112,9 +111,8 @@ public class Account implements Serializable
 			}
 			catch (ForemanException e)
 			{
-				throw new UtilityException("Make API Call",e);
+				throw new ModelException("Make API Call", e);
 			}
-			map = handler.parseAccount(response.toString());
 		}
 		else
 		{
@@ -124,11 +122,23 @@ public class Account implements Serializable
 			}
 			catch (ForemanException e)
 			{
-				throw new UtilityException("Make API Call",e);
+				throw new ModelException("Make API Call", e);
 			}
-			map = handler.parseAccount(response.toString());
 		}
+		map = parseAccount(response.toString());
 	}
 
+	public Map<AccountsField, String> parseAccount(String res) throws ModelException
+	{
+		XMLHandler handler = new XMLHandler();
+		try
+		{
+			return handler.parseAccount(response.toString());
+		}
+		catch (UtilityException e)
+		{
+			throw new ModelException("", e);
+		}
+	}
 
 }

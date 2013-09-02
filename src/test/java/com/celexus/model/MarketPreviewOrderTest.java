@@ -1,8 +1,8 @@
 package com.celexus.model;
 
-import com.celexus.conniption.foreman.util.UtilityException;
 import com.celexus.conniption.model.Account;
 import com.celexus.conniption.model.MarketPreviewOrder;
+import com.celexus.conniption.model.ModelException;
 import com.celexus.conniption.model.util.OrderPreviewField;
 import com.celexus.conniption.model.util.fixml.FIXMLBuilder;
 import com.celexus.conniption.model.util.fixml.MarketSideField;
@@ -14,7 +14,7 @@ public class MarketPreviewOrderTest
 {
 
 //	@Test
-	public void test() throws UtilityException
+	public void test() throws ModelException
 	{
 		Account a = new Account();
 		FIXMLBuilder builder = new FIXMLBuilder(a);
