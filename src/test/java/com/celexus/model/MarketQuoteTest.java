@@ -5,8 +5,8 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.celexus.conniption.foreman.util.UtilityException;
 import com.celexus.conniption.model.MarketQuote;
+import com.celexus.conniption.model.ModelException;
 import com.celexus.conniption.model.Symbol;
 import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
@@ -28,7 +28,7 @@ public class MarketQuoteTest
 			}
 			assertTrue("Expected Field not in response",quote.hasField(MarketQuotesResponseField.DATE_TIME));
 		}
-		catch (UtilityException e)
+		catch (ModelException e)
 		{
 			fail();
 		}

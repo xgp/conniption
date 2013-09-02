@@ -37,41 +37,39 @@ public class MarketQuote implements Serializable
 	private Symbol symbol;
 	private MarketQuotesResponseField[] fields;
 
-	public MarketQuote(Symbol symbol) throws UtilityException
+	public MarketQuote(Symbol symbol) throws ModelException
 	{
 		this.symbol = symbol;
 		update();
 	}
 
-	public MarketQuote(Symbol symbol, MarketQuotesResponseField... fields) throws UtilityException
+	public MarketQuote(Symbol symbol, MarketQuotesResponseField... fields) throws ModelException
 	{
 		this.symbol = symbol;
 		this.fields = fields;
 		update();
 	}
 
-	public MarketQuote(TKResponse response, ResponseFormat format) throws UtilityException
+	public MarketQuote(TKResponse response, ResponseFormat format) throws ModelException
 	{
 		this.response = response;
-		XMLHandler handler = new XMLHandler();
 		if (!format.equals(ResponseFormat.XML))
 		{
-			throw new UtilityException("Format:" + format.name() + " not supported");
+			throw new ModelException("Format:" + format.name() + " not supported");
 		}
-		map = handler.parseMarketQuote(response.toString());
+		map = parseQuote(response.toString());
 		this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
 	}
-	
-	private MarketQuote(Map<MarketQuotesResponseField,String> map)
+
+	private MarketQuote(Map<MarketQuotesResponseField, String> map) throws ModelException
 	{
 		this.map = map;
 		this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
 	}
 
-	public void update() throws UtilityException
+	public void update() throws ModelException
 	{
 		TradeKingForeman foreman = new TradeKingForeman();
-		XMLHandler handler = new XMLHandler();
 		if (fields != null)
 		{
 			try
@@ -80,9 +78,8 @@ public class MarketQuote implements Serializable
 			}
 			catch (ForemanException e)
 			{
-				throw new UtilityException("Make API Call", e);
+				throw new ModelException("Make API Call", e);
 			}
-			map = handler.parseMarketQuote(response.toString());
 		}
 		else
 		{
@@ -92,9 +89,22 @@ public class MarketQuote implements Serializable
 			}
 			catch (ForemanException e)
 			{
-				throw new UtilityException("Make API Call", e);
+				throw new ModelException("Make API Call", e);
 			}
-			map = handler.parseMarketQuote(response.toString());
+		}
+		map = parseQuote(response.toString());
+	}
+
+	public Map<MarketQuotesResponseField, String> parseQuote(String response) throws ModelException
+	{
+		XMLHandler handler = new XMLHandler();
+		try
+		{
+			return handler.parseMarketQuote(response.toString());
+		}
+		catch (UtilityException e)
+		{
+			throw new ModelException("", e);
 		}
 	}
 
@@ -150,10 +160,10 @@ public class MarketQuote implements Serializable
 		return true;
 	}
 
-	public static MarketQuote modify(MarketQuote q, MarketQuotesResponseField key, String value)
+	public static MarketQuote modify(MarketQuote q, MarketQuotesResponseField key, String value) throws ModelException
 	{
 		Map<MarketQuotesResponseField, String> copy = new HashMap<MarketQuotesResponseField, String>();
-		for(Entry<MarketQuotesResponseField,String> ent: q.map.entrySet())
+		for (Entry<MarketQuotesResponseField, String> ent : q.map.entrySet())
 		{
 			copy.put(ent.getKey(), ent.getValue());
 		}
