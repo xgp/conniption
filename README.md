@@ -20,7 +20,7 @@ They all access System environment variables (via [System.getEnv()](http://docs.
 
 ### Linux
 
-Put these lines in */etc/environment*.
+Put these lines in */etc/environment* or */etc/profile*.
 
     API_KEY=<YOUR API KEY HERE>
     API_SECRET=<YOUR API SECRET HERE>
