@@ -6,11 +6,11 @@ The missing TradeKing API for Java.
 ## Getting an API Key from TradeKing
 
 * [Visit the TradeKing Developers Website](https://developers.tradeking.com/applications/)  
-  * Fill in their info and you will get 4 important values needed for [OAuth](http://oauth.net/)
-   * An API Key
-   * An API Secret Key
-   * An Access Token
-   * A Secret Access Token
+* Fill in their info and you will get 4 important values needed for [OAuth](http://oauth.net/)
+    * An API Key
+    * An API Secret Key
+    * An Access Token
+    * A Secret Access Token
 * [Go over the TradeKing API Docs](https://developers.tradeking.com/documentation/getting-started) 
 
 ## Installing
