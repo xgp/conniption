@@ -31,6 +31,12 @@ import org.slf4j.LoggerFactory;
 import com.celexus.conniption.foreman.util.TradekingAPI;
 import com.celexus.conniption.foreman.util.builder.APIBuilder;
 
+/**
+ * A Helper to interact with the TradeKing API
+ * 
+ * @author cam
+ * 
+ */
 public class TradeKingForeman implements Serializable
 {
 	private static final long serialVersionUID = 7830844282343108561L;

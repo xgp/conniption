@@ -17,11 +17,16 @@ package com.celexus.conniption.foreman.util;
 
 import java.io.Serializable;
 
+/**
+ * TradeKing support XML and JSON responses
+ * 
+ * @author cam
+ * 
+ */
 public enum ResponseFormat implements Serializable
 {
-	XML,
-	JSON;
-	
+	XML, JSON;
+
 	@Override
 	public String toString()
 	{

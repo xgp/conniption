@@ -1,5 +1,11 @@
 package com.celexus.conniption.model;
 
+/**
+ * An exception for the exclusive use of the Model Package
+ * 
+ * @author cam
+ * 
+ */
 public class ModelException extends Exception
 {
 

@@ -29,6 +29,12 @@ import com.celexus.conniption.foreman.util.XMLHandler;
 import com.celexus.conniption.foreman.util.builder.MarketBuilder;
 import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
+/**
+ * A representation for TradeKing's Market Quotes
+ * 
+ * @author cam
+ * 
+ */
 public class MarketQuote implements Serializable
 {
 	private static final long serialVersionUID = 3574007890139251515L;

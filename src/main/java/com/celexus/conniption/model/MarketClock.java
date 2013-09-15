@@ -28,6 +28,12 @@ import com.celexus.conniption.foreman.util.XMLHandler;
 import com.celexus.conniption.foreman.util.builder.MarketBuilder;
 import com.celexus.conniption.model.util.MarketClockField;
 
+/**
+ * A representation of TradeKing's Market Clock
+ * 
+ * @author cam
+ * 
+ */
 public class MarketClock implements Serializable
 {
 	private static final long serialVersionUID = 4825597509929315969L;
@@ -95,7 +101,7 @@ public class MarketClock implements Serializable
 		}
 		catch (ForemanException e)
 		{
-			throw new UtilityException("Make API Call",e);
+			throw new UtilityException("Make API Call", e);
 		}
 		map = handler.parseMarketClock(response.toString());
 	}

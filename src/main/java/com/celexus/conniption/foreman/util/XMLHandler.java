@@ -33,6 +33,12 @@ import com.celexus.conniption.model.util.MarketQuotesResponseField;
 import com.celexus.conniption.model.util.OrderField;
 import com.celexus.conniption.model.util.OrderPreviewField;
 
+/**
+ * A Handler to parse TradeKing Responses
+ * 
+ * @author cam
+ * 
+ */
 public class XMLHandler implements Serializable
 {
 	private static final long serialVersionUID = -720928472060791141L;

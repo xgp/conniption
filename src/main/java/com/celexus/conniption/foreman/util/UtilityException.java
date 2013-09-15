@@ -15,6 +15,12 @@
  */
 package com.celexus.conniption.foreman.util;
 
+/**
+ * A class for the exclusive use of Utility Packages
+ * 
+ * @author cam
+ * 
+ */
 public class UtilityException extends Exception
 {
 

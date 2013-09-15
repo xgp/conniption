@@ -19,6 +19,12 @@ import java.io.Serializable;
 
 import org.scribe.model.Verb;
 
+/**
+ * A builder for different sorts of TradeKing API calls
+ * 
+ * @author cam
+ * 
+ */
 public class APICall implements Serializable
 {
 	private static final long serialVersionUID = -3600236076708483532L;

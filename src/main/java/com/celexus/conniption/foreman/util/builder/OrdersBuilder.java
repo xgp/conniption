@@ -20,6 +20,12 @@ import org.scribe.model.Verb;
 import com.celexus.conniption.foreman.util.APICall;
 import com.celexus.conniption.foreman.util.ResponseFormat;
 
+/**
+ * An APIBuilder to handle TradeKing Orders
+ * 
+ * @author cam
+ * 
+ */
 public class OrdersBuilder extends APIBuilder
 {
 	private static final long serialVersionUID = 4913476469409758292L;

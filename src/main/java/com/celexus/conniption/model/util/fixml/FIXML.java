@@ -17,15 +17,22 @@ package com.celexus.conniption.model.util.fixml;
 
 import java.io.Serializable;
 
+/**
+ * A wrapper over the FIXML string
+ * 
+ * @author cam
+ * 
+ */
 public class FIXML implements Serializable
 {
 	private static final long serialVersionUID = -1634940482369566168L;
 	private String source = "";
+
 	public FIXML(String fixmlSource)
 	{
 		this.source = fixmlSource;
 	}
-	
+
 	@Override
 	public String toString()
 	{

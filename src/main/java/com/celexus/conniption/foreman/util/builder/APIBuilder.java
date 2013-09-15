@@ -21,6 +21,12 @@ import java.util.Map;
 
 import org.scribe.model.Verb;
 
+/**
+ * The abstract backend to all APIBuilders
+ * 
+ * @author cam
+ * 
+ */
 public abstract class APIBuilder implements Serializable
 {
 	private static final long serialVersionUID = 5364934694744835663L;
@@ -49,7 +55,7 @@ public abstract class APIBuilder implements Serializable
 	{
 		return body;
 	}
-	
+
 	public boolean isStreaming()
 	{
 		return streaming;

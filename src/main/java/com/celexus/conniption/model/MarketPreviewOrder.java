@@ -28,6 +28,12 @@ import com.celexus.conniption.foreman.util.builder.OrdersBuilder;
 import com.celexus.conniption.model.util.OrderPreviewField;
 import com.celexus.conniption.model.util.fixml.FIXMLBuilder;
 
+/**
+ * A representation of a market order that is used for validation purposes only
+ * 
+ * @author cam
+ * 
+ */
 public class MarketPreviewOrder implements Serializable
 {
 

@@ -20,6 +20,12 @@ import java.io.Serializable;
 import com.celexus.conniption.foreman.util.UtilityException;
 import com.celexus.conniption.model.Account;
 
+/**
+ * A builder to generate FIXML
+ * 
+ * @author cam
+ * 
+ */
 public class FIXMLBuilder implements Serializable
 {
 	private static final long serialVersionUID = 7606325661660023305L;

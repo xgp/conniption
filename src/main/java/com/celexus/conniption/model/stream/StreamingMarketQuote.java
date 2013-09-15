@@ -34,6 +34,12 @@ import com.celexus.conniption.foreman.util.ResponseFormat;
 import com.celexus.conniption.model.ModelException;
 import com.celexus.conniption.model.Symbol;
 
+/**
+ * A representation of TradeKing's Market Quote that permits streaming
+ * 
+ * @author cam
+ * 
+ */
 public class StreamingMarketQuote
 {
 	HttpClient client = new HttpClient();

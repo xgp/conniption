@@ -15,6 +15,12 @@
  */
 package com.celexus.conniption.foreman;
 
+/**
+ * An exception for the exclusive use of the conniption.foreman package
+ * 
+ * @author cam
+ * 
+ */
 public class ForemanException extends Exception
 {
 

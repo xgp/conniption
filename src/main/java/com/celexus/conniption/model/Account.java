@@ -28,6 +28,12 @@ import com.celexus.conniption.foreman.util.XMLHandler;
 import com.celexus.conniption.foreman.util.builder.AccountsBuilder;
 import com.celexus.conniption.model.util.AccountsField;
 
+/**
+ * A representation of TradeKing Accounts
+ * 
+ * @author cam
+ * 
+ */
 public class Account implements Serializable
 {
 	private static final long serialVersionUID = -3038944208566900477L;

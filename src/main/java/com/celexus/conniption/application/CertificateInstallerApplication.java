@@ -23,6 +23,12 @@ import javax.net.ssl.X509TrustManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Installs a dummy TrustManager. This can be rather dangerous, but if you're having keytool/certificate exceptions This will solve it.
+ * 
+ * @author cam
+ * 
+ */
 public class CertificateInstallerApplication
 {
 	private static Logger log = LoggerFactory.getLogger(CertificateInstallerApplication.class);

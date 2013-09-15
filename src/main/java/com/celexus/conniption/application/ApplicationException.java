@@ -15,6 +15,12 @@
  */
 package com.celexus.conniption.application;
 
+/**
+ * An exception class for the exclusive use of the application package
+ * 
+ * @author cam
+ * 
+ */
 public class ApplicationException extends Exception
 {
 

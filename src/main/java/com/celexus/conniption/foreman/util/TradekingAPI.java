@@ -20,6 +20,12 @@ import java.io.Serializable;
 import org.scribe.builder.api.DefaultApi10a;
 import org.scribe.model.Token;
 
+/**
+ * This class is required for Scribe OAuth.
+ * 
+ * @author cam
+ * 
+ */
 public class TradekingAPI extends DefaultApi10a implements Serializable
 {
 	private static final long serialVersionUID = 4355447429052389540L;

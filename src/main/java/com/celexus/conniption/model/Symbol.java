@@ -2,6 +2,12 @@ package com.celexus.conniption.model;
 
 import java.io.Serializable;
 
+/**
+ * A holder/validator for Stock Symbols returned by TradeKing
+ * 
+ * @author cam
+ * 
+ */
 public class Symbol implements Serializable
 {
 	private static final long serialVersionUID = 4066680359489718558L;

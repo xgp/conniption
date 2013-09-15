@@ -20,6 +20,13 @@ import java.io.Serializable;
 import org.scribe.model.Request;
 import org.scribe.model.Response;
 
+/**
+ * A holder for all the bits that come back through each REST call.<br>
+ * The important parts are the rate limits, which help you control how many calls of that type you can use again.
+ * 
+ * @author cam
+ * 
+ */
 public class TKResponse implements Serializable
 {
 	private static final long serialVersionUID = 1626169989303557890L;

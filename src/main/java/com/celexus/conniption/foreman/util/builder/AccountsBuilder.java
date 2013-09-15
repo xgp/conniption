@@ -22,6 +22,12 @@ import org.scribe.model.Verb;
 import com.celexus.conniption.foreman.util.APICall;
 import com.celexus.conniption.foreman.util.ResponseFormat;
 
+/**
+ * An APIBuilder that will build REST calls relating to TradeKing Accounts
+ * 
+ * @author cam
+ * 
+ */
 public class AccountsBuilder extends APIBuilder implements Serializable
 {
 	private static final long serialVersionUID = 7982141126897931034L;
@@ -44,7 +50,7 @@ public class AccountsBuilder extends APIBuilder implements Serializable
 		toReturn.resourceURL = APICall.getAccountByID(format, id);
 		return toReturn;
 	}
-	
+
 	public static AccountsBuilder getAccountBalances(ResponseFormat format)
 	{
 		AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
@@ -58,5 +64,5 @@ public class AccountsBuilder extends APIBuilder implements Serializable
 		toReturn.resourceURL = APICall.getAccountBalanceByID(format, id);
 		return toReturn;
 	}
-	
+
 }

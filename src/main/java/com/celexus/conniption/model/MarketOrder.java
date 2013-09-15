@@ -28,6 +28,12 @@ import com.celexus.conniption.foreman.util.builder.OrdersBuilder;
 import com.celexus.conniption.model.util.OrderField;
 import com.celexus.conniption.model.util.fixml.FIXMLBuilder;
 
+/**
+ * A representation of a TradeKing Market Order
+ * 
+ * @author cam
+ * 
+ */
 public class MarketOrder implements Serializable
 {
 	private static final long serialVersionUID = -6031612547592870127L;
@@ -70,7 +76,7 @@ public class MarketOrder implements Serializable
 		}
 		catch (ForemanException e)
 		{
-			throw new UtilityException("Make API Call",e);
+			throw new UtilityException("Make API Call", e);
 		}
 		map = handler.parseMarketOrder(response.toString());
 	}
