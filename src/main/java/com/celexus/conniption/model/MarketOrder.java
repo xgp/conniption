@@ -17,6 +17,7 @@ package com.celexus.conniption.model;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.celexus.conniption.foreman.ForemanException;
 import com.celexus.conniption.foreman.TKResponse;
@@ -79,5 +80,26 @@ public class MarketOrder implements Serializable
 			throw new UtilityException("Make API Call", e);
 		}
 		map = handler.parseMarketOrder(response.toString());
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj != null && obj instanceof MarketOrder)
+		{
+			MarketOrder other = (MarketOrder) obj;
+			if (other.response.equals(this.response) && other.account.equals(this.account))
+			{
+				for (Entry<OrderField, String> ent : map.entrySet())
+				{
+					if (!other.hasField(ent.getKey()) && !other.getField(ent.getKey()).equals(ent.getValue()))
+					{
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -30,7 +30,7 @@ public class Symbol implements Serializable
 	@Override
 	public boolean equals(Object o)
 	{
-		if (!(o instanceof Symbol))
+		if (o == null || !(o instanceof Symbol))
 		{
 			return false;
 		}
