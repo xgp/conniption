@@ -23,7 +23,7 @@ public class Percentage implements Serializable
 	private double percentage = 0;
 	public Percentage(double d)
 	{
-		this.percentage = d;
+		percentage = d;
 	}
 	
 	public double toDouble()

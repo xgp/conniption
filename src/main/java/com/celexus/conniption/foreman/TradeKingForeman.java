@@ -60,9 +60,9 @@ public class TradeKingForeman implements Serializable
 
 	public TKResponse makeAPICall(APIBuilder b) throws ForemanException
 	{
-		if (!this.isConnected())
+		if (!isConnected())
 		{
-			this.connect();
+			connect();
 		}
 		log.trace("Making an API Call");
 		log.trace("\t ... Verb:" + b.getVerb());
@@ -74,12 +74,12 @@ public class TradeKingForeman implements Serializable
 
 	public boolean hasOAuth()
 	{
-		return this.srv != null;
+		return srv != null;
 	}
 
 	public boolean hasAccessToken()
 	{
-		return this.accessToken != null;
+		return accessToken != null;
 	}
 
 	public boolean isConnected()

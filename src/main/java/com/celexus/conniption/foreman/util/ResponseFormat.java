@@ -30,6 +30,6 @@ public enum ResponseFormat implements Serializable
 	@Override
 	public String toString()
 	{
-		return this.name().toLowerCase();
+		return name().toLowerCase();
 	}
 }

@@ -34,7 +34,7 @@ public class MarketBuilder extends APIBuilder
 
 	private MarketBuilder(Verb v)
 	{
-		this.verb = v;
+		verb = v;
 	}
 
 	public static MarketBuilder getClock(ResponseFormat format)

@@ -30,7 +30,7 @@ public class FIXML implements Serializable
 
 	public FIXML(String fixmlSource)
 	{
-		this.source = fixmlSource;
+		source = fixmlSource;
 	}
 
 	@Override

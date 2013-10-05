@@ -43,7 +43,7 @@ public class FIXMLBuilder implements Serializable
 
 	public FIXMLBuilder(Account a)
 	{
-		this.id = a.getId();
+		id = a.getId();
 	}
 
 	public FIXMLBuilder id(String id)
@@ -54,7 +54,7 @@ public class FIXMLBuilder implements Serializable
 
 	public FIXMLBuilder symbol(String sym)
 	{
-		this.symbol = sym;
+		symbol = sym;
 		return this;
 	}
 
@@ -66,44 +66,44 @@ public class FIXMLBuilder implements Serializable
 
 	public FIXMLBuilder timeInForce(TimeInForceField f)
 	{
-		this.timeInForce = f;
+		timeInForce = f;
 		return this;
 	}
 
 	public FIXMLBuilder priceType(PriceType type)
 	{
-		this.priceType = type;
+		priceType = type;
 		return this;
 	}
 
 	public FIXMLBuilder securityType(SecurityType type)
 	{
-		this.securityType = type;
+		securityType = type;
 		return this;
 	}
 
 	public FIXMLBuilder side(MarketSideField f)
 	{
-		this.side = f;
+		side = f;
 		return this;
 	}
 
 	public FIXMLBuilder executionPrice(double d)
 	{
-		this.executionPrice = d;
+		executionPrice = d;
 		return this;
 	}
 
 	public FIXMLBuilder executionPrice(double stop, double limit)
 	{
 		this.stop = stop;
-		this.executionPrice = limit;
+		executionPrice = limit;
 		return this;
 	}
 
 	public FIXMLBuilder offset(double d)
 	{
-		this.offset = d;
+		offset = d;
 		return this;
 	}
 

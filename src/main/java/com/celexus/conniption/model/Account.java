@@ -54,12 +54,12 @@ public class Account implements Serializable
 
 	public String getId()
 	{
-		return this.getField(AccountsField.ACCOUNT_NUMBER);
+		return getField(AccountsField.ACCOUNT_NUMBER);
 	}
 
 	public Account(Map<AccountsField, String> fields)
 	{
-		this.map = fields;
+		map = fields;
 	}
 
 	public boolean hasField(AccountsField f)

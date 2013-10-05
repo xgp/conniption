@@ -32,7 +32,7 @@ public class OrdersBuilder extends APIBuilder
 
 	private OrdersBuilder(Verb v)
 	{
-		this.verb = v;
+		verb = v;
 	}
 
 	public static OrdersBuilder getOrders(String id, ResponseFormat format)

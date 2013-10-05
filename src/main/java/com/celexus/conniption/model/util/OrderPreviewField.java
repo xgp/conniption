@@ -39,6 +39,6 @@ public enum OrderPreviewField implements Serializable
 
 	public String getPath()
 	{
-		return "/"+this.toString();
+		return "/"+toString();
 	}
 }
