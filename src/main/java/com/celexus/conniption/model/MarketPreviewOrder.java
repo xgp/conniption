@@ -17,6 +17,7 @@ package com.celexus.conniption.model;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.celexus.conniption.foreman.ForemanException;
 import com.celexus.conniption.foreman.TKResponse;
@@ -62,6 +63,25 @@ public class MarketPreviewOrder implements Serializable
 	public TKResponse getTKResponse()
 	{
 		return response;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj != null && obj instanceof MarketPreviewOrder)
+		{
+			MarketPreviewOrder other = (MarketPreviewOrder) obj;
+			for (Entry<OrderPreviewField, String> ent : map.entrySet())
+			{
+				if (!other.hasField(ent.getKey()) && !other.getField(ent.getKey()).equals(ent.getValue()))
+				{
+					return false;
+				}
+			}
+			return true;
+
+		}
+		return false;
 	}
 
 	public void update() throws ModelException
