@@ -49,12 +49,12 @@ public class MarketQuote implements Serializable
 		update();
 	}
 
-	public MarketQuote(Symbol symbol, MarketQuotesResponseField... fields) throws ModelException
-	{
-		this.symbol = symbol;
-		this.fields = fields;
-		update();
-	}
+//	public MarketQuote(Symbol symbol, MarketQuotesResponseField... fields) throws ModelException
+//	{
+//		this.symbol = symbol;
+//		this.fields = fields;
+//		update();
+//	}
 
 	public MarketQuote(TKResponse response, ResponseFormat format) throws ModelException
 	{
@@ -67,10 +67,11 @@ public class MarketQuote implements Serializable
 		this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
 	}
 
-	private MarketQuote(Map<MarketQuotesResponseField, String> map) throws ModelException
+	private MarketQuote(TKResponse response, Map<MarketQuotesResponseField, String> map) throws ModelException
 	{
 		this.map = map;
 		this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
+		this.response = response;
 	}
 
 	public void update() throws ModelException
@@ -174,7 +175,12 @@ public class MarketQuote implements Serializable
 			copy.put(ent.getKey(), ent.getValue());
 		}
 		copy.put(key, value);
-		return new MarketQuote(copy);
+		return new MarketQuote(q.getTKResponse(),copy);
+	}
+
+	public boolean isValid()
+	{
+		return !map.isEmpty() && symbol != null;
 	}
 
 }

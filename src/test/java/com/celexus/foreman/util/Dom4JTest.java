@@ -10,7 +10,7 @@ public class Dom4JTest
 //	@Test
 	public void test() throws Exception
 	{
-		MarketQuote quote = new MarketQuote( new Symbol("SIRI"), MarketQuotesResponseField.SYMBOL);
+		MarketQuote quote = new MarketQuote( new Symbol("SIRI"));
 		for(MarketQuotesResponseField f: MarketQuotesResponseField.values())
 		{
 			if (quote.hasField(f))

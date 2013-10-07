@@ -15,7 +15,7 @@ public class Symbol implements Serializable
 
 	public Symbol(String symbol) throws ModelException
 	{
-		if (symbol.matches(".*\\d.*"))
+		if (symbol == null || symbol.matches(".*\\d.*"))
 		{
 			throw new ModelException("Not a valid symbol:" + symbol);
 		}
