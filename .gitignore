@@ -1,6 +1,5 @@
 .classpath
 .project
 .settings
-target
 Streaming.java
 zookeeper.out
