@@ -44,11 +44,11 @@ Use the maven clean install directive to compile and make sure everythng works. 
 
 ## Maven 
 
-	<dependency>
-		<groupId>com.celexus</groupId>
-		<artifactId>conniption</artifactId>
-  		<version>1.0.2</version>
-	</dependency>
+		<dependency>
+			<groupId>com.celexus</groupId>
+			<artifactId>conniption</artifactId>
+  			<version>1.0.2</version>
+		</dependency>
 
 ## Usage
 
