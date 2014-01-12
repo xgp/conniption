@@ -42,6 +42,14 @@ Restart your computer.
 
 Use the maven clean install directive to compile and make sure everythng works. I highly recommend you do not use -DskipTests. The tests will check your connection to TradeKing
 
+## Maven 
+
+	<dependency>
+		<groupId>com.celexus</groupId>
+		<artifactId>conniption</artifactId>
+  		<version>1.0.2</version>
+	</dependency>
+
 ## Usage
 
 If you're just here to use conniption, there are really only a couple classes you need to know about
