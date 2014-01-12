@@ -2,8 +2,36 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.celexus</groupId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>Conniption - A Tradeking Foreman for Java</name>
+	<description>The missing tradeking API for Java</description>
+	<packaging>jar</packaging>
+	<url>http://www.github.com/ccook</url>
+	<developers>
+		<developer>
+			<id>ckcook</id>
+			<name>Cam Cook</name>
+			<email>cam.cook@linux.com</email>
+			<url>http://www.github.com/ccook</url>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>A business-friendly OSS license</comments>
+		</license>
+	</licenses>
+	<scm>
+		<connection>scm:git:git@github.com:ccook/conniption.git</connection>
+		<url>scm:git:git@github.com:ccook/conniption.git</url>
+		<developerConnection>scm:git:git@github.com:ccook/conniption.git</developerConnection>
+	</scm>
+
 	<distributionManagement>
 		<repository>
 			<id>bintray-ckcook-maven-Conniption</id>
@@ -98,6 +126,31 @@
 						<id>attach-sources</id>
 						<goals>
 							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
 						</goals>
 					</execution>
 				</executions>
