@@ -2,6 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.celexus</groupId>
+	<artifactId>conniption</artifactId>
 	<version>1.0.2</version>
 	<name>Conniption - A Tradeking Foreman for Java</name>
 	<description>The missing tradeking API for Java</description>
@@ -157,5 +158,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<artifactId>conniption</artifactId>
 </project>

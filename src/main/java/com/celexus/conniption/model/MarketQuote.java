@@ -35,151 +35,124 @@ import com.celexus.conniption.model.util.MarketQuotesResponseField;
  * @author cam
  * 
  */
-public class MarketQuote implements Serializable
-{
+public class MarketQuote implements Serializable {
 	private static final long serialVersionUID = 3574007890139251515L;
 	private Map<MarketQuotesResponseField, String> map = new HashMap<MarketQuotesResponseField, String>();
 	private TKResponse response;
 	private Symbol symbol;
 	private MarketQuotesResponseField[] fields;
 
-	public MarketQuote(Symbol symbol) throws ModelException
-	{
+	public MarketQuote(Symbol symbol) throws ModelException {
 		this.symbol = symbol;
 		update();
 	}
 
-//	public MarketQuote(Symbol symbol, MarketQuotesResponseField... fields) throws ModelException
-//	{
-//		this.symbol = symbol;
-//		this.fields = fields;
-//		update();
-//	}
+	public MarketQuote(Symbol symbol, Map<MarketQuotesResponseField, String> map) {
+		this.symbol = symbol;
+		this.map = map;
+		response = new TKResponse();
+	}
 
-	public MarketQuote(TKResponse response, ResponseFormat format) throws ModelException
-	{
+	public MarketQuote(TKResponse response, ResponseFormat format)
+			throws ModelException {
 		this.response = response;
-		if (!format.equals(ResponseFormat.XML))
-		{
-			throw new ModelException("Format:" + format.name() + " not supported");
+		if (!format.equals(ResponseFormat.XML)) {
+			throw new ModelException("Format:" + format.name()
+					+ " not supported");
 		}
 		map = parseQuote(response.toString());
 		this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
 	}
 
-	private MarketQuote(TKResponse response, Map<MarketQuotesResponseField, String> map) throws ModelException
-	{
+	private MarketQuote(TKResponse response,
+			Map<MarketQuotesResponseField, String> map) throws ModelException {
 		this.map = map;
 		this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
 		this.response = response;
 	}
 
-	public void update() throws ModelException
-	{
+	public void update() throws ModelException {
 		TradeKingForeman foreman = new TradeKingForeman();
-		if (fields != null)
-		{
-			try
-			{
-				response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, new String[] { symbol.getSymbol() }, fields));
-			}
-			catch (ForemanException e)
-			{
+		if (fields != null) {
+			try {
+				response = foreman.makeAPICall(MarketBuilder.getQuotes(
+						ResponseFormat.XML,
+						new String[] { symbol.getSymbol() }, fields));
+			} catch (ForemanException e) {
 				throw new ModelException("Make API Call", e);
 			}
-		}
-		else
-		{
-			try
-			{
-				response = foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, symbol.getSymbol()));
-			}
-			catch (ForemanException e)
-			{
+		} else {
+			try {
+				response = foreman.makeAPICall(MarketBuilder.getQuotes(
+						ResponseFormat.XML, symbol.getSymbol()));
+			} catch (ForemanException e) {
 				throw new ModelException("Make API Call", e);
 			}
 		}
 		map = parseQuote(response.toString());
 	}
 
-	public Map<MarketQuotesResponseField, String> parseQuote(String response) throws ModelException
-	{
+	public Map<MarketQuotesResponseField, String> parseQuote(String response)
+			throws ModelException {
 		XMLHandler handler = new XMLHandler();
-		try
-		{
+		try {
 			return handler.parseMarketQuote(response.toString());
-		}
-		catch (UtilityException e)
-		{
+		} catch (UtilityException e) {
 			throw new ModelException("", e);
 		}
 	}
 
-	public boolean hasField(MarketQuotesResponseField f)
-	{
+	public boolean hasField(MarketQuotesResponseField f) {
 		return map.containsKey(f);
 	}
 
-	public String getField(MarketQuotesResponseField f)
-	{
+	public String getField(MarketQuotesResponseField f) {
 		return map.get(f);
 
 	}
 
-	public Symbol getSymbol()
-	{
+	public Symbol getSymbol() {
 		return symbol;
 	}
 
-	public TKResponse getTKResponse()
-	{
+	public TKResponse getTKResponse() {
 		return response;
 	}
 
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 
-		if (obj == null)
-		{
+		if (obj == null) {
 			return false;
 		}
-		if (obj instanceof MarketQuote)
-		{
+		if (obj instanceof MarketQuote) {
 			MarketQuote other = (MarketQuote) obj;
-			for (MarketQuotesResponseField f : MarketQuotesResponseField.values())
-			{
-				if (this.hasField(f) == other.hasField(f) && this.hasField(f))
-				{
+			for (MarketQuotesResponseField f : MarketQuotesResponseField
+					.values()) {
+				if (this.hasField(f) == other.hasField(f) && this.hasField(f)) {
 					this.getField(f).equals(other.getField(f));
-				}
-				else if (this.hasField(f) || other.hasField(f))
-				{
+				} else if (this.hasField(f) || other.hasField(f)) {
 					return false;
 				}
 			}
-		}
-		else
-		{
+		} else {
 			return false;
 		}
 
 		return true;
 	}
 
-	public static MarketQuote modify(MarketQuote q, MarketQuotesResponseField key, String value) throws ModelException
-	{
+	public static MarketQuote modify(MarketQuote q,
+			MarketQuotesResponseField key, String value) throws ModelException {
 		Map<MarketQuotesResponseField, String> copy = new HashMap<MarketQuotesResponseField, String>();
-		for (Entry<MarketQuotesResponseField, String> ent : q.map.entrySet())
-		{
+		for (Entry<MarketQuotesResponseField, String> ent : q.map.entrySet()) {
 			copy.put(ent.getKey(), ent.getValue());
 		}
 		copy.put(key, value);
-		return new MarketQuote(q.getTKResponse(),copy);
+		return new MarketQuote(q.getTKResponse(), copy);
 	}
 
-	public boolean isValid()
-	{
+	public boolean isValid() {
 		return !map.isEmpty() && symbol != null;
 	}
 
