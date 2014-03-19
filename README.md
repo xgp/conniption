@@ -44,6 +44,10 @@ Use the maven clean install directive to compile and make sure everythng works. 
 
 ## Maven 
 
+		<repository>
+			<name>bintray</name>
+			<url>http://dl.bintray.com/ckcook/maven</url>
+		</repository>
 		<dependency>
 			<groupId>com.celexus</groupId>
 			<artifactId>conniption</artifactId>
