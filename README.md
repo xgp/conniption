@@ -37,8 +37,10 @@ Put these lines in */etc/launchd.conf*
     setenv ACCESS_TOKEN <YOUR ACCESS TOKEN HERE>
     setenv ACCESS_TOKEN_SECRET <YOUR SECRET ACCESS TOKEN HERE>
     
-    
+
 Restart your computer.
+
+## Building from souurce
 
 Use the maven clean install directive to compile and make sure everythng works. I highly recommend you do not use -DskipTests. The tests will check your connection to TradeKing
 
