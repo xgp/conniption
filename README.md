@@ -44,15 +44,13 @@ Use the maven clean install directive to compile and make sure everythng works. 
 
 ## Maven 
 
-		<repository>
-			<name>bintray</name>
-			<url>http://dl.bintray.com/ckcook/maven</url>
-		</repository>
-		<dependency>
-			<groupId>com.celexus</groupId>
-			<artifactId>conniption</artifactId>
-  			<version>1.0.2</version>
-		</dependency>
+```xml
+<dependency>
+    <groupId>com.celexus</groupId>
+    <artifactId>conniption</artifactId>
+    <version>1.0.2</version>
+</dependency>
+```
 
 ## Usage
 
@@ -63,13 +61,13 @@ If you're just here to use conniption, there are really only a couple classes yo
 Access to your Tradeking Account. You'll notice there are two constructors. One which takes your ID as a parameter, one without.
 The one without assumes you only have one account attached. You can access the fields returned by using ***hasField()*** and ***getField()***
 
-
-	Account acc = new Account();
-	for(AccountsField f: AccountsField.values())
-	{
-		System.out.println(f+" "+acc.getField(f));
-	}
-      
+```java
+Account acc = new Account();
+for(AccountsField f: AccountsField.values())
+{
+	System.out.println(f+" "+acc.getField(f));
+}
+```
 will yield 
 
     ACCOUNT_TYPE null
@@ -136,14 +134,16 @@ You can learn more about these fields [here](https://developers.tradeking.com/do
 
 Access to the Market's clock. Use ***hasField()*** and ***getField*** to access these values.
   
-	MarketClock clock = new MarketClock();
-	for(MarketClockField f: MarketClockField.values())
+```java
+MarketClock clock = new MarketClock();
+for(MarketClockField f: MarketClockField.values())
+{
+	if(clock.hasField(f))
 	{
-		if(clock.hasField(f))
-		{
-        		System.out.println("\t"+f.name()+"="+clock.getField(f));
-		}
+        	System.out.println("\t"+f.name()+"="+clock.getField(f));
 	}
+}
+```
 
 will yield
 
@@ -158,15 +158,16 @@ will yield
 
 Get information on stocks. 
 
-	MarketQuote quote = new MarketQuote(new Symbol("SIRI"));
-	for(MarketQuotesResponseField f: MarketQuotesResponseField.values())
+```java
+MarketQuote quote = new MarketQuote(new Symbol("SIRI"));
+for(MarketQuotesResponseField f: MarketQuotesResponseField.values())
+{
+	if(quote.hasField(f))
 	{
-		if(quote.hasField(f))
-		{
-			System.out.println(f.name()+"="+quote.getField(f));
-		}
+		System.out.println(f.name()+"="+quote.getField(f));
 	}
-
+}
+```
 will yield
 
 	AVG_DAILY_PRICE_100_DAYS=3.3229
@@ -242,57 +243,60 @@ will yield
 
 You'll need a good understanding of how to use the [FIXMLBuilder](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/model/util/fixml/FIXMLBuilder.java), which uses FIXML to post orders. If you want to validate your order, use MarketPreviewOrder instead.
 
-		Account a = new Account();
-		FIXMLBuilder builder = new FIXMLBuilder(a);
-		builder.timeInForce(TimeInForceField.DAY_ORDER);
-			.symbol("OCQLF");
-			.priceType(PriceType.LIMIT);
-			.securityType(SecurityType.STOCK);
-			.quantity(1);
-			.executionPrice(.01);
-			.side(MarketSideField.BUY);
+```java
+Account a = new Account();
+FIXMLBuilder builder = new FIXMLBuilder(a);
+builder.timeInForce(TimeInForceField.DAY_ORDER);
+	.symbol("OCQLF");
+	.priceType(PriceType.LIMIT);
+	.securityType(SecurityType.STOCK);
+	.quantity(1);
+	.executionPrice(.01);
+	.side(MarketSideField.BUY);
 		
-		MarketPreviewOrder order = new MarketPreviewOrder(a, builder);
-		for(OrderPreviewField f: OrderPreviewField.values())
-		{
-			if(order.hasField(f))
-			{
-				String value = order.getField(f);
-				System.out.println(f+" "+value);
-			}
-		}
+MarketPreviewOrder order = new MarketPreviewOrder(a, builder);
+for(OrderPreviewField f: OrderPreviewField.values())
+{
+	if(order.hasField(f))
+	{
+		String value = order.getField(f);
+		System.out.println(f+" "+value);
+	}
+}
+```
+
 #### [StreamingMarketQuote (Experimental)](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/model/stream/StreamingMarketQuote.java)
 
 Streaming APIs allow you to maintain a tradeking connection. This reduces the number of API calls you have to make.
 
 Each StreamingMarketQuote requires a ContentExchange Object. The one provided below simply prints the response (conniption has the functions to parse these responses, I just don't know what to do with them yet).
 
-
-		StreamingMarketQuote quote = new StreamingMarketQuote();
+```java
+StreamingMarketQuote quote = new StreamingMarketQuote();
 		
-		ContentExchange ex = new ContentExchange(true)
-		{
-			// tell me what kind of response code we got
-			protected void onResponseComplete() throws IOException
-			{
-				int status = getResponseStatus();
-				if (status == 200)
-					System.out.println("Successfully connected");
-				else
-					System.out.println("Error Code Received: " + status);
-			}
+ContentExchange ex = new ContentExchange(true)
+{
+	// tell me what kind of response code we got
+	protected void onResponseComplete() throws IOException
+	{
+		int status = getResponseStatus();
+		if (status == 200)
+			System.out.println("Successfully connected");
+		else
+			System.out.println("Error Code Received: " + status);
+	}
 
-			// print out any response data we get along the stream
-			protected void onResponseContent(Buffer data)
-			{
-				System.out.println(data);
-			}
-		};
+	// print out any response data we get along the stream
+	protected void onResponseContent(Buffer data)
+	{
+		System.out.println(data);
+	}
+};
 		
-		ContentExchange request = quote.stream(ex, new Symbol("IBM"));
-		// Be careful! this line is blocking!
-		request.waitForDone();
-
+ContentExchange request = quote.stream(ex, new Symbol("IBM"));
+// Be careful! this line is blocking!
+request.waitForDone();
+```
 ## Warnings
 
 Conniption assumes the most simpliest of Accounts. Don't use if you're doing complex shit. I also haven't implemented options functionality yet. Use at your own risk.
