@@ -17,23 +17,20 @@ package com.celexus.conniption.foreman;
 
 /**
  * An exception for the exclusive use of the conniption.foreman package
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class ForemanException extends Exception
-{
+public class ForemanException extends Exception {
 
-	public ForemanException(String message)
-	{
-		super(message);
-	}
+    public ForemanException(String message) {
+        super(message);
+    }
 
-	public ForemanException(String message, Throwable e)
-	{
-		super(message, e);
-	}
+    public ForemanException(String message, Throwable e) {
+        super(message, e);
+    }
 
-	private static final long serialVersionUID = 8119056765113019308L;
+    private static final long serialVersionUID = 8119056765113019308L;
 
 }

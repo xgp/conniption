@@ -17,23 +17,20 @@ package com.celexus.conniption.application;
 
 /**
  * An exception class for the exclusive use of the application package
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class ApplicationException extends Exception
-{
+public class ApplicationException extends Exception {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public ApplicationException(Throwable e)
-	{
-		super(e);
-	}
+    public ApplicationException(Throwable e) {
+        super(e);
+    }
 
-	public ApplicationException(String message, Throwable e)
-	{
-		super(message, e);
-	}
+    public ApplicationException(String message, Throwable e) {
+        super(message, e);
+    }
 
 }

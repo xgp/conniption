@@ -24,45 +24,40 @@ import com.celexus.conniption.foreman.util.ResponseFormat;
 
 /**
  * An APIBuilder that will build REST calls relating to TradeKing Accounts
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class AccountsBuilder extends APIBuilder implements Serializable
-{
-	private static final long serialVersionUID = 7982141126897931034L;
+public class AccountsBuilder extends APIBuilder implements Serializable {
 
-	private AccountsBuilder(Verb v)
-	{
-		verb = v;
-	}
+    private static final long serialVersionUID = 7982141126897931034L;
 
-	public static AccountsBuilder getAccounts(ResponseFormat format)
-	{
-		AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
-		toReturn.resourceURL = APICall.getAccounts(format);
-		return toReturn;
-	}
+    private AccountsBuilder(Verb v) {
+        verb = v;
+    }
 
-	public static APIBuilder getAccount(String id, ResponseFormat format)
-	{
-		AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
-		toReturn.resourceURL = APICall.getAccountByID(format, id);
-		return toReturn;
-	}
+    public static AccountsBuilder getAccounts(ResponseFormat format) {
+        AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
+        toReturn.resourceURL = APICall.getAccounts(format);
+        return toReturn;
+    }
 
-	public static AccountsBuilder getAccountBalances(ResponseFormat format)
-	{
-		AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
-		toReturn.resourceURL = APICall.getAccountBalances(format);
-		return toReturn;
-	}
+    public static APIBuilder getAccount(String id, ResponseFormat format) {
+        AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
+        toReturn.resourceURL = APICall.getAccountByID(format, id);
+        return toReturn;
+    }
 
-	public static APIBuilder getAccountBalance(String id, ResponseFormat format)
-	{
-		AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
-		toReturn.resourceURL = APICall.getAccountBalanceByID(format, id);
-		return toReturn;
-	}
+    public static AccountsBuilder getAccountBalances(ResponseFormat format) {
+        AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
+        toReturn.resourceURL = APICall.getAccountBalances(format);
+        return toReturn;
+    }
+
+    public static APIBuilder getAccountBalance(String id, ResponseFormat format) {
+        AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
+        toReturn.resourceURL = APICall.getAccountBalanceByID(format, id);
+        return toReturn;
+    }
 
 }

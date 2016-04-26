@@ -36,59 +36,49 @@ import com.celexus.conniption.model.Symbol;
 
 /**
  * A representation of TradeKing's Market Quote that permits streaming
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class StreamingMarketQuote
-{
-	HttpClient client = new HttpClient();
+public class StreamingMarketQuote {
 
-	public StreamingMarketQuote() throws ModelException
-	{
-		client.setThreadPool(new QueuedThreadPool(250));
-		client.setConnectorType(HttpClient.CONNECTOR_SELECT_CHANNEL);
-		client.setMaxConnectionsPerAddress(500); // max 200 concurrent connections to every address
-		try
-		{
-			client.start();
-		}
-		catch (Exception e)
-		{
-			throw new ModelException("Start HTTP Client", e);
-		}
-	}
+    HttpClient client = new HttpClient();
 
-	public ContentExchange stream(ContentExchange ex, Symbol... symbols) throws ModelException
-	{
-		OAuthConsumer consumer = new JettyOAuthConsumer(ForemanConstants.API_KEY.toString(), ForemanConstants.API_SECRET.toString());
-		consumer.setTokenWithSecret(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());
+    public StreamingMarketQuote() throws ModelException {
+        client.setThreadPool(new QueuedThreadPool(250));
+        client.setConnectorType(HttpClient.CONNECTOR_SELECT_CHANNEL);
+        client.setMaxConnectionsPerAddress(500); // max 200 concurrent connections to every address
+        try {
+            client.start();
+        } catch (Exception e) {
+            throw new ModelException("Start HTTP Client", e);
+        }
+    }
 
-		ex.setMethod(Verb.GET.name());
-		ex.setURL(APICall.getStreamingQuote(ResponseFormat.XML) + getParameters(symbols));
+    public ContentExchange stream(ContentExchange ex, Symbol... symbols) throws ModelException {
+        OAuthConsumer consumer = new JettyOAuthConsumer(ForemanConstants.API_KEY.toString(), ForemanConstants.API_SECRET.toString());
+        consumer.setTokenWithSecret(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());
 
-		// sign the request
-		try
-		{
-			consumer.sign(ex);
-			client.send(ex);
-		}
-		catch (IOException | OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException e)
-		{
-			throw new ModelException("Sent Exchange to Client", e);
-		}
+        ex.setMethod(Verb.GET.name());
+        ex.setURL(APICall.getStreamingQuote(ResponseFormat.XML) + getParameters(symbols));
 
-		return ex;
-	}
+        // sign the request
+        try {
+            consumer.sign(ex);
+            client.send(ex);
+        } catch (IOException | OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException e) {
+            throw new ModelException("Sent Exchange to Client", e);
+        }
 
-	private String getParameters(Symbol[] symbols)
-	{
-		StringBuilder sb = new StringBuilder("?symbols=");
-		for (Symbol sym : symbols)
-		{
-			sb.append(sym.toString().replace("^", "%5E")).append(",");
-		}
+        return ex;
+    }
 
-		return sb.toString().replaceAll(",$", "");
-	}
+    private String getParameters(Symbol[] symbols) {
+        StringBuilder sb = new StringBuilder("?symbols=");
+        for (Symbol sym : symbols) {
+            sb.append(sym.toString().replace("^", "%5E")).append(",");
+        }
+
+        return sb.toString().replaceAll(",$", "");
+    }
 }

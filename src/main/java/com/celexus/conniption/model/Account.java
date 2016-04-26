@@ -30,121 +30,91 @@ import com.celexus.conniption.model.util.AccountsField;
 
 /**
  * A representation of TradeKing Accounts
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class Account implements Serializable
-{
-	private static final long serialVersionUID = -3038944208566900477L;
-	private Map<AccountsField, String> map = new HashMap<AccountsField, String>();
-	private TKResponse response;
-	private String id;
+public class Account implements Serializable {
 
-	public Account(String id) throws ModelException
-	{
-		this.id = id;
-		update();
-	}
+    private static final long serialVersionUID = -3038944208566900477L;
+    private Map<AccountsField, String> map = new HashMap<AccountsField, String>();
+    private TKResponse response;
+    private String id;
 
-	public Account() throws ModelException
-	{
-		update();
-	}
+    public Account(String id) throws ModelException {
+        this.id = id;
+        update();
+    }
 
-	public String getId()
-	{
-		return getField(AccountsField.ACCOUNT_NUMBER);
-	}
+    public Account() throws ModelException {
+        update();
+    }
 
-	public Account(Map<AccountsField, String> fields)
-	{
-		map = fields;
-	}
+    public String getId() {
+        return getField(AccountsField.ACCOUNT_NUMBER);
+    }
 
-	public boolean hasField(AccountsField f)
-	{
-		return map.containsKey(f);
-	}
+    public Account(Map<AccountsField, String> fields) {
+        map = fields;
+    }
 
-	public String getField(AccountsField f)
-	{
-		return map.get(f);
-	}
+    public boolean hasField(AccountsField f) {
+        return map.containsKey(f);
+    }
 
-	public TKResponse getTKResponse()
-	{
-		return response;
-	}
+    public String getField(AccountsField f) {
+        return map.get(f);
+    }
 
-	@Override
-	public boolean equals(Object other)
-	{
-		if (other == null)
-		{
-			return false;
-		}
-		if (other instanceof Account)
-		{
-			Account otherA = (Account) other;
-			for (AccountsField f : AccountsField.values())
-			{
-				if (this.hasField(f) == otherA.hasField(f) && this.hasField(f))
-				{
-					this.getField(f).equals(otherA.getField(f));
-				}
-				else if (this.hasField(f) || otherA.hasField(f))
-				{
-					return false;
-				}
-			}
-		}
-		else
-		{
-			return false;
-		}
-		return true;
-	}
+    public TKResponse getTKResponse() {
+        return response;
+    }
 
-	public void update() throws ModelException
-	{
-		TradeKingForeman foreman = new TradeKingForeman();
-		if (id == null)
-		{
-			try
-			{
-				response = foreman.makeAPICall(AccountsBuilder.getAccounts(ResponseFormat.XML));
-			}
-			catch (ForemanException e)
-			{
-				throw new ModelException("Make API Call", e);
-			}
-		}
-		else
-		{
-			try
-			{
-				response = foreman.makeAPICall(AccountsBuilder.getAccount(id, ResponseFormat.XML));
-			}
-			catch (ForemanException e)
-			{
-				throw new ModelException("Make API Call", e);
-			}
-		}
-		map = parseAccount(response.toString());
-	}
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other instanceof Account) {
+            Account otherA = (Account) other;
+            for (AccountsField f : AccountsField.values()) {
+                if (this.hasField(f) == otherA.hasField(f) && this.hasField(f)) {
+                    this.getField(f).equals(otherA.getField(f));
+                } else if (this.hasField(f) || otherA.hasField(f)) {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
 
-	public Map<AccountsField, String> parseAccount(String res) throws ModelException
-	{
-		XMLHandler handler = new XMLHandler();
-		try
-		{
-			return handler.parseAccount(response.toString());
-		}
-		catch (UtilityException e)
-		{
-			throw new ModelException("", e);
-		}
-	}
+    public void update() throws ModelException {
+        TradeKingForeman foreman = new TradeKingForeman();
+        if (id == null) {
+            try {
+                response = foreman.makeAPICall(AccountsBuilder.getAccounts(ResponseFormat.XML));
+            } catch (ForemanException e) {
+                throw new ModelException("Make API Call", e);
+            }
+        } else {
+            try {
+                response = foreman.makeAPICall(AccountsBuilder.getAccount(id, ResponseFormat.XML));
+            } catch (ForemanException e) {
+                throw new ModelException("Make API Call", e);
+            }
+        }
+        map = parseAccount(response.toString());
+    }
+
+    public Map<AccountsField, String> parseAccount(String res) throws ModelException {
+        XMLHandler handler = new XMLHandler();
+        try {
+            return handler.parseAccount(response.toString());
+        } catch (UtilityException e) {
+            throw new ModelException("", e);
+        }
+    }
 
 }

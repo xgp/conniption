@@ -35,244 +35,202 @@ import com.celexus.conniption.model.util.OrderPreviewField;
 
 /**
  * A Handler to parse TradeKing Responses
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class XMLHandler implements Serializable
-{
-	private static final long serialVersionUID = -720928472060791141L;
+public class XMLHandler implements Serializable {
 
-	public XMLHandler()
-	{
-	}
+    private static final long serialVersionUID = -720928472060791141L;
 
-	public Map<AccountsField, String> parseAccount(String response) throws UtilityException
-	{
-		Document doc = getDocument(response);
-		return getAccountPaths(doc);
-	}
+    public XMLHandler() {
+    }
 
-	public Map<MarketClockField, String> parseMarketClock(String response) throws UtilityException
-	{
-		Document doc = getDocument(response);
-		return getMarketClockPaths(doc);
-	}
+    public Map<AccountsField, String> parseAccount(String response) throws UtilityException {
+        Document doc = getDocument(response);
+        return getAccountPaths(doc);
+    }
 
-	public Map<MarketQuotesResponseField, String> parseMarketQuote(String response) throws UtilityException
-	{
-		Document doc = getDocument(response);
-		return getMarketQuotePaths(doc);
-	}
+    public Map<MarketClockField, String> parseMarketClock(String response) throws UtilityException {
+        Document doc = getDocument(response);
+        return getMarketClockPaths(doc);
+    }
 
-	public Map<OrderPreviewField, String> parseMarketOrderPreview(String response) throws UtilityException
-	{
-		Document doc = getDocument(response);
-		return getMarketPreviewOrderPaths(doc);
-	}
+    public Map<MarketQuotesResponseField, String> parseMarketQuote(String response) throws UtilityException {
+        Document doc = getDocument(response);
+        return getMarketQuotePaths(doc);
+    }
 
-	public Map<OrderField, String> parseMarketOrder(String response) throws UtilityException
-	{
-		Document doc = getDocument(response);
-		return getMarketOrderPaths(doc);
-	}
+    public Map<OrderPreviewField, String> parseMarketOrderPreview(String response) throws UtilityException {
+        Document doc = getDocument(response);
+        return getMarketPreviewOrderPaths(doc);
+    }
 
-	@SuppressWarnings("unchecked")
-	private Map<OrderField, String> getMarketOrderPaths(Document doc)
-	{
-		Map<OrderField, String> toReturn = new HashMap<OrderField, String>();
-		for (OrderField f : OrderField.values())
-		{
-			String path = f.getPath();
-			if (path != null)
-			{
-				List<DefaultElement> list = doc.selectNodes(path);
+    public Map<OrderField, String> parseMarketOrder(String response) throws UtilityException {
+        Document doc = getDocument(response);
+        return getMarketOrderPaths(doc);
+    }
 
-				for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
-				{
-					DefaultElement attribute = iter.next();
-					String url = attribute.getText();
-					toReturn.put(f, url);
-				}
-			}
-		}
-		return toReturn;
-	}
+    @SuppressWarnings("unchecked")
+    private Map<OrderField, String> getMarketOrderPaths(Document doc) {
+        Map<OrderField, String> toReturn = new HashMap<OrderField, String>();
+        for (OrderField f : OrderField.values()) {
+            String path = f.getPath();
+            if (path != null) {
+                List<DefaultElement> list = doc.selectNodes(path);
 
-	@SuppressWarnings("unchecked")
-	private Map<OrderPreviewField, String> getMarketPreviewOrderPaths(Document doc) throws UtilityException
-	{
-		Map<OrderPreviewField, String> toReturn = new HashMap<OrderPreviewField, String>();
-		for (OrderPreviewField f : OrderPreviewField.values())
-		{
-			String path = f.getPath();
-			if (f.equals(OrderPreviewField.ERROR))
-			{
-				if (path != null)
-				{
-					List<DefaultElement> list = doc.selectNodes(path);
+                for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();) {
+                    DefaultElement attribute = iter.next();
+                    String url = attribute.getText();
+                    toReturn.put(f, url);
+                }
+            }
+        }
+        return toReturn;
+    }
 
-					for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
-					{
-						DefaultElement attribute = iter.next();
-						String url = attribute.getText();
-						throw new UtilityException(url);
-					}
+    private void isError(DefaultElement attribute) throws UtilityException {
+        String url = attribute.getText();
+        if (url.equals("Success")) {
+            //do nothing
+        } else {
+            throw new UtilityException(url);
+        }
+    }
 
-				}
-			}
-			if (path != null)
-			{
-				List<DefaultElement> list = doc.selectNodes(path);
+    @SuppressWarnings("unchecked")
+    private Map<OrderPreviewField, String> getMarketPreviewOrderPaths(Document doc) throws UtilityException {
+        Map<OrderPreviewField, String> toReturn = new HashMap<OrderPreviewField, String>();
+        for (OrderPreviewField f : OrderPreviewField.values()) {
+            String path = f.getPath();
+            if (f.equals(OrderPreviewField.ERROR)) {
+                if (path != null) {
+                    List<DefaultElement> list = doc.selectNodes(path);
 
-				for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
-				{
-					DefaultElement attribute = iter.next();
-					String url = attribute.getText();
-					toReturn.put(f, url);
-				}
+                    for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();) {
+                        isError(iter.next());
+                    }
 
-			}
-		}
+                }
+            }
+            if (path != null) {
+                List<DefaultElement> list = doc.selectNodes(path);
 
-		return toReturn;
-	}
+                for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();) {
+                    DefaultElement attribute = iter.next();
+                    String url = attribute.getText();
+                    toReturn.put(f, url);
+                }
 
-	@SuppressWarnings("unchecked")
-	private Map<AccountsField, String> getAccountPaths(Document doc) throws UtilityException
-	{
-		Map<AccountsField, String> toReturn = new HashMap<AccountsField, String>();
-		for (AccountsField f : AccountsField.values())
-		{
-			String path = f.getPath();
-			if (f.equals(AccountsField.ERROR))
-			{
-				if (path != null)
-				{
-					List<DefaultElement> list = doc.selectNodes(path);
+            }
+        }
 
-					for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
-					{
-						DefaultElement attribute = iter.next();
-						String url = attribute.getText();
-						throw new UtilityException(url);
-					}
+        return toReturn;
+    }
 
-				}
-			}
-			if (path != null)
-			{
-				List<DefaultElement> list = doc.selectNodes(path);
+    @SuppressWarnings("unchecked")
+    private Map<AccountsField, String> getAccountPaths(Document doc) throws UtilityException {
+        Map<AccountsField, String> toReturn = new HashMap<AccountsField, String>();
+        for (AccountsField f : AccountsField.values()) {
+            String path = f.getPath();
+            if (f.equals(AccountsField.ERROR)) {
+                if (path != null) {
+                    List<DefaultElement> list = doc.selectNodes(path);
 
-				for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
-				{
-					DefaultElement attribute = iter.next();
-					String url = attribute.getText();
-					toReturn.put(f, url);
-				}
+                    for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();) {
+                        isError(iter.next());
+                    }
 
-			}
-		}
+                }
+            }
+            if (path != null) {
+                List<DefaultElement> list = doc.selectNodes(path);
 
-		return toReturn;
+                for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();) {
+                    DefaultElement attribute = iter.next();
+                    String url = attribute.getText();
+                    toReturn.put(f, url);
+                }
 
-	}
+            }
+        }
 
-	@SuppressWarnings("unchecked")
-	private Map<MarketQuotesResponseField, String> getMarketQuotePaths(Document doc) throws UtilityException
-	{
-		Map<MarketQuotesResponseField, String> toReturn = new HashMap<MarketQuotesResponseField, String>();
-		for (MarketQuotesResponseField f : MarketQuotesResponseField.values())
-		{
-			String[] paths = f.getPaths();
-			if (f.equals(MarketQuotesResponseField.ERROR))
-			{
-				if (paths != null)
-				{
-					for (String path : paths)
-					{
-						List<DefaultElement> list = doc.selectNodes(path);
+        return toReturn;
 
-						for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
-						{
-							DefaultElement attribute = iter.next();
-							String url = attribute.getText();
-							throw new UtilityException(url);
-						}
-					}
+    }
 
-				}
-			}
-			if (paths != null)
-			{
-				for (String path : paths)
-				{
-					List<DefaultElement> list = doc.selectNodes(path);
+    @SuppressWarnings("unchecked")
+    private Map<MarketQuotesResponseField, String> getMarketQuotePaths(Document doc) throws UtilityException {
+        Map<MarketQuotesResponseField, String> toReturn = new HashMap<MarketQuotesResponseField, String>();
+        for (MarketQuotesResponseField f : MarketQuotesResponseField.values()) {
+            String[] paths = f.getPaths();
+            if (f.equals(MarketQuotesResponseField.ERROR)) {
+                if (paths != null) {
+                    for (String path : paths) {
+                        List<DefaultElement> list = doc.selectNodes(path);
 
-					for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
-					{
-						DefaultElement attribute = iter.next();
-						String url = attribute.getText();
-						toReturn.put(f, url);
-					}
-				}
+                        for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();) {
+                            isError(iter.next());
+                        }
+                    }
 
-			}
-		}
-		return toReturn;
-	}
+                }
+            }
+            if (paths != null) {
+                for (String path : paths) {
+                    List<DefaultElement> list = doc.selectNodes(path);
 
-	@SuppressWarnings("unchecked")
-	public Map<MarketClockField, String> getMarketClockPaths(Document doc) throws UtilityException
-	{
-		Map<MarketClockField, String> toReturn = new HashMap<MarketClockField, String>();
-		for (MarketClockField f : MarketClockField.values())
-		{
-			String path = f.getPath();
-			if (f.equals(MarketClockField.ERROR))
-			{
-				if (path != null)
-				{
-					List<DefaultElement> list = doc.selectNodes(path);
+                    for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();) {
+                        DefaultElement attribute = iter.next();
+                        String url = attribute.getText();
+                        toReturn.put(f, url);
+                    }
+                }
 
-					for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
-					{
-						DefaultElement attribute = iter.next();
-						String url = attribute.getText();
-						throw new UtilityException(url);
-					}
+            }
+        }
+        return toReturn;
+    }
 
-				}
-			}
-			if (path != null)
-			{
-				List<DefaultElement> list = doc.selectNodes(path);
+    @SuppressWarnings("unchecked")
+    public Map<MarketClockField, String> getMarketClockPaths(Document doc) throws UtilityException {
+        Map<MarketClockField, String> toReturn = new HashMap<MarketClockField, String>();
+        for (MarketClockField f : MarketClockField.values()) {
+            String path = f.getPath();
+            if (f.equals(MarketClockField.ERROR)) {
+                if (path != null) {
+                    List<DefaultElement> list = doc.selectNodes(path);
 
-				for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();)
-				{
-					DefaultElement attribute = iter.next();
-					String url = attribute.getText();
-					toReturn.put(f, url);
-				}
+                    for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();) {
+                        isError(iter.next());
+                    }
 
-			}
-		}
+                }
+            }
+            if (path != null) {
+                List<DefaultElement> list = doc.selectNodes(path);
 
-		return toReturn;
-	}
+                for (Iterator<DefaultElement> iter = list.iterator(); iter.hasNext();) {
+                    DefaultElement attribute = iter.next();
+                    String url = attribute.getText();
+                    toReturn.put(f, url);
+                }
 
-	private Document getDocument(String response) throws UtilityException
-	{
-		SAXReader reader = new SAXReader();
-		Document document;
-		try
-		{
-			document = reader.read(new ByteArrayInputStream(response.getBytes()));
-		}
-		catch (DocumentException e)
-		{
-			throw new UtilityException("Parse response failed", e);
-		}
-		return document;
-	}
+            }
+        }
+
+        return toReturn;
+    }
+
+    private Document getDocument(String response) throws UtilityException {
+        SAXReader reader = new SAXReader();
+        Document document;
+        try {
+            document = reader.read(new ByteArrayInputStream(response.getBytes()));
+        } catch (DocumentException e) {
+            throw new UtilityException("Parse response failed", e);
+        }
+        return document;
+    }
+
 }

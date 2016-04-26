@@ -17,63 +17,51 @@ import com.celexus.conniption.model.util.AccountsField;
 import com.celexus.conniption.model.util.MarketClockField;
 import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
-public class XMLHandlerTest
-{
-	TradeKingForeman foreman = new TradeKingForeman();
+public class XMLHandlerTest {
 
-	@Test
-	public void parseAccountTest()
-	{
-		XMLHandler handler = new XMLHandler();
-		Map<AccountsField, String> map = null;
-		try
-		{
-			 map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccount("38580744", ResponseFormat.XML)).toString());
-		}
-		catch (Exception e)
-		{
-			fail();
-		}
+    TradeKingForeman foreman = new TradeKingForeman();
 
-		assertTrue("Response failed to get results",!map.isEmpty());
-		assertNotNull("Response did not include expected results",map.get(AccountsField.ACCOUNT_NUMBER));
-	}
-	
-	@Test
-	public void marketClockTest()
-	{
-		XMLHandler handler = new XMLHandler();
-		Map<MarketClockField, String> map = null;
-		try
-		{
-			map = handler.parseMarketClock(foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML)).toString());
-		}
-		catch (Exception e)
-		{
-			fail();
-		}	
-		assertTrue("Response failed to get results",!map.isEmpty());
-		assertNotNull("Response did not include expected results",map.get(MarketClockField.CURRENT));
-	}
+    @Test
+    public void parseAccountTest() {
+        XMLHandler handler = new XMLHandler();
+        Map<AccountsField, String> map = null;
+        try {
+            map = handler.parseAccount(foreman.makeAPICall(AccountsBuilder.getAccount(System.getenv("TK_ACCOUNT_NO"), ResponseFormat.XML)).toString());
+        } catch (Exception e) {
+            fail();
+        }
 
-	@Test
-	public void marketQuoteTest()
-	{
-		XMLHandler handler = new XMLHandler();
-		Map<MarketQuotesResponseField, String> map = null;
-		
-		try
-		{
-			map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, "SIRI")).toString());
-		}
-		catch (Exception e)
-		{
-			fail();
-		}
-		
-		assertTrue("Response failed to get results",!map.isEmpty());
-		assertNotNull("Response did not include expected results",map.get(MarketQuotesResponseField.SYMBOL));
-	}
+        assertTrue("Response failed to get results", !map.isEmpty());
+        assertNotNull("Response did not include expected results", map.get(AccountsField.ACCOUNT_NUMBER));
+    }
 
+    @Test
+    public void marketClockTest() {
+        XMLHandler handler = new XMLHandler();
+        Map<MarketClockField, String> map = null;
+        try {
+            map = handler.parseMarketClock(foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML)).toString());
+        } catch (Exception e) {
+
+            fail();
+        }
+        assertTrue("Response failed to get results", !map.isEmpty());
+        assertNotNull("Response did not include expected results", map.get(MarketClockField.CURRENT));
+    }
+
+    @Test
+    public void marketQuoteTest() {
+        XMLHandler handler = new XMLHandler();
+        Map<MarketQuotesResponseField, String> map = null;
+
+        try {
+            map = handler.parseMarketQuote(foreman.makeAPICall(MarketBuilder.getQuotes(ResponseFormat.XML, "SIRI")).toString());
+        } catch (Exception e) {
+            fail();
+        }
+
+        assertTrue("Response failed to get results", !map.isEmpty());
+        assertNotNull("Response did not include expected results", map.get(MarketQuotesResponseField.SYMBOL));
+    }
 
 }

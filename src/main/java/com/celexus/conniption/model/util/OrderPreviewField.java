@@ -17,28 +17,25 @@ package com.celexus.conniption.model.util;
 
 import java.io.Serializable;
 
-public enum OrderPreviewField implements Serializable
-{
-	ESTIMATED_COMISSION("estcommission"),
-	MARGIN_REQUIREMENT("marginrequirement"),
-	TOTAL_COST("principal"),
-	SEC_FEE("secfee"),
-	WARNING("warningtext"),
-	ERROR("/error");
-	private String tag;
-	OrderPreviewField(String tag)
-	{
-		this.tag = tag;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return tag;
-	}
+public enum OrderPreviewField implements Serializable {
+    ESTIMATED_COMISSION("estcommission"),
+    MARGIN_REQUIREMENT("marginrequirement"),
+    TOTAL_COST("principal"),
+    SEC_FEE("secfee"),
+    WARNING("warningtext"),
+    ERROR("/error");
+    private String tag;
 
-	public String getPath()
-	{
-		return "/"+toString();
-	}
+    OrderPreviewField(String tag) {
+        this.tag = tag;
+    }
+
+    @Override
+    public String toString() {
+        return tag;
+    }
+
+    public String getPath() {
+        return "/" + toString();
+    }
 }

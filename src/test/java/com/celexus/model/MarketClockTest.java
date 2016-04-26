@@ -9,28 +9,21 @@ import com.celexus.conniption.foreman.util.UtilityException;
 import com.celexus.conniption.model.MarketClock;
 import com.celexus.conniption.model.util.MarketClockField;
 
-public class MarketClockTest
-{
+public class MarketClockTest {
 
-	@Test
-	public void test()
-	{
-		try
-		{
-			MarketClock clock = new MarketClock();
-			for(MarketClockField f: MarketClockField.values())
-			{
-				if(clock.hasField(f))
-				{
-					System.out.println("\t"+f.name()+"="+clock.getField(f));
-				}
-			}
-			assertTrue("Expected field not in response",clock.hasField(MarketClockField.CURRENT));
-		}
-		catch (UtilityException e)
-		{
-			fail();
-		}
-	}
+    @Test
+    public void test() {
+        try {
+            MarketClock clock = new MarketClock();
+            for (MarketClockField f : MarketClockField.values()) {
+                if (clock.hasField(f)) {
+                    System.out.println("\t" + f.name() + "=" + clock.getField(f));
+                }
+            }
+            assertTrue("Expected field not in response", clock.hasField(MarketClockField.CURRENT));
+        } catch (UtilityException e) {
+            fail();
+        }
+    }
 
 }

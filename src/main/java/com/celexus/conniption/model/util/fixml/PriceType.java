@@ -17,27 +17,24 @@ package com.celexus.conniption.model.util.fixml;
 
 import java.io.Serializable;
 
-public enum PriceType implements Serializable
-{
-	/*
+public enum PriceType implements Serializable {
+    /*
 	 * Price Type as "1" ‐ Market, "2" ‐ Limit", "3" ‐ Stop, "4" Stop Limit, or "P" for trailing stop. 
-	 */
-	MARKET("1"),
-	LIMIT("2"),
-	STOP("3"),
-	STOP_LIMIT("4"),
-	TRAILING_STOP("P");
-	
-	private String value;
-	
-	PriceType(String value)
-	{
-		this.value = value;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return value;
-	}
+     */
+    MARKET("1"),
+    LIMIT("2"),
+    STOP("3"),
+    STOP_LIMIT("4"),
+    TRAILING_STOP("P");
+
+    private String value;
+
+    PriceType(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

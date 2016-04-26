@@ -24,52 +24,44 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Installs a dummy TrustManager. This can be rather dangerous, but if you're having keytool/certificate exceptions This will solve it.
- * 
+ * Installs a dummy TrustManager. This can be rather dangerous, but if you're
+ * having keytool/certificate exceptions This will solve it.
+ *
  * @author cam
- * 
+ *
  */
-public class CertificateInstallerApplication
-{
-	private static Logger log = LoggerFactory.getLogger(CertificateInstallerApplication.class);
+public class CertificateInstallerApplication {
 
-	public static void main(String[] args) throws ApplicationException
-	{
-		new CertificateInstallerApplication();
-	}
+    private static Logger log = LoggerFactory.getLogger(CertificateInstallerApplication.class);
 
-	private CertificateInstallerApplication() throws ApplicationException, com.celexus.conniption.application.ApplicationException
-	{
-		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager()
-		{
+    public static void main(String[] args) throws ApplicationException {
+        new CertificateInstallerApplication();
+    }
 
-			public java.security.cert.X509Certificate[] getAcceptedIssuers()
-			{
-				return null;
-			}
+    private CertificateInstallerApplication() throws ApplicationException, com.celexus.conniption.application.ApplicationException {
+        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
 
-			public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType)
-			{
-			}
+            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
 
-			public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType)
-			{
-			}
-		} };
+            public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {
+            }
 
-		// Install the all-trusting trust manager
-		try
-		{
-			SSLContext sc = SSLContext.getInstance("SSL");
-			log.info("Installing Certificates...");
-			sc.init(null, trustAllCerts, new java.security.SecureRandom());
-			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-			log.info("Done.");
-		}
-		catch (Exception e)
-		{
-			throw new ApplicationException(e);
-		}
-	}
+            public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {
+            }
+        }};
+
+        // Install the all-trusting trust manager
+        try {
+            SSLContext sc = SSLContext.getInstance("SSL");
+            log.info("Installing Certificates...");
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            log.info("Done.");
+        } catch (Exception e) {
+            throw new ApplicationException(e);
+        }
+    }
 
 }

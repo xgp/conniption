@@ -17,22 +17,20 @@ package com.celexus.conniption.model.util.fixml;
 
 import java.io.Serializable;
 
-public enum MarketSideField implements Serializable
-{
-	BUY("1"),
-	SELL("2"),
-	BUY_TO_COVER("1"),
-	SELL_SHORT("5");
-	
-	private String value;
-	MarketSideField(String value)
-	{
-		this.value = value;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return value;
-	}
+public enum MarketSideField implements Serializable {
+    BUY("1"),
+    SELL("2"),
+    BUY_TO_COVER("1"),
+    SELL_SHORT("5");
+
+    private String value;
+
+    MarketSideField(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

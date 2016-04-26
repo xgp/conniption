@@ -17,23 +17,20 @@ package com.celexus.conniption.foreman.util;
 
 /**
  * A class for the exclusive use of Utility Packages
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class UtilityException extends Exception
-{
+public class UtilityException extends Exception {
 
-	public UtilityException(String message, Throwable e)
-	{
-		super(message, e);
-	}
+    public UtilityException(String message, Throwable e) {
+        super(message, e);
+    }
 
-	public UtilityException(String message)
-	{
-		super(message);
-	}
+    public UtilityException(String message) {
+        super(message);
+    }
 
-	private static final long serialVersionUID = -648398061055013027L;
+    private static final long serialVersionUID = -648398061055013027L;
 
 }

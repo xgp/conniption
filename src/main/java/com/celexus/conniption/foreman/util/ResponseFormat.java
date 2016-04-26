@@ -19,17 +19,15 @@ import java.io.Serializable;
 
 /**
  * TradeKing support XML and JSON responses
- * 
+ *
  * @author cam
- * 
+ *
  */
-public enum ResponseFormat implements Serializable
-{
-	XML, JSON;
+public enum ResponseFormat implements Serializable {
+    XML, JSON;
 
-	@Override
-	public String toString()
-	{
-		return name().toLowerCase();
-	}
+    @Override
+    public String toString() {
+        return name().toLowerCase();
+    }
 }

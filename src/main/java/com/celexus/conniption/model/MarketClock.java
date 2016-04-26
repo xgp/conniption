@@ -30,80 +30,63 @@ import com.celexus.conniption.model.util.MarketClockField;
 
 /**
  * A representation of TradeKing's Market Clock
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class MarketClock implements Serializable
-{
-	private static final long serialVersionUID = 4825597509929315969L;
-	private Map<MarketClockField, String> map = new HashMap<MarketClockField, String>();
-	private TKResponse response;
+public class MarketClock implements Serializable {
 
-	public MarketClock() throws UtilityException
-	{
-		update();
-	}
+    private static final long serialVersionUID = 4825597509929315969L;
+    private Map<MarketClockField, String> map = new HashMap<MarketClockField, String>();
+    private TKResponse response;
 
-	public boolean hasField(MarketClockField f)
-	{
-		return map.containsKey(f);
-	}
+    public MarketClock() throws UtilityException {
+        update();
+    }
 
-	public String getField(MarketClockField f)
-	{
-		return map.get(f);
+    public boolean hasField(MarketClockField f) {
+        return map.containsKey(f);
+    }
 
-	}
+    public String getField(MarketClockField f) {
+        return map.get(f);
 
-	public TKResponse getTKResponse()
-	{
-		return response;
-	}
+    }
 
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null)
-		{
-			return false;
-		}
-		if (obj instanceof MarketClock)
-		{
-			MarketClock other = (MarketClock) obj;
-			for (MarketClockField f : MarketClockField.values())
-			{
-				if (this.hasField(f) == other.hasField(f) && this.hasField(f))
-				{
-					this.getField(f).equals(other.getField(f));
-				}
-				else if (this.hasField(f) || other.hasField(f))
-				{
-					return false;
-				}
-			}
-		}
-		else
-		{
-			return false;
-		}
+    public TKResponse getTKResponse() {
+        return response;
+    }
 
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof MarketClock) {
+            MarketClock other = (MarketClock) obj;
+            for (MarketClockField f : MarketClockField.values()) {
+                if (this.hasField(f) == other.hasField(f) && this.hasField(f)) {
+                    this.getField(f).equals(other.getField(f));
+                } else if (this.hasField(f) || other.hasField(f)) {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
 
-	public void update() throws UtilityException
-	{
-		TradeKingForeman foreman = new TradeKingForeman();
-		XMLHandler handler = new XMLHandler();
-		try
-		{
-			response = foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML));
-		}
-		catch (ForemanException e)
-		{
-			throw new UtilityException("Make API Call", e);
-		}
-		map = handler.parseMarketClock(response.toString());
-	}
+        return true;
+    }
+
+    public void update() throws UtilityException {
+        TradeKingForeman foreman = new TradeKingForeman();
+        XMLHandler handler = new XMLHandler();
+        try {
+            response = foreman.makeAPICall(MarketBuilder.getClock(ResponseFormat.XML));
+        } catch (ForemanException e) {
+            throw new UtilityException("Make API Call", e);
+        }
+        map = handler.parseMarketClock(response.toString());
+    }
 
 }

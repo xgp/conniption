@@ -4,3 +4,5 @@
 Streaming.java
 zookeeper.out
 target
+*~
+*.DS_Store

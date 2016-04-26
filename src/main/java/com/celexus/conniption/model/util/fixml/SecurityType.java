@@ -17,20 +17,18 @@ package com.celexus.conniption.model.util.fixml;
 
 import java.io.Serializable;
 
-public enum SecurityType implements Serializable
-{
-	STOCK("CS"),
-	OPTION("OPT");
-	
-	private String value;
-	SecurityType(String value)
-	{
-		this.value = value;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return value;
-	}
+public enum SecurityType implements Serializable {
+    STOCK("CS"),
+    OPTION("OPT");
+
+    private String value;
+
+    SecurityType(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

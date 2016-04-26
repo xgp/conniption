@@ -17,21 +17,19 @@ package com.celexus.conniption.model.util.fixml;
 
 import java.io.Serializable;
 
-public enum TimeInForceField implements Serializable
-{
-	DAY_ORDER("0"),
-	GOOD_TIL_CANCELED("1"), 
-	MARKET_CLOSE("7");
-	
-	private String value;
-	
-	TimeInForceField(String value)
-	{
-		this.value = value;
-	}
-	@Override
-	public String toString()
-	{
-		return value;
-	}
+public enum TimeInForceField implements Serializable {
+    DAY_ORDER("0"),
+    GOOD_TIL_CANCELED("1"),
+    MARKET_CLOSE("7");
+
+    private String value;
+
+    TimeInForceField(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

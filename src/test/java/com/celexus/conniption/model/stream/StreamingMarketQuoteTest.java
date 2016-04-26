@@ -22,35 +22,31 @@ import org.mortbay.jetty.client.ContentExchange;
 
 import com.celexus.conniption.model.Symbol;
 
-public class StreamingMarketQuoteTest
-{
+public class StreamingMarketQuoteTest {
 
 //	@Test
-	public void test() throws Exception
-	{
-		StreamingMarketQuote quote = new StreamingMarketQuote();
-		
-		ContentExchange ex = new ContentExchange(true)
-		{
-			// tell me what kind of response code we got
-			protected void onResponseComplete() throws IOException
-			{
-				int status = getResponseStatus();
-				if (status == 200)
-					System.out.println("Successfully connected");
-				else
-					System.out.println("Error Code Received: " + status);
-			}
+    public void test() throws Exception {
+        StreamingMarketQuote quote = new StreamingMarketQuote();
 
-			// print out any response data we get along the stream
-			protected void onResponseContent(Buffer data)
-			{
-				System.out.println(data);
-			}
-		};
-		
-		ContentExchange request = quote.stream(ex, new Symbol("IBM"));
-		request.waitForDone();
-	}
+        ContentExchange ex = new ContentExchange(true) {
+            // tell me what kind of response code we got
+            protected void onResponseComplete() throws IOException {
+                int status = getResponseStatus();
+                if (status == 200) {
+                    System.out.println("Successfully connected");
+                } else {
+                    System.out.println("Error Code Received: " + status);
+                }
+            }
+
+            // print out any response data we get along the stream
+            protected void onResponseContent(Buffer data) {
+                System.out.println(data);
+            }
+        };
+
+        ContentExchange request = quote.stream(ex, new Symbol("IBM"));
+        request.waitForDone();
+    }
 
 }

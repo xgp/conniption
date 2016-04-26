@@ -11,39 +11,30 @@ import org.junit.Test;
 
 import com.celexus.conniption.foreman.util.TradekingAPI;
 
-public class TradekingAPITest
-{
+public class TradekingAPITest {
 
-	@Test
-	public void validEndpointsTest()
-	{
-		TradekingAPI api = new TradekingAPI();
-		assertTrue("Request Token Endpoint is not valid",isValid(api.getRequestTokenEndpoint()));
-		assertTrue("Access Token Endpoint is not valid",isValid(api.getAccessTokenEndpoint()));
-	}
+    @Test
+    public void validEndpointsTest() {
+        TradekingAPI api = new TradekingAPI();
+        assertTrue("Request Token Endpoint is not valid", isValid(api.getRequestTokenEndpoint()));
+        assertTrue("Access Token Endpoint is not valid", isValid(api.getAccessTokenEndpoint()));
+    }
 
-	public boolean isValid(String urlString)
-	{
-		URL url = null;
-		try
-		{
-			url = new URL(urlString);
-		}
-		catch (MalformedURLException e)
-		{
-			return false;
-		}
-		URLConnection conn;
-		try
-		{
-			conn = url.openConnection();
-			conn.connect();
-		}
-		catch (IOException e)
-		{
-			return false;
-		}
-		return true;
-	}
+    public boolean isValid(String urlString) {
+        URL url = null;
+        try {
+            url = new URL(urlString);
+        } catch (MalformedURLException e) {
+            return false;
+        }
+        URLConnection conn;
+        try {
+            conn = url.openConnection();
+            conn.connect();
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
+    }
 
 }

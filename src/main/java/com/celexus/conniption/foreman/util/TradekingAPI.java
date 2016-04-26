@@ -22,30 +22,27 @@ import org.scribe.model.Token;
 
 /**
  * This class is required for Scribe OAuth.
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class TradekingAPI extends DefaultApi10a implements Serializable
-{
-	private static final long serialVersionUID = 4355447429052389540L;
+public class TradekingAPI extends DefaultApi10a implements Serializable {
 
-	@Override
-	public String getRequestTokenEndpoint()
-	{
-		return "https://developers.tradeking.com/oauth/request_token";
-	}
+    private static final long serialVersionUID = 4355447429052389540L;
 
-	@Override
-	public String getAccessTokenEndpoint()
-	{
-		return "https://developers.tradeking.com/oauth/access_token";
-	}
+    @Override
+    public String getRequestTokenEndpoint() {
+        return "https://developers.tradeking.com/oauth/request_token";
+    }
 
-	@Override
-	public String getAuthorizationUrl(Token requestToken)
-	{
-		return "https://developers.tradeking.com/oauth/authorize?oauth_token=%s";
-	}
+    @Override
+    public String getAccessTokenEndpoint() {
+        return "https://developers.tradeking.com/oauth/access_token";
+    }
+
+    @Override
+    public String getAuthorizationUrl(Token requestToken) {
+        return "https://developers.tradeking.com/oauth/authorize?oauth_token=%s";
+    }
 
 }

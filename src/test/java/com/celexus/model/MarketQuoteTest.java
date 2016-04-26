@@ -10,28 +10,21 @@ import com.celexus.conniption.model.ModelException;
 import com.celexus.conniption.model.Symbol;
 import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
-public class MarketQuoteTest
-{
+public class MarketQuoteTest {
 
-	@Test
-	public void test()
-	{
-		try
-		{
-			MarketQuote quote = new MarketQuote(new Symbol("SIRI"));
-			for(MarketQuotesResponseField f: MarketQuotesResponseField.values())
-			{
-				if(quote.hasField(f))
-				{
-					System.out.println(f.name()+"="+quote.getField(f));
-				}
-			}
-			assertTrue("Expected Field not in response",quote.hasField(MarketQuotesResponseField.DATE_TIME));
-		}
-		catch (ModelException e)
-		{
-			fail();
-		}
-	}
+    @Test
+    public void test() {
+        try {
+            MarketQuote quote = new MarketQuote(new Symbol("SIRI"));
+            for (MarketQuotesResponseField f : MarketQuotesResponseField.values()) {
+                if (quote.hasField(f)) {
+                    System.out.println(f.name() + "=" + quote.getField(f));
+                }
+            }
+            assertTrue("Expected Field not in response", quote.hasField(MarketQuotesResponseField.DATE_TIME));
+        } catch (ModelException e) {
+            fail();
+        }
+    }
 
 }

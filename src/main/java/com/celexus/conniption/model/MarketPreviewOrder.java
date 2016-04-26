@@ -31,80 +31,64 @@ import com.celexus.conniption.model.util.fixml.FIXMLBuilder;
 
 /**
  * A representation of a market order that is used for validation purposes only
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class MarketPreviewOrder implements Serializable
-{
+public class MarketPreviewOrder implements Serializable {
 
-	private static final long serialVersionUID = -3555216843532994045L;
-	private Map<OrderPreviewField, String> map;
-	private TKResponse response;
-	private Account a;
-	private FIXMLBuilder b;
+    private static final long serialVersionUID = -3555216843532994045L;
+    private Map<OrderPreviewField, String> map;
+    private TKResponse response;
+    private Account a;
+    private FIXMLBuilder b;
 
-	public MarketPreviewOrder(Account a, FIXMLBuilder b) throws ModelException
-	{
-		update();
-	}
+    public MarketPreviewOrder(Account a, FIXMLBuilder b) throws ModelException {
+        update();
+    }
 
-	public boolean hasField(OrderPreviewField f)
-	{
-		return map.containsKey(f);
-	}
+    public boolean hasField(OrderPreviewField f) {
+        return map.containsKey(f);
+    }
 
-	public String getField(OrderPreviewField f)
-	{
-		return map.get(f);
+    public String getField(OrderPreviewField f) {
+        return map.get(f);
 
-	}
+    }
 
-	public TKResponse getTKResponse()
-	{
-		return response;
-	}
+    public TKResponse getTKResponse() {
+        return response;
+    }
 
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj != null && obj instanceof MarketPreviewOrder)
-		{
-			MarketPreviewOrder other = (MarketPreviewOrder) obj;
-			for (Entry<OrderPreviewField, String> ent : map.entrySet())
-			{
-				if (!other.hasField(ent.getKey()) && !other.getField(ent.getKey()).equals(ent.getValue()))
-				{
-					return false;
-				}
-			}
-			return true;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj instanceof MarketPreviewOrder) {
+            MarketPreviewOrder other = (MarketPreviewOrder) obj;
+            for (Entry<OrderPreviewField, String> ent : map.entrySet()) {
+                if (!other.hasField(ent.getKey()) && !other.getField(ent.getKey()).equals(ent.getValue())) {
+                    return false;
+                }
+            }
+            return true;
 
-		}
-		return false;
-	}
+        }
+        return false;
+    }
 
-	public void update() throws ModelException
-	{
-		TradeKingForeman foreman = new TradeKingForeman();
-		XMLHandler handler = new XMLHandler();
-		try
-		{
-			response = foreman.makeAPICall(OrdersBuilder.preview(a.getId(), b.build().toString(), ResponseFormat.XML));
-		}
-		catch (ForemanException | UtilityException e)
-		{
-			throw new ModelException("Make API Call", e);
-		}
+    public void update() throws ModelException {
+        TradeKingForeman foreman = new TradeKingForeman();
+        XMLHandler handler = new XMLHandler();
+        try {
+            response = foreman.makeAPICall(OrdersBuilder.preview(a.getId(), b.build().toString(), ResponseFormat.XML));
+        } catch (ForemanException | UtilityException e) {
+            throw new ModelException("Make API Call", e);
+        }
 
-		try
-		{
-			map = handler.parseMarketOrderPreview(response.toString());
-		}
-		catch (UtilityException e)
-		{
-			throw new ModelException("", e);
-		}
-	}
+        try {
+            map = handler.parseMarketOrderPreview(response.toString());
+        } catch (UtilityException e) {
+            throw new ModelException("", e);
+        }
+    }
 
 }

@@ -23,42 +23,37 @@ import org.scribe.model.Verb;
 
 /**
  * The abstract backend to all APIBuilders
- * 
+ *
  * @author cam
- * 
+ *
  */
-public abstract class APIBuilder implements Serializable
-{
-	private static final long serialVersionUID = 5364934694744835663L;
-	protected Verb verb;
-	protected Map<String, String> params = new HashMap<String, String>();
-	protected String resourceURL;
-	protected String body;
-	protected boolean streaming;
+public abstract class APIBuilder implements Serializable {
 
-	public Verb getVerb()
-	{
-		return verb;
-	}
+    private static final long serialVersionUID = 5364934694744835663L;
+    protected Verb verb;
+    protected Map<String, String> params = new HashMap<String, String>();
+    protected String resourceURL;
+    protected String body;
+    protected boolean streaming;
 
-	public Map<String, String> getParameters()
-	{
-		return params;
-	}
+    public Verb getVerb() {
+        return verb;
+    }
 
-	public String getResourceURL()
-	{
-		return resourceURL;
-	}
+    public Map<String, String> getParameters() {
+        return params;
+    }
 
-	public String getBody()
-	{
-		return body;
-	}
+    public String getResourceURL() {
+        return resourceURL;
+    }
 
-	public boolean isStreaming()
-	{
-		return streaming;
-	}
+    public String getBody() {
+        return body;
+    }
+
+    public boolean isStreaming() {
+        return streaming;
+    }
 
 }

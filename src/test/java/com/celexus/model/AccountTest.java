@@ -9,22 +9,17 @@ import com.celexus.conniption.model.Account;
 import com.celexus.conniption.model.ModelException;
 import com.celexus.conniption.model.util.AccountsField;
 
-public class AccountTest
-{
+public class AccountTest {
 
-	@Test
-	public void test()
-	{
-		try
-		{
-			Account acc = new Account();
-			assertTrue("Expected Field not returned",acc.hasField(AccountsField.ACCOUNT_VALUE));
-		
-		}
-		catch (ModelException e)
-		{
-			fail();
-		}
-	}
+    @Test
+    public void test() {
+        try {
+            Account acc = new Account();
+            assertTrue("Expected Field not returned", acc.hasField(AccountsField.ACCOUNT_VALUE));
+
+        } catch (ModelException e) {
+            fail();
+        }
+    }
 
 }

@@ -19,23 +19,21 @@ import java.io.Serializable;
 
 /**
  * A wrapper over the FIXML string
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class FIXML implements Serializable
-{
-	private static final long serialVersionUID = -1634940482369566168L;
-	private String source = "";
+public class FIXML implements Serializable {
 
-	public FIXML(String fixmlSource)
-	{
-		source = fixmlSource;
-	}
+    private static final long serialVersionUID = -1634940482369566168L;
+    private String source = "";
 
-	@Override
-	public String toString()
-	{
-		return source;
-	}
+    public FIXML(String fixmlSource) {
+        source = fixmlSource;
+    }
+
+    @Override
+    public String toString() {
+        return source;
+    }
 }

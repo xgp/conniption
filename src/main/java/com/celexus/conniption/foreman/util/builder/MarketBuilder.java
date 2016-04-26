@@ -24,51 +24,44 @@ import com.celexus.conniption.model.util.MarketQuotesResponseField;
 
 /**
  * An APIBuilder to handle TradeKing Market calls
- * 
+ *
  * @author cam
- * 
+ *
  */
-public class MarketBuilder extends APIBuilder
-{
-	private static final long serialVersionUID = -7542591696724178699L;
+public class MarketBuilder extends APIBuilder {
 
-	private MarketBuilder(Verb v)
-	{
-		verb = v;
-	}
+    private static final long serialVersionUID = -7542591696724178699L;
 
-	public static MarketBuilder getClock(ResponseFormat format)
-	{
-		MarketBuilder b = new MarketBuilder(Verb.GET);
-		b.resourceURL = APICall.getMarketClock(format);
-		return b;
-	}
+    private MarketBuilder(Verb v) {
+        verb = v;
+    }
 
-	public static MarketBuilder getQuotes(ResponseFormat format, String... symbols)
-	{
-		return getQuotes(format, symbols, new MarketQuotesResponseField[] {});
-	}
+    public static MarketBuilder getClock(ResponseFormat format) {
+        MarketBuilder b = new MarketBuilder(Verb.GET);
+        b.resourceURL = APICall.getMarketClock(format);
+        return b;
+    }
 
-	public static MarketBuilder getQuotes(ResponseFormat format, String[] symbols, MarketQuotesResponseField[] fields)
-	{
-		StringBuilder sb = new StringBuilder();
-		for (String sym : symbols)
-		{
-			sb.append(sym + " ");
-		}
-		StringBuilder fids = new StringBuilder();
-		for (MarketQuotesResponseField f : fields)
-		{
-			fids.append(f.toString() + " ");
-		}
-		MarketBuilder b = new MarketBuilder(Verb.POST);
-		b.params.put(MarketQuotesField.SYMBOLS.toString(), sb.toString().trim().replace(" ", ","));
-		b.resourceURL = APICall.getQuote(ResponseFormat.XML);
-		if (!fids.toString().isEmpty())
-		{
-			b.params.put(MarketQuotesField.FIDS.toString(), fids.toString().trim().replace(" ", ","));
-		}
-		return b;
-	}
+    public static MarketBuilder getQuotes(ResponseFormat format, String... symbols) {
+        return getQuotes(format, symbols, new MarketQuotesResponseField[]{});
+    }
+
+    public static MarketBuilder getQuotes(ResponseFormat format, String[] symbols, MarketQuotesResponseField[] fields) {
+        StringBuilder sb = new StringBuilder();
+        for (String sym : symbols) {
+            sb.append(sym + " ");
+        }
+        StringBuilder fids = new StringBuilder();
+        for (MarketQuotesResponseField f : fields) {
+            fids.append(f.toString() + " ");
+        }
+        MarketBuilder b = new MarketBuilder(Verb.POST);
+        b.params.put(MarketQuotesField.SYMBOLS.toString(), sb.toString().trim().replace(" ", ","));
+        b.resourceURL = APICall.getQuote(ResponseFormat.XML);
+        if (!fids.toString().isEmpty()) {
+            b.params.put(MarketQuotesField.FIDS.toString(), fids.toString().trim().replace(" ", ","));
+        }
+        return b;
+    }
 
 }
