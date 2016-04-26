@@ -1,8 +1,8 @@
+### NOTICE
+Fork of the Ccook original project here: [Conniption](https://github.com/Ccook/conniption)
+
 Conniption
 ==========
-
-### NOTICE
-While this still works as explained, I've shifted all my development energy to the scala version of this project. [Conniption4s](https://github.com/Ccook/conniption4s)
 
 The missing TradeKing API for Java.
 
