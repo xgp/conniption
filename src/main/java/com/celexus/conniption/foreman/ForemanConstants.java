@@ -18,41 +18,45 @@ package com.celexus.conniption.foreman;
 import java.io.Serializable;
 
 /**
- * TradeKing Foreman's Constants that come from System Environment Properties
+ * TradeKing Foreman's Constants. These can be set either as system enviroment 
+ * variables or as system properties. System properties take precendence over
+ * environment variables.
  *
- * @author cam
+ * @author cam, garth
  *
  */
 public enum ForemanConstants implements Serializable {
-    /**
-     * TradeKing's OAuth API Key
-     */
-    API_KEY(System.getenv("API_KEY")),
-    /**
-     * TradeKing's OAuth API Secret Key
-     */
-    API_SECRET(System.getenv("API_SECRET")),
-    /**
-     * TradeKing's OAuth Access Token Key
-     */
-    ACCESS_TOKEN(System.getenv("ACCESS_TOKEN")),
-    /**
-     * TradeKing's OAuth Access Token Secret Key
-     */
-    ACCESS_TOKEN_SECRET(System.getenv("ACCESS_TOKEN_SECRET"));
 
-    private String value;
+    /**
+     * TradeKing OAuth API Key
+     */
+    API_KEY("API_KEY"),
+    /**
+     * TradeKing OAuth API Secret Key
+     */
+    API_SECRET("API_SECRET"),
+    /**
+     * TradeKing OAuth Access Token Key
+     */
+    ACCESS_TOKEN("ACCESS_TOKEN"),
+    /**
+     * TradeKing OAuth Access Token Secret Key
+     */
+    ACCESS_TOKEN_SECRET("ACCESS_TOKEN_SECRET");
 
-    ForemanConstants(String value) {
-        if (value == null) {
-            this.value = "";
-        } else {
-            this.value = value;
-        }
+    private String key;
+
+    ForemanConstants(String key) {
+	this.key = key;
     }
 
     @Override
     public String toString() {
-        return value;
+	if (System.getProperty(key) != null) {
+	    return System.getProperty(key);
+	} else {
+	    return System.getenv(key);
+	}
     }
+
 }
