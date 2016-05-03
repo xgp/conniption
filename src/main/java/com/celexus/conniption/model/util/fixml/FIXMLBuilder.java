@@ -332,4 +332,147 @@ public class FIXMLBuilder implements Serializable {
         return sb.toString();
     }
 
+    static public FIXMLBuilder buyStockAtMarket(Account account, String symbol, int quantity) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.BUY)
+	    .priceType(PriceType.MARKET)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+    static public FIXMLBuilder buyStockAtLimit(Account account, String symbol, int quantity, double limit) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.BUY)
+	    .priceType(PriceType.LIMIT)
+	    .executionPrice(limit)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+    static public FIXMLBuilder buyStockAtStop(Account account, String symbol, int quantity, double stop) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.BUY)
+	    .priceType(PriceType.STOP)
+	    .executionPrice(stop)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+    static public FIXMLBuilder buyStockAtStopLimit(Account account, String symbol, int quantity, double stop, double limit) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.BUY)
+	    .priceType(PriceType.STOP_LIMIT)
+	    .executionPrice(stop, limit)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+
+    static public FIXMLBuilder buyStockWithTrailingStopAmount(Account account, String symbol, int quantity, double offset) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.BUY)
+	    .priceType(PriceType.TRAILING_STOP)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .offset(offset)
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+    static public FIXMLBuilder buyStockWithTrailingStopPercent(Account account, String symbol, int quantity, double percent) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.BUY)
+	    .priceType(PriceType.TRAILING_STOP)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .offset(new Percentage(percent))
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+    static public FIXMLBuilder sellStockAtMarket(Account account, String symbol, int quantity) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.SELL)
+	    .priceType(PriceType.MARKET)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+    static public FIXMLBuilder sellStockAtLimit(Account account, String symbol, int quantity, double limit) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.SELL)
+	    .priceType(PriceType.LIMIT)
+	    .executionPrice(limit)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+    static public FIXMLBuilder sellStockAtStop(Account account, String symbol, int quantity, double stop) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.SELL)
+	    .priceType(PriceType.STOP)
+	    .executionPrice(stop)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+    static public FIXMLBuilder sellStockAtStopLimit(Account account, String symbol, int quantity, double stop, double limit) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.SELL)
+	    .priceType(PriceType.STOP_LIMIT)
+	    .executionPrice(stop, limit)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+    static public FIXMLBuilder sellStockWithTrailingStopAmount(Account account, String symbol, int quantity, double offset) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.SELL)
+	    .priceType(PriceType.TRAILING_STOP)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .offset(offset)
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
+    static public FIXMLBuilder sellStockWithTrailingStopPercent(Account account, String symbol, int quantity, double percent) {
+	FIXMLBuilder builder = new FIXMLBuilder(account)
+	    .securityType(SecurityType.STOCK)
+	    .side(MarketSideField.SELL)
+	    .priceType(PriceType.TRAILING_STOP)
+	    .symbol(symbol)
+	    .quantity(quantity)
+	    .offset(new Percentage(percent))
+	    .timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
+	return builder;
+    }
+
 }
