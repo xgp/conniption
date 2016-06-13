@@ -15,7 +15,7 @@
  */
 package com.celexus.conniption.foreman.util.builder;
 
-import org.scribe.model.Verb;
+import com.github.scribejava.core.model.Verb;
 
 import com.celexus.conniption.foreman.util.APICall;
 import com.celexus.conniption.foreman.util.ResponseFormat;

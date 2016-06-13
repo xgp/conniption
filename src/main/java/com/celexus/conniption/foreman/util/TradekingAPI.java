@@ -17,8 +17,8 @@ package com.celexus.conniption.foreman.util;
 
 import java.io.Serializable;
 
-import org.scribe.builder.api.DefaultApi10a;
-import org.scribe.model.Token;
+import com.github.scribejava.core.builder.api.DefaultApi10a;
+import com.github.scribejava.core.model.OAuth1RequestToken;
 
 /**
  * This class is required for Scribe OAuth.
@@ -41,7 +41,7 @@ public class TradekingAPI extends DefaultApi10a implements Serializable {
     }
 
     @Override
-    public String getAuthorizationUrl(Token requestToken) {
+    public String getAuthorizationUrl(OAuth1RequestToken requestToken) {
         return "https://developers.tradeking.com/oauth/authorize?oauth_token=%s";
     }
 

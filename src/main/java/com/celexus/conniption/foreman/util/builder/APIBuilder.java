@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.scribe.model.Verb;
+import com.github.scribejava.core.model.Verb;
 
 /**
  * The abstract backend to all APIBuilders

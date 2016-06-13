@@ -17,7 +17,7 @@ package com.celexus.conniption.foreman.util;
 
 import java.io.Serializable;
 
-import org.scribe.model.Verb;
+import com.github.scribejava.core.model.Verb;
 
 /**
  * A builder for different sorts of TradeKing API calls

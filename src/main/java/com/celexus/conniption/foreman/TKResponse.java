@@ -17,8 +17,8 @@ package com.celexus.conniption.foreman;
 
 import java.io.Serializable;
 import java.util.Map;
-import org.scribe.model.Request;
-import org.scribe.model.Response;
+import com.github.scribejava.core.model.OAuthRequest;
+import com.github.scribejava.core.model.Response;
 
 /**
  * A holder for all the bits that come back through each REST call.<br>
@@ -37,7 +37,7 @@ public class TKResponse implements Serializable {
     private int rateLimitTotal = 0;
     private int rateLimitRemaining = 0;
 
-    public TKResponse(Request req) {
+    public TKResponse(OAuthRequest req) {
         Response response = req.send();
         String limitUsed = response.getHeader("X-RateLimit-Used");
         String limitExpire = response.getHeader("X-RateLimit-Expire");
@@ -99,7 +99,7 @@ public class TKResponse implements Serializable {
         System.err.println(resp.getBody());
     }
 
-    static private void printRequest(Request req) {
+    static private void printRequest(OAuthRequest req) {
         System.err.println(req.toString());
         Map<String, String> headers = req.getHeaders();
         for (Map.Entry<String, String> header : headers.entrySet()) {

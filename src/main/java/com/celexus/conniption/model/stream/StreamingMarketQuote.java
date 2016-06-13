@@ -26,7 +26,7 @@ import oauth.signpost.jetty.JettyOAuthConsumer;
 import org.mortbay.jetty.client.ContentExchange;
 import org.mortbay.jetty.client.HttpClient;
 import org.mortbay.thread.QueuedThreadPool;
-import org.scribe.model.Verb;
+import com.github.scribejava.core.model.Verb;
 
 import com.celexus.conniption.foreman.ForemanConstants;
 import com.celexus.conniption.foreman.util.APICall;

@@ -19,12 +19,13 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.scribe.builder.ServiceBuilder;
-import org.scribe.model.OAuthRequest;
-import org.scribe.model.Request;
-import org.scribe.model.Token;
-import org.scribe.model.Verb;
-import org.scribe.oauth.OAuthService;
+import com.github.scribejava.core.builder.ServiceBuilder;
+import com.github.scribejava.core.model.OAuth1AccessToken;
+import com.github.scribejava.core.model.OAuthRequest;
+import com.github.scribejava.core.model.Token;
+import com.github.scribejava.core.model.Verb;
+import com.github.scribejava.core.oauth.OAuthService;
+import com.github.scribejava.core.oauth.OAuth10aService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,8 +41,8 @@ import com.celexus.conniption.foreman.util.builder.APIBuilder;
 public class TradeKingForeman implements Serializable {
 
     private static final long serialVersionUID = 7830844282343108561L;
-    private Token accessToken;
-    private OAuthService srv;
+    private OAuth1AccessToken accessToken;
+    private OAuth10aService srv;
     private Logger log = LoggerFactory.getLogger(TradeKingForeman.class);
 
     public TradeKingForeman() {
@@ -49,9 +50,9 @@ public class TradeKingForeman implements Serializable {
 
     private void connect() throws ForemanException {
         log.trace("Connecting to Tradeking");
-        srv = new ServiceBuilder().provider(TradekingAPI.class).apiKey(ForemanConstants.API_KEY.toString()).apiSecret(ForemanConstants.API_SECRET.toString()).build();
+	srv = new ServiceBuilder().apiKey(ForemanConstants.API_KEY.toString()).apiSecret(ForemanConstants.API_SECRET.toString()).build(new TradekingAPI());
         log.trace("\t ... Service built!");
-        accessToken = new Token(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());
+        accessToken = new OAuth1AccessToken(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());
         log.trace("\t ... Access Token built!");
         log.trace("Connection Established");
     }
@@ -80,8 +81,8 @@ public class TradeKingForeman implements Serializable {
         return hasOAuth() && hasAccessToken();
     }
 
-    private Request makeRequest(Verb verb, String resourceURL, Map<String, String> parameters, String payload) {
-        OAuthRequest request = new OAuthRequest(verb, resourceURL);
+    private OAuthRequest makeRequest(Verb verb, String resourceURL, Map<String, String> parameters, String payload) {
+        OAuthRequest request = new OAuthRequest(verb, resourceURL, srv);
         for (Entry<String, String> entry : parameters.entrySet()) {
             request.addBodyParameter(entry.getKey(), entry.getValue());
         }
@@ -94,7 +95,7 @@ public class TradeKingForeman implements Serializable {
         return request;
     }
 
-    private TKResponse sendRequest(Request request) {
+    private TKResponse sendRequest(OAuthRequest request) {
         TKResponse response = new TKResponse(request);
         return response;
     }
