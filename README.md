@@ -258,35 +258,18 @@ for(OrderPreviewField f: OrderPreviewField.values())
 
 #### [StreamingMarketQuote (Experimental)](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/model/stream/StreamingMarketQuote.java)
 
-Streaming APIs allow you to maintain a tradeking connection. This reduces the number of API calls you have to make.
-
-Each StreamingMarketQuote requires a ContentExchange Object. The one provided below simply prints the response (conniption has the functions to parse these responses, I just don't know what to do with them yet).
+Streaming APIs allow you to maintain a tradeking connection. This reduces the number of API calls you have to make. You must implement a StreamHandler that takes a MarketQuote to listen for new quotes/trades. Note that you should not block or perform long operations in the handle(MarketQuote) method. E.g.:
 
 ```java
 StreamingMarketQuote quote = new StreamingMarketQuote();
-		
-ContentExchange ex = new ContentExchange(true)
-{
-	// tell me what kind of response code we got
-	protected void onResponseComplete() throws IOException
-	{
-		int status = getResponseStatus();
-		if (status == 200)
-			System.out.println("Successfully connected");
-		else
-			System.out.println("Error Code Received: " + status);
-	}
 
-	// print out any response data we get along the stream
-	protected void onResponseContent(Buffer data)
-	{
-		System.out.println(data);
-	}
+StreamHandler<MarketQuote> handler = new StreamHandler<MarketQuote>() {
+    public void handle(MarketQuote quote) {
+        System.out.println(quote.toString());
+    }
 };
-		
-ContentExchange request = quote.stream(ex, new Symbol("IBM"));
-// Be careful! this line is blocking!
-request.waitForDone();
+
+Future<List<MarketQuote>> future = quote.stream(handler, new Symbol("AAPL"));
 ```
 ## Warnings
 

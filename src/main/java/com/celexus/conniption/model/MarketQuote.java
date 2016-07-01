@@ -43,6 +43,15 @@ public class MarketQuote implements Serializable {
     private Symbol symbol;
     private MarketQuotesResponseField[] fields;
 
+    public String toString() {
+	StringBuilder o = new StringBuilder();
+	o.append(symbol.toString());
+	for (Map.Entry<MarketQuotesResponseField, String> field : map.entrySet()) {
+	    o.append("\n  ").append(field.getKey().name()).append(" => ").append(field.getValue());
+	}
+	return o.toString();
+    }
+
     public MarketQuote(Symbol symbol) throws ModelException {
         this.symbol = symbol;
         update();
@@ -65,8 +74,8 @@ public class MarketQuote implements Serializable {
         this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
     }
 
-    private MarketQuote(TKResponse response,
-            Map<MarketQuotesResponseField, String> map) throws ModelException {
+    public MarketQuote(TKResponse response,
+		       Map<MarketQuotesResponseField, String> map) throws ModelException {
         this.map = map;
         this.symbol = new Symbol(map.get(MarketQuotesResponseField.SYMBOL));
         this.response = response;
@@ -93,7 +102,7 @@ public class MarketQuote implements Serializable {
         map = parseQuote(response.toString());
     }
 
-    public Map<MarketQuotesResponseField, String> parseQuote(String response)
+    static public Map<MarketQuotesResponseField, String> parseQuote(String response)
             throws ModelException {
         XMLHandler handler = new XMLHandler();
         try {

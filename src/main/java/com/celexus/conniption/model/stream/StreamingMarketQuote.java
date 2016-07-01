@@ -15,62 +15,96 @@
  */
 package com.celexus.conniption.model.stream;
 
-import java.io.IOException;
-
-import oauth.signpost.OAuthConsumer;
-import oauth.signpost.exception.OAuthCommunicationException;
-import oauth.signpost.exception.OAuthExpectationFailedException;
-import oauth.signpost.exception.OAuthMessageSignerException;
-import oauth.signpost.jetty.JettyOAuthConsumer;
-
-import org.mortbay.jetty.client.ContentExchange;
-import org.mortbay.jetty.client.HttpClient;
-import org.mortbay.thread.QueuedThreadPool;
-import com.github.scribejava.core.model.Verb;
-
 import com.celexus.conniption.foreman.ForemanConstants;
+import com.celexus.conniption.foreman.TKResponse;
 import com.celexus.conniption.foreman.util.APICall;
 import com.celexus.conniption.foreman.util.ResponseFormat;
+import com.celexus.conniption.model.MarketQuote;
 import com.celexus.conniption.model.ModelException;
 import com.celexus.conniption.model.Symbol;
+import com.ning.http.client.AsyncHandler;
+import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.AsyncHttpClientConfig;
+import com.ning.http.client.HttpResponseBodyPart;
+import com.ning.http.client.HttpResponseHeaders;
+import com.ning.http.client.HttpResponseStatus;
+import com.ning.http.client.ListenableFuture;
+import com.ning.http.client.oauth.ConsumerKey;
+import com.ning.http.client.oauth.OAuthSignatureCalculator;
+import com.ning.http.client.oauth.RequestToken;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A representation of TradeKing's Market Quote that permits streaming
- *
- * @author cam
- *
+ * @author xgp (rewritten with Ning AsyncHttpClient)
  */
 public class StreamingMarketQuote {
+    static private final Logger log = LoggerFactory.getLogger(StreamingMarketQuote.class);
 
-    HttpClient client = new HttpClient();
+    private final AsyncHttpClient client;
 
     public StreamingMarketQuote() throws ModelException {
-        client.setThreadPool(new QueuedThreadPool(250));
-        client.setConnectorType(HttpClient.CONNECTOR_SELECT_CHANNEL);
-        client.setMaxConnectionsPerAddress(500); // max 200 concurrent connections to every address
-        try {
-            client.start();
-        } catch (Exception e) {
-            throw new ModelException("Start HTTP Client", e);
-        }
+	AsyncHttpClientConfig.Builder builder = new AsyncHttpClientConfig.Builder()
+	    .setConnectTimeout(60*60*1000)
+	    .setRequestTimeout(60*60*1000)
+	    .setMaxConnectionsPerHost(500)
+	    .setExecutorService(Executors.newCachedThreadPool()); //TODO dangerous. 250 in cam's code
+	this.client = new AsyncHttpClient(builder.build());
     }
 
-    public ContentExchange stream(ContentExchange ex, Symbol... symbols) throws ModelException {
-        OAuthConsumer consumer = new JettyOAuthConsumer(ForemanConstants.API_KEY.toString(), ForemanConstants.API_SECRET.toString());
-        consumer.setTokenWithSecret(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());
+    /**
+     */
+    public ListenableFuture<List<MarketQuote>> stream(final StreamHandler<MarketQuote> handler, Symbol... symbols) {
+	ConsumerKey consumer =
+	    new ConsumerKey(ForemanConstants.API_KEY.toString(), ForemanConstants.API_SECRET.toString());
+	RequestToken user =
+	    new RequestToken(ForemanConstants.ACCESS_TOKEN.toString(), ForemanConstants.ACCESS_TOKEN_SECRET.toString());
+	OAuthSignatureCalculator calc = new OAuthSignatureCalculator(consumer, user);
 
-        ex.setMethod(Verb.GET.name());
-        ex.setURL(APICall.getStreamingQuote(ResponseFormat.XML) + getParameters(symbols));
+	ListenableFuture<List<MarketQuote>> response = client
+	    .prepareGet(APICall.getStreamingQuote(ResponseFormat.XML) + getParameters(symbols))
+	    .setSignatureCalculator(calc)
+	    .execute(new AsyncHandler<List<MarketQuote>>() {
+		    private List<MarketQuote> quotes = new ArrayList<MarketQuote>();
+ 
+		    @Override public AsyncHandler.STATE onStatusReceived(HttpResponseStatus s) throws Exception {
+			// TODO bad status check?
+			// return AsyncHandler.STATE.CONTINUE or AsyncHandler.STATE.ABORT
+			return AsyncHandler.STATE.CONTINUE;
+		   }
+ 
+		    @Override public AsyncHandler.STATE onHeadersReceived(HttpResponseHeaders bodyPart) throws Exception {
+			return AsyncHandler.STATE.CONTINUE;
+		    }
 
-        // sign the request
-        try {
-            consumer.sign(ex);
-            client.send(ex);
-        } catch (IOException | OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException e) {
-            throw new ModelException("Sent Exchange to Client", e);
-        }
+		    @Override public AsyncHandler.STATE onBodyPartReceived(HttpResponseBodyPart bodyPart) throws Exception {
+			String q = new String(bodyPart.getBodyPartBytes());
+			log.info("onBodyPartReceived {}", q);
+			if (q.equals("<status>connected</status>")) { //TODO make more robust
+			    return AsyncHandler.STATE.CONTINUE;
+			}
 
-        return ex;
+			MarketQuote quote = new MarketQuote((TKResponse)null, MarketQuote.parseQuote(q));
+			handler.handle(quote);
+			quotes.add(quote);
+
+			return AsyncHandler.STATE.CONTINUE;
+		    }
+ 
+		    @Override public List<MarketQuote> onCompleted() throws Exception {
+			return quotes;
+		    }
+ 
+		    @Override public void onThrowable(Throwable t) {
+			log.warn("onThrowable", t);
+		    }
+		});
+	return response;
     }
 
     private String getParameters(Symbol[] symbols) {
@@ -81,4 +115,5 @@ public class StreamingMarketQuote {
 
         return sb.toString().replaceAll(",$", "");
     }
+
 }
