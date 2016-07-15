@@ -15,6 +15,7 @@
  */
 package com.celexus.conniption.foreman;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
 import com.github.scribejava.core.model.OAuthRequest;
@@ -37,8 +38,7 @@ public class TKResponse implements Serializable {
     private int rateLimitTotal = 0;
     private int rateLimitRemaining = 0;
 
-    public TKResponse(OAuthRequest req) {
-        Response response = req.send();
+    public TKResponse(Response response) {
         String limitUsed = response.getHeader("X-RateLimit-Used");
         String limitExpire = response.getHeader("X-RateLimit-Expire");
         String limitTotal = response.getHeader("X-RateLimit-Limit");
@@ -59,7 +59,7 @@ public class TKResponse implements Serializable {
         if (limitRemain != null) {
             rateLimitRemaining = Integer.parseInt(limitRemain);
         }
-        this.response = response.getBody();
+        this.response = getBody(response);
     }
 
     public TKResponse(String req, Integer... limits) {
@@ -96,7 +96,7 @@ public class TKResponse implements Serializable {
         for (Map.Entry<String, String> header : headers.entrySet()) {
             System.err.println(String.format("  - %s : %s", header.getKey(), header.getValue()));
         }
-        System.err.println(resp.getBody());
+        System.err.println(getBody(resp));
     }
 
     static private void printRequest(OAuthRequest req) {
@@ -107,4 +107,11 @@ public class TKResponse implements Serializable {
         }
     }
 
+    static public String getBody(Response resp) {
+	try {
+	    return resp.getBody();
+	} catch (IOException e) {
+	    return null;
+	}
+    }
 }

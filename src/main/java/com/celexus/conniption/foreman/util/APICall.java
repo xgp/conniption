@@ -76,6 +76,30 @@ public class APICall implements Serializable {
         return Accounts.ID_BALANCES.resolveString(id, ".", format.toString());
     }
 
+    /**
+     * This call will return detailed history information for the account number
+     * specified in the URI.
+     *
+     * @param format
+     * @param id
+     * @return
+     */
+    public static String getAccountHistoryByID(ResponseFormat format, String id) {
+        return Accounts.ID_HISTORY.resolveString(id, ".", format.toString());
+    }
+
+    /**
+     * This call will return detailed holdings information for the account number
+     * specified in the URI.
+     *
+     * @param format
+     * @param id
+     * @return
+     */
+    public static String getAccountHoldingsByID(ResponseFormat format, String id) {
+        return Accounts.ID_HOLDINGS.resolveString(id, ".", format.toString());
+    }
+
     public enum Accounts {
         ACCOUNTS("https://api.tradeking.com/v1/accounts", "."), ACCOUNTS_BALANCES("https://api.tradeking.com/v1/accounts/balances", "."), ID("https://api.tradeking.com/v1/accounts/", "."), ID_BALANCES("https://api.tradeking.com/v1/accounts/", "/balances", "", "", ""), ID_HISTORY("https://api.tradeking.com/v1/accounts/", "/history", "."), ID_HOLDINGS("https://api.tradeking.com/v1/accounts/", "/holdings", ".");
 

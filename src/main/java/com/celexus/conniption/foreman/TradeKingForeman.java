@@ -96,7 +96,7 @@ public class TradeKingForeman implements Serializable {
     }
 
     private TKResponse sendRequest(OAuthRequest request) {
-        TKResponse response = new TKResponse(request);
+	TKResponse response = new TKResponse(request.send());
         return response;
     }
 

@@ -18,7 +18,6 @@ package com.celexus.conniption.model.util.fixml;
 import java.io.Serializable;
 
 import com.celexus.conniption.foreman.util.UtilityException;
-import com.celexus.conniption.model.Account;
 
 /**
  * A builder to generate FIXML
@@ -41,8 +40,8 @@ public class FIXMLBuilder implements Serializable {
     private Percentage percentage;
     private double stop = 0;
 
-    public FIXMLBuilder(Account a) {
-        id = a.getId();
+    public FIXMLBuilder(String id) {
+        id = id;
     }
 
     public FIXMLBuilder id(String id) {
@@ -332,8 +331,8 @@ public class FIXMLBuilder implements Serializable {
         return sb.toString();
     }
 
-    static public FIXMLBuilder buyStockAtMarket(Account account, String symbol, int quantity) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder buyStockAtMarket(String accountId, String symbol, int quantity) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.MARKET)
@@ -343,8 +342,8 @@ public class FIXMLBuilder implements Serializable {
 	return builder;
     }
 
-    static public FIXMLBuilder buyStockAtLimit(Account account, String symbol, int quantity, double limit) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder buyStockAtLimit(String accountId, String symbol, int quantity, double limit) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.LIMIT)
@@ -355,8 +354,8 @@ public class FIXMLBuilder implements Serializable {
 	return builder;
     }
 
-    static public FIXMLBuilder buyStockAtStop(Account account, String symbol, int quantity, double stop) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder buyStockAtStop(String accountId, String symbol, int quantity, double stop) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.STOP)
@@ -367,8 +366,8 @@ public class FIXMLBuilder implements Serializable {
 	return builder;
     }
 
-    static public FIXMLBuilder buyStockAtStopLimit(Account account, String symbol, int quantity, double stop, double limit) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder buyStockAtStopLimit(String accountId, String symbol, int quantity, double stop, double limit) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.STOP_LIMIT)
@@ -380,8 +379,8 @@ public class FIXMLBuilder implements Serializable {
     }
 
 
-    static public FIXMLBuilder buyStockWithTrailingStopAmount(Account account, String symbol, int quantity, double offset) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder buyStockWithTrailingStopAmount(String accountId, String symbol, int quantity, double offset) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.TRAILING_STOP)
@@ -392,8 +391,8 @@ public class FIXMLBuilder implements Serializable {
 	return builder;
     }
 
-    static public FIXMLBuilder buyStockWithTrailingStopPercent(Account account, String symbol, int quantity, double percent) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder buyStockWithTrailingStopPercent(String accountId, String symbol, int quantity, double percent) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.TRAILING_STOP)
@@ -404,8 +403,8 @@ public class FIXMLBuilder implements Serializable {
 	return builder;
     }
 
-    static public FIXMLBuilder sellStockAtMarket(Account account, String symbol, int quantity) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder sellStockAtMarket(String accountId, String symbol, int quantity) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.MARKET)
@@ -415,8 +414,8 @@ public class FIXMLBuilder implements Serializable {
 	return builder;
     }
 
-    static public FIXMLBuilder sellStockAtLimit(Account account, String symbol, int quantity, double limit) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder sellStockAtLimit(String accountId, String symbol, int quantity, double limit) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.LIMIT)
@@ -427,8 +426,8 @@ public class FIXMLBuilder implements Serializable {
 	return builder;
     }
 
-    static public FIXMLBuilder sellStockAtStop(Account account, String symbol, int quantity, double stop) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder sellStockAtStop(String accountId, String symbol, int quantity, double stop) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.STOP)
@@ -439,8 +438,8 @@ public class FIXMLBuilder implements Serializable {
 	return builder;
     }
 
-    static public FIXMLBuilder sellStockAtStopLimit(Account account, String symbol, int quantity, double stop, double limit) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder sellStockAtStopLimit(String accountId, String symbol, int quantity, double stop, double limit) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.STOP_LIMIT)
@@ -451,8 +450,8 @@ public class FIXMLBuilder implements Serializable {
 	return builder;
     }
 
-    static public FIXMLBuilder sellStockWithTrailingStopAmount(Account account, String symbol, int quantity, double offset) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder sellStockWithTrailingStopAmount(String accountId, String symbol, int quantity, double offset) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.TRAILING_STOP)
@@ -463,8 +462,8 @@ public class FIXMLBuilder implements Serializable {
 	return builder;
     }
 
-    static public FIXMLBuilder sellStockWithTrailingStopPercent(Account account, String symbol, int quantity, double percent) {
-	FIXMLBuilder builder = new FIXMLBuilder(account)
+    static public FIXMLBuilder sellStockWithTrailingStopPercent(String accountId, String symbol, int quantity, double percent) {
+	FIXMLBuilder builder = new FIXMLBuilder(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.TRAILING_STOP)

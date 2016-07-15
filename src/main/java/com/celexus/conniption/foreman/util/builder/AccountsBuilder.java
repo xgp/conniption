@@ -60,4 +60,16 @@ public class AccountsBuilder extends APIBuilder implements Serializable {
         return toReturn;
     }
 
+    public static APIBuilder getAccountHoldings(String id, ResponseFormat format) {
+        AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
+        toReturn.resourceURL = APICall.getAccountHoldingsByID(format, id);
+        return toReturn;
+    }
+
+    public static APIBuilder getAccountHistory(String id, ResponseFormat format) {
+        AccountsBuilder toReturn = new AccountsBuilder(Verb.GET);
+        toReturn.resourceURL = APICall.getAccountHistoryByID(format, id);
+        return toReturn;
+    }
+
 }
