@@ -28,6 +28,10 @@ import java.io.Serializable;
 public enum ForemanConstants implements Serializable {
 
     /**
+     * TradeKing Account Number
+     */
+    TK_ACCOUNT_NO("TK_ACCOUNT_NO"),
+    /**
      * TradeKing OAuth API Key
      */
     API_KEY("API_KEY"),

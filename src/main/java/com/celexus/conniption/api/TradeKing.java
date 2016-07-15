@@ -79,13 +79,13 @@ public class TradeKing {
     }
 
     static public void main(String[] argv) throws Exception {
-	TradeKing ops = new TradeKing(new TradeKingForeman());
+	TradeKing tk = new TradeKing(new TradeKingForeman());
 
-	Clock c = ops.clock();
-	Accounts a = ops.accounts();
-	Quotes q = ops.quotes("TWTR", "XIV");
-	Future f = ops.quotes(handler, "TWTR", "XIV");
-
+	Clock c = tk.clock();
+	Accounts a = tk.accounts();
+	Quotes q = tk.quotes("TWTR", "XIV");
+	Future f = tk.quotes(handler, "TWTR", "XIV");
+	
 	log(c);
 	log(a);
 	log(q);
