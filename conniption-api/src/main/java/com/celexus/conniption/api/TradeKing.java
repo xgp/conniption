@@ -11,6 +11,7 @@ import com.celexus.conniption.foreman.util.builder.OrdersBuilder;
 import com.celexus.conniption.model.accounts.AccountsResponse;
 import com.celexus.conniption.model.clock.ClockResponse;
 import com.celexus.conniption.model.order.OrderResponse;
+import com.celexus.conniption.model.orders.OrdersResponse;
 import com.celexus.conniption.model.quotes.Quote;
 import com.celexus.conniption.model.quotes.Quotes;
 import com.celexus.conniption.model.util.stream.StreamHandler;
@@ -43,7 +44,7 @@ public class TradeKing {
 
     public Quotes quotes(String... symbols) {
 	return get(MarketBuilder.getQuotes(ResponseFormat.XML, symbols),
-		   "quotes",
+		   null,
                    "com.celexus.conniption.model.quotes",
 		   Quotes.class);
     }
@@ -74,14 +75,12 @@ public class TradeKing {
 		   OrderResponse.class);
     }
 
-    /*
     public OrdersResponse orders(String accountId, String fixml) {
 	return get(OrdersBuilder.getOrders(accountId, ResponseFormat.XML),
-		   "orderstatus",
+		   null,
                    "com.celexus.conniption.model.orders",
 		   OrdersResponse.class);
     }
-    */
 
     private <T> T get(APIBuilder builder, String root, String pkg, Class<T> clazz) {
 	try {

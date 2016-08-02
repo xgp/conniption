@@ -48,7 +48,7 @@ Use the maven clean install directive to compile and make sure everythng works. 
 
 #### [TradeKing](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/api/TradeKing.java)
 
-This is the main entry point to using the API. The other classes you should care about are all in [model](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/model). Usage is pretty straightforward:
+This is the main entry point to using the API. The other classes you should care about are all in [model](https://github.com/Ccook/conniption/blob/master/connption-model/). Usage is pretty straightforward:
 
 ```java
 TradeKing tk = new TradeKing(new TradeKingForeman());
