@@ -5,14 +5,14 @@
 
   <xs:complexType name="OrdersResponse">
     <xs:sequence>
-      <xs:element name="orderstatus" type="OrderStatus"></xs:element>
+      <xs:element name="orderstatus" minOccurs="0" maxOccurs="unbounded" type="OrderStatus"></xs:element>
     </xs:sequence>
     <xs:attribute name="id" type="xs:string"></xs:attribute>
   </xs:complexType>
 
   <xs:complexType name="OrderStatus">
     <xs:sequence>
-      <xs:element name="order" minOccurs="0" maxOccurs="unbounded" type="FIXMLMessage"></xs:element>
+      <xs:element name="order" type="FIXMLMessage"></xs:element>
     </xs:sequence>
   </xs:complexType>
 

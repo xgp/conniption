@@ -54,13 +54,13 @@ This is the main entry point to using the API. The other classes you should care
 TradeKing tk = new TradeKing(new TradeKingForeman());
 
 // get the market clock https://developers.tradeking.com/documentation/market-clock-get
-Clock c = tk.clock();
+ClockResponse c = tk.clock();
 
 // get your account https://developers.tradeking.com/documentation/accounts-get
-Accounts a = tk.accounts();
+AccountsResponse a = tk.accounts();
 
 // get some market quotes https://developers.tradeking.com/documentation/market-ext-quotes-get-post
-Quotes q = tk.quotes("TWTR", "FB");
+QuotesResponse q = tk.quotes("TWTR", "FB");
 
 // stream market quotes https://developers.tradeking.com/documentation/streaming-market-quotes-get-post
 Future f = tk.quotes(new StreamHandler<Quote>() {
@@ -79,10 +79,13 @@ FIXMLBuilder builder = new FIXMLBuilder()
     .quantity(1)
     .executionPrice(18.01)
     .side(MarketSideField.BUY);
-Order p = tk.preview(ForemanConstants.TK_ACCOUNT_NO, builder.build().toString());
+OrderResponse p = tk.preview(ForemanConstants.TK_ACCOUNT_NO, builder.build().toString());
 
 // place a real order
-Order o = tk.order(ForemanConstants.TK_ACCOUNT_NO, builder.build().toString());
+OrderResponse o = tk.order(ForemanConstants.TK_ACCOUNT_NO, builder.build().toString());
+
+// check the status of your orders
+OrdersResponse os = tk.orders(ForemanConstants.TK_ACCOUNT_NO);
 ```
 ## Warnings
 

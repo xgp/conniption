@@ -3,6 +3,8 @@ package com.celexus.conniption.api;
 import com.celexus.conniption.foreman.ForemanConstants;
 import com.celexus.conniption.foreman.TKResponse;
 import com.celexus.conniption.foreman.TradeKingForeman;
+import com.celexus.conniption.foreman.stream.StreamHandler;
+import com.celexus.conniption.foreman.stream.StreamingQuote;
 import com.celexus.conniption.foreman.util.ResponseFormat;
 import com.celexus.conniption.foreman.util.builder.AccountsBuilder;
 import com.celexus.conniption.foreman.util.builder.APIBuilder;
@@ -14,10 +16,8 @@ import com.celexus.conniption.model.order.OrderResponse;
 import com.celexus.conniption.model.orders.OrdersResponse;
 import com.celexus.conniption.model.quotes.Quote;
 import com.celexus.conniption.model.quotes.Quotes;
-import com.celexus.conniption.model.util.stream.StreamHandler;
-import com.celexus.conniption.model.util.stream.StreamingQuote;
 import static com.celexus.conniption.model.util.JAXBUtils.*;
-import com.celexus.conniption.model.util.fixml.*;
+import com.celexus.conniption.model.fixml.*;
 import java.util.List;
 import java.util.concurrent.Future;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
@@ -75,7 +75,7 @@ public class TradeKing {
 		   OrderResponse.class);
     }
 
-    public OrdersResponse orders(String accountId, String fixml) {
+    public OrdersResponse orders(String accountId) {
 	return get(OrdersBuilder.getOrders(accountId, ResponseFormat.XML),
 		   null,
                    "com.celexus.conniption.model.orders",
