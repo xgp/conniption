@@ -67,18 +67,18 @@ Future f = tk.quotes(new StreamHandler<Quote>() {
     public void handle(Quote quote) {
             System.out.println(quote.toString());
         }
-    }, "TWTR", "XIV");
+    }, "TWTR", "FB");
 
 // place a non-executing, preview order
-FIXMLBuilder builder = new FIXMLBuilder(a);
-    .timeInForce(TimeInForceField.DAY_ORDER);
-    .symbol("TWTR");
-    .priceType(PriceType.LIMIT);
-    .securityType(SecurityType.STOCK);
-    .quantity(1);
-    .executionPrice(18.01);
+FIXMLBuilder builder = new FIXMLBuilder()
+    .id(ForemanConstants.TK_ACCOUNT_NO.toString())
+    .timeInForce(TimeInForceField.DAY_ORDER)
+    .symbol("TWTR")
+    .priceType(PriceType.LIMIT)
+    .securityType(SecurityType.STOCK)
+    .quantity(1)
+    .executionPrice(18.01)
     .side(MarketSideField.BUY);
-
 Order p = tk.preview(ForemanConstants.TK_ACCOUNT_NO, builder.build().toString());
 
 // place a real order

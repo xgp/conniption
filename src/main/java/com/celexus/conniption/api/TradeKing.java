@@ -1,5 +1,6 @@
 package com.celexus.conniption.api;
 
+import com.celexus.conniption.foreman.ForemanConstants;
 import com.celexus.conniption.foreman.TKResponse;
 import com.celexus.conniption.foreman.TradeKingForeman;
 import com.celexus.conniption.foreman.util.ResponseFormat;
@@ -15,7 +16,7 @@ import com.celexus.conniption.model.Quotes;
 import com.celexus.conniption.model.stream.StreamHandler;
 import com.celexus.conniption.model.stream.StreamingQuote;
 import static com.celexus.conniption.model.util.JAXBUtils.*;
-// import com.celexus.conniption.model.util.fixml.*;
+import com.celexus.conniption.model.util.fixml.*;
 import java.util.List;
 import java.util.concurrent.Future;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
@@ -68,6 +69,12 @@ public class TradeKing {
 		   Order.class);
     }
 
+    public Order orders(String accountId, String fixml) {
+	return get(OrdersBuilder.getOrders(accountId, ResponseFormat.XML),
+		   "orderstatus",
+		   Order.class);
+    }
+
     private <T> T get(APIBuilder builder, String root, Class<T> clazz) {
 	try {
 	    TKResponse response = foreman
@@ -81,30 +88,42 @@ public class TradeKing {
     static public void main(String[] argv) throws Exception {
 	TradeKing tk = new TradeKing(new TradeKingForeman());
 
+	FIXMLBuilder fixml = new FIXMLBuilder().
+	    id(ForemanConstants.TK_ACCOUNT_NO.toString())
+	    .timeInForce(TimeInForceField.DAY_ORDER)
+	    .symbol("TWTR")
+	    .priceType(PriceType.LIMIT)
+	    .securityType(SecurityType.STOCK)
+	    .quantity(1)
+	    .executionPrice(.01)
+	    .side(MarketSideField.BUY);
+	System.err.println(fixml.build().toString());
+	Order o = tk.preview(ForemanConstants.TK_ACCOUNT_NO.toString(),
+			     fixml.build().toString());
+	log(o);
+
+	/*
 	Clock c = tk.clock();
-	Accounts a = tk.accounts();
-	Quotes q = tk.quotes("TWTR", "XIV");
-	Future f = tk.quotes(handler, "TWTR", "XIV");
-	
 	log(c);
+
+	Accounts a = tk.accounts();
 	log(a);
+
+	Quotes q = tk.quotes("TWTR", "XIV");
 	log(q);
 
-	wait(f, 5000L);
+	Future f = tk.quotes(handler, "TWTR", "XIV");
+	wait(f, 15000L);
+	*/
     }
 
     static private void log(Object o) {
 	System.err.println(ReflectionToStringBuilder.toString(o, new RecursiveToStringStyle()));
     }
 
-    static private void wait(Future f, long millis) {
-	while (!f.isDone()) {
-	    try {
-		Thread.sleep(millis);
-	    } catch (Exception e) {
-		break;
-	    }
-	}
+    static private void wait(Future f, long millis) throws Exception {
+	Thread.sleep(millis);
+	if (!f.isDone()) f.cancel(true);
     }
 
     static private final StreamHandler<Quote> handler = new StreamHandler<Quote>() {
@@ -113,14 +132,4 @@ public class TradeKing {
 	}
     };
 
-    /*
-    FIXMLBuilder builder = new FIXMLBuilder(a);
-    builder.timeInForce(TimeInForceField.DAY_ORDER);
-    builder.symbol("OCQLF");
-    builder.priceType(PriceType.LIMIT);
-    builder.securityType(SecurityType.STOCK);
-    builder.quantity(1);
-    builder.executionPrice(.01);
-    builder.side(MarketSideField.BUY);
-    */
 }

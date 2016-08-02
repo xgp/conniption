@@ -12,14 +12,19 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JAXBUtils {
+    static private final Logger log = LoggerFactory.getLogger(JAXBUtils.class);
 
     static public <T> T getElement(String response, String root, Class<T> clazz) throws Exception {
 	return getElement("com.celexus.conniption.model", response, root, clazz);
     }
 
     static public <T> T getElement(String path, String response, String root, Class<T> clazz) throws Exception {
+	log.trace(response);
+
 	JAXBContext jaxbContext = JAXBContext.newInstance(path);
 	Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 	

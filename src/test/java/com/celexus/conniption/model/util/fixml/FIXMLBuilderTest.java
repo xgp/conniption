@@ -1,4 +1,4 @@
-package com.celexus.model.util.fixml;
+package com.celexus.conniption.model.util.fixml;
 
 import static org.junit.Assert.assertEquals;
 
@@ -30,7 +30,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void simpleBuyTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.DAY_ORDER);
         builder.symbol("F");
@@ -60,7 +60,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void simpleSellTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.DAY_ORDER);
         builder.symbol("F");
@@ -93,7 +93,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void sellShortAtExecutionPriceTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.DAY_ORDER);
         builder.symbol("F");
@@ -128,7 +128,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void buyToCoverAtExecutionPriceTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.DAY_ORDER);
         builder.symbol("F");
@@ -160,7 +160,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void buyTrailingStopTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.DAY_ORDER);
         builder.symbol("IBM");
@@ -192,7 +192,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void buyTrailingStopPercentageTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
         builder.symbol("COST");
@@ -227,7 +227,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void marketTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.DAY_ORDER);
         builder.symbol("F");
@@ -257,7 +257,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void limitTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.DAY_ORDER);
         builder.symbol("F");
@@ -288,7 +288,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void stopTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.DAY_ORDER);
         builder.symbol("F");
@@ -325,7 +325,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void stopLimitTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.DAY_ORDER);
         builder.symbol("F");
@@ -361,7 +361,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void dayOrderTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.DAY_ORDER);
         builder.symbol("F");
@@ -393,7 +393,7 @@ public class FIXMLBuilderTest {
     @Test
     public void marketOnCloseTest() throws UtilityException {
 
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.MARKET_CLOSE);
         builder.symbol("F");
@@ -428,7 +428,7 @@ public class FIXMLBuilderTest {
      */
     @Test
     public void gtcTest() throws UtilityException {
-        FIXMLBuilder builder = new FIXMLBuilder(a);
+        FIXMLBuilder builder = new FIXMLBuilder();
         builder.id("12345678");
         builder.timeInForce(TimeInForceField.GOOD_TIL_CANCELED);
         builder.symbol("F");

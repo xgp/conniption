@@ -40,9 +40,7 @@ public class FIXMLBuilder implements Serializable {
     private Percentage percentage;
     private double stop = 0;
 
-    public FIXMLBuilder(String id) {
-        id = id;
-    }
+    public FIXMLBuilder() {}
 
     public FIXMLBuilder id(String id) {
         this.id = id;
@@ -100,7 +98,7 @@ public class FIXMLBuilder implements Serializable {
         return this;
     }
 
-    public FIXML build() throws UtilityException {
+    public String build() throws UtilityException {
         verify(side);
         verify(timeInForce);
         verify(symbol);
@@ -186,68 +184,68 @@ public class FIXMLBuilder implements Serializable {
         }
     }
 
-    public static FIXML buy(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype) {
-        return new FIXML(FIXMLBuilder.createSimpleOrder(id, sym, quantity, tinf, type, sectype, MarketSideField.BUY));
+    public static String buy(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype) {
+        return FIXMLBuilder.createSimpleOrder(id, sym, quantity, tinf, type, sectype, MarketSideField.BUY);
     }
 
-    private FIXML buyAtPrice(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype, double executionPrice, double stop) {
-        return new FIXML(FIXMLBuilder.createOrderAtExecution(id, sym, quantity, tinf, type, sectype, MarketSideField.BUY, executionPrice, stop));
+    private String buyAtPrice(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype, double executionPrice, double stop) {
+        return FIXMLBuilder.createOrderAtExecution(id, sym, quantity, tinf, type, sectype, MarketSideField.BUY, executionPrice, stop);
     }
 
-    private FIXML buyAtOffset(String id2, String symbol2, int quantity2, TimeInForceField timeInForce2, PriceType priceType2, SecurityType securityType2, Percentage offset) {
-        return new FIXML(FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.BUY, offset));
+    private String buyAtOffset(String id2, String symbol2, int quantity2, TimeInForceField timeInForce2, PriceType priceType2, SecurityType securityType2, Percentage offset) {
+        return FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.BUY, offset);
     }
 
-    private FIXML buyAtOffset(String id2, String symbol2, int quantity2, TimeInForceField timeInForce2, PriceType priceType2, SecurityType securityType2, double offset) {
-        return new FIXML(FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.BUY, offset));
+    private String buyAtOffset(String id2, String symbol2, int quantity2, TimeInForceField timeInForce2, PriceType priceType2, SecurityType securityType2, double offset) {
+        return FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.BUY, offset);
     }
 
-    public static FIXML sell(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype) {
-        return new FIXML(FIXMLBuilder.createSimpleOrder(id, sym, quantity, tinf, type, sectype, MarketSideField.SELL));
+    public static String sell(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype) {
+        return FIXMLBuilder.createSimpleOrder(id, sym, quantity, tinf, type, sectype, MarketSideField.SELL);
     }
 
-    private FIXML sellAtPrice(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype, double executionPrice, double stop) {
-        return new FIXML(FIXMLBuilder.createOrderAtExecution(id, sym, quantity, tinf, type, sectype, MarketSideField.SELL, executionPrice, stop));
+    private String sellAtPrice(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype, double executionPrice, double stop) {
+        return FIXMLBuilder.createOrderAtExecution(id, sym, quantity, tinf, type, sectype, MarketSideField.SELL, executionPrice, stop);
     }
 
-    private FIXML sellAtOffset(String id, String symbol, int quantity, TimeInForceField timeInForce, PriceType priceType, SecurityType securityType, Percentage offset) {
-        return new FIXML(FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.SELL, offset));
+    private String sellAtOffset(String id, String symbol, int quantity, TimeInForceField timeInForce, PriceType priceType, SecurityType securityType, Percentage offset) {
+        return FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.SELL, offset);
     }
 
-    private FIXML sellAtOffset(String id, String symbol, int quantity, TimeInForceField timeInForce, PriceType priceType, SecurityType securityType, double offset) {
-        return new FIXML(FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.SELL, offset));
+    private String sellAtOffset(String id, String symbol, int quantity, TimeInForceField timeInForce, PriceType priceType, SecurityType securityType, double offset) {
+        return FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.SELL, offset);
     }
 
-    public static FIXML sellShort(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype) {
-        return new FIXML(FIXMLBuilder.createSimpleOrder(id, sym, quantity, tinf, type, sectype, MarketSideField.SELL_SHORT));
+    public static String sellShort(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype) {
+        return FIXMLBuilder.createSimpleOrder(id, sym, quantity, tinf, type, sectype, MarketSideField.SELL_SHORT);
     }
 
-    private FIXML sellShortAtPrice(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype, double executionPrice, double stop) {
-        return new FIXML(FIXMLBuilder.createOrderAtExecution(id, sym, quantity, tinf, type, sectype, MarketSideField.SELL_SHORT, executionPrice, stop));
+    private String sellShortAtPrice(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype, double executionPrice, double stop) {
+        return FIXMLBuilder.createOrderAtExecution(id, sym, quantity, tinf, type, sectype, MarketSideField.SELL_SHORT, executionPrice, stop);
     }
 
-    private FIXML sellShortAtOffset(String id, String symbol, int quantity, TimeInForceField timeInForce, PriceType priceType, SecurityType securityType, double offset) {
-        return new FIXML(FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.SELL_SHORT, offset));
+    private String sellShortAtOffset(String id, String symbol, int quantity, TimeInForceField timeInForce, PriceType priceType, SecurityType securityType, double offset) {
+        return FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.SELL_SHORT, offset);
     }
 
-    private FIXML sellShortAtOffset(String id, String symbol, int quantity, TimeInForceField timeInForce, PriceType priceType, SecurityType securityType, Percentage offset) {
-        return new FIXML(FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.SELL_SHORT, offset));
+    private String sellShortAtOffset(String id, String symbol, int quantity, TimeInForceField timeInForce, PriceType priceType, SecurityType securityType, Percentage offset) {
+        return FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.SELL_SHORT, offset);
     }
 
-    public static FIXML buyToCover(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype) {
-        return new FIXML(FIXMLBuilder.createSimpleOrder(id, sym, quantity, tinf, type, sectype, MarketSideField.SELL_SHORT));
+    public static String buyToCover(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype) {
+        return FIXMLBuilder.createSimpleOrder(id, sym, quantity, tinf, type, sectype, MarketSideField.SELL_SHORT);
     }
 
-    private FIXML buyToCoverAtPrice(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype, double executionPrice, double stop) {
-        return new FIXML(FIXMLBuilder.createOrderAtExecution(id, sym, quantity, tinf, type, sectype, MarketSideField.BUY_TO_COVER, executionPrice, stop));
+    private String buyToCoverAtPrice(String id, String sym, int quantity, TimeInForceField tinf, PriceType type, SecurityType sectype, double executionPrice, double stop) {
+        return FIXMLBuilder.createOrderAtExecution(id, sym, quantity, tinf, type, sectype, MarketSideField.BUY_TO_COVER, executionPrice, stop);
     }
 
-    private FIXML buyToCoverAtOffset(String id2, String symbol2, int quantity2, TimeInForceField timeInForce2, PriceType priceType2, SecurityType securityType2, double offset) {
-        return new FIXML(FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.BUY_TO_COVER, offset));
+    private String buyToCoverAtOffset(String id2, String symbol2, int quantity2, TimeInForceField timeInForce2, PriceType priceType2, SecurityType securityType2, double offset) {
+        return FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.BUY_TO_COVER, offset);
     }
 
-    private FIXML buyToCoverAtOffset(String id2, String symbol2, int quantity2, TimeInForceField timeInForce2, PriceType priceType2, SecurityType securityType2, Percentage offset) {
-        return new FIXML(FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.BUY_TO_COVER, offset));
+    private String buyToCoverAtOffset(String id2, String symbol2, int quantity2, TimeInForceField timeInForce2, PriceType priceType2, SecurityType securityType2, Percentage offset) {
+        return FIXMLBuilder.createOrderAtOffset(id, symbol, quantity, timeInForce, priceType, securityType, MarketSideField.BUY_TO_COVER, offset);
     }
 
     public static void changeOrder() {
@@ -332,7 +330,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder buyStockAtMarket(String accountId, String symbol, int quantity) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.MARKET)
@@ -343,7 +341,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder buyStockAtLimit(String accountId, String symbol, int quantity, double limit) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.LIMIT)
@@ -355,7 +353,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder buyStockAtStop(String accountId, String symbol, int quantity, double stop) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.STOP)
@@ -367,7 +365,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder buyStockAtStopLimit(String accountId, String symbol, int quantity, double stop, double limit) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.STOP_LIMIT)
@@ -380,7 +378,7 @@ public class FIXMLBuilder implements Serializable {
 
 
     static public FIXMLBuilder buyStockWithTrailingStopAmount(String accountId, String symbol, int quantity, double offset) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.TRAILING_STOP)
@@ -392,7 +390,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder buyStockWithTrailingStopPercent(String accountId, String symbol, int quantity, double percent) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.BUY)
 	    .priceType(PriceType.TRAILING_STOP)
@@ -404,7 +402,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder sellStockAtMarket(String accountId, String symbol, int quantity) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.MARKET)
@@ -415,7 +413,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder sellStockAtLimit(String accountId, String symbol, int quantity, double limit) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.LIMIT)
@@ -427,7 +425,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder sellStockAtStop(String accountId, String symbol, int quantity, double stop) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.STOP)
@@ -439,7 +437,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder sellStockAtStopLimit(String accountId, String symbol, int quantity, double stop, double limit) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.STOP_LIMIT)
@@ -451,7 +449,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder sellStockWithTrailingStopAmount(String accountId, String symbol, int quantity, double offset) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.TRAILING_STOP)
@@ -463,7 +461,7 @@ public class FIXMLBuilder implements Serializable {
     }
 
     static public FIXMLBuilder sellStockWithTrailingStopPercent(String accountId, String symbol, int quantity, double percent) {
-	FIXMLBuilder builder = new FIXMLBuilder(accountId)
+	FIXMLBuilder builder = new FIXMLBuilder().id(accountId)
 	    .securityType(SecurityType.STOCK)
 	    .side(MarketSideField.SELL)
 	    .priceType(PriceType.TRAILING_STOP)
