@@ -1,5 +1,5 @@
 ### NOTICE
-Fork of Ccook's [Conniption](https://github.com/Ccook/conniption) project. This is now significantly departed.
+Fork of Ccook's [Conniption](https://github.com/Ccook/conniption) project. This is now significantly departed. We now use xjc to automatically build Java classes for the model with [XSD](https://github.com/Ccook/conniption/blob/master/conniption-model/src/main/xsd/) built by hand from TradeKing's XML examples. Full FIXML parsing is also now supported using Java classes built from the [FIX Protocol](www.fixprotocol.org/) [FIXML](https://github.com/xgp/fixml) schemas.
 
 Conniption
 ==========
