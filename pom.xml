@@ -4,10 +4,9 @@
   <groupId>com.celexus</groupId>
   <artifactId>conniption</artifactId>
   <version>1.1.0-SNAPSHOT</version>
-  <name>Conniption - A Tradeking Foreman for Java</name>
+  <name>Conniption</name>
   <description>The missing tradeking API for Java</description>
-  <packaging>jar</packaging>
-  <url>http://www.github.com/ccook</url>
+  <packaging>pom</packaging>
 
   <developers>
     <developer>
@@ -50,60 +49,77 @@
     <scribe.version>2.8.0</scribe.version>
   </properties>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.4</version>
-    </dependency>
-    <dependency>
-      <groupId>com.github.scribejava</groupId>
-      <artifactId>scribejava-apis</artifactId>
-      <version>${scribe.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.github.scribejava</groupId>
-      <artifactId>scribejava-core</artifactId>
-      <version>${scribe.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.21</version>
-    </dependency>
-    <dependency>
-      <groupId>dom4j</groupId>
-      <artifactId>dom4j</artifactId>
-      <version>1.6.1</version>
-    </dependency>
-    <dependency>
-      <groupId>jaxen</groupId>
-      <artifactId>jaxen</artifactId>
-      <version>1.1.6</version>
-    </dependency>
-    <dependency>
-      <groupId>org.fixprotocol.fixml</groupId>
-      <artifactId>fixml</artifactId>
-      <version>5.0.SP2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.ning</groupId>
-      <artifactId>async-http-client</artifactId>
-      <version>1.9.38</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.1.7</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+  <modules>
+    <module>conniption-model</module>
+    <module>conniption-api</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+	<groupId>com.celexus</groupId>
+	<artifactId>conniption-model</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+	<groupId>com.celexus</groupId>
+	<artifactId>conniption-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-lang3</artifactId>
+	<version>3.4</version>
+      </dependency>
+      <dependency>
+	<groupId>com.github.scribejava</groupId>
+	<artifactId>scribejava-apis</artifactId>
+	<version>${scribe.version}</version>
+      </dependency>
+      <dependency>
+	<groupId>com.github.scribejava</groupId>
+	<artifactId>scribejava-core</artifactId>
+	<version>${scribe.version}</version>
+      </dependency>
+      <dependency>
+	<groupId>org.slf4j</groupId>
+	<artifactId>slf4j-api</artifactId>
+	<version>1.7.21</version>
+      </dependency>
+      <dependency>
+	<groupId>dom4j</groupId>
+	<artifactId>dom4j</artifactId>
+	<version>1.6.1</version>
+      </dependency>
+      <dependency>
+	<groupId>jaxen</groupId>
+	<artifactId>jaxen</artifactId>
+	<version>1.1.6</version>
+      </dependency>
+      <dependency>
+	<groupId>org.fixprotocol.fixml</groupId>
+	<artifactId>fixml</artifactId>
+	<version>5.0.SP2</version>
+      </dependency>
+      <dependency>
+	<groupId>com.ning</groupId>
+	<artifactId>async-http-client</artifactId>
+	<version>1.9.38</version>
+      </dependency>
+      <dependency>
+	<groupId>junit</groupId>
+	<artifactId>junit</artifactId>
+	<version>4.11</version>
+	<scope>test</scope>
+      </dependency>
+      <dependency>
+	<groupId>ch.qos.logback</groupId>
+	<artifactId>logback-classic</artifactId>
+	<version>1.1.7</version>
+	<scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <plugins>
