@@ -1,5 +1,5 @@
 ### NOTICE
-Fork of Ccook's [Conniption](https://github.com/Ccook/conniption) project. This is now significantly departed. We now use xjc to automatically build Java classes for the model with [XSD](https://github.com/Ccook/conniption/blob/master/conniption-model/src/main/xsd/) built by hand from TradeKing's XML examples. Full FIXML parsing is also now supported using Java classes built from the [FIX Protocol](www.fixprotocol.org/) [FIXML](https://github.com/xgp/fixml) schemas.
+Fork of Ccook's [Conniption](https://github.com/Ccook/conniption) project. This is now significantly departed. We now use xjc to automatically build Java classes for the model with [XSD](https://github.com/xgp/conniption/blob/master/conniption-model/src/main/xsd/) built by hand from TradeKing's XML examples. Full FIXML parsing is also now supported using Java classes built from the [FIX Protocol](http://www.fixprotocol.org/) [FIXML](https://github.com/xgp/fixml) schemas.
 
 Conniption
 ==========
@@ -46,9 +46,9 @@ Use the maven clean install directive to compile and make sure everythng works. 
 
 ## Usage
 
-#### [TradeKing](https://github.com/Ccook/conniption/blob/master/src/main/java/com/celexus/conniption/api/TradeKing.java)
+#### [TradeKing](https://github.com/xgp/conniption/blob/master/src/main/java/com/celexus/conniption/api/TradeKing.java)
 
-This is the main entry point to using the API. The other classes you should care about are all in [model](https://github.com/Ccook/conniption/blob/master/connption-model/). Usage is pretty straightforward:
+This is the main entry point to using the API. The other classes you should care about are all in [model](https://github.com/xgp/conniption/blob/master/connption-model/). Usage is pretty straightforward:
 
 ```java
 TradeKing tk = new TradeKing(new TradeKingForeman());
