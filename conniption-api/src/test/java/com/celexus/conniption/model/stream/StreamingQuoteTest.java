@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.celexus.conniption.model.stream;
+package com.celexus.conniption.model.util.stream;
 
-import com.celexus.conniption.model.Quote;
+import com.celexus.conniption.model.quotes.Quote;
 import java.util.List;
 import java.util.concurrent.Future;
 import org.junit.Ignore;

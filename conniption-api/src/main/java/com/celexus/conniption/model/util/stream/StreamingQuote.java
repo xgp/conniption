@@ -1,10 +1,10 @@
-package com.celexus.conniption.model.stream;
+package com.celexus.conniption.model.util.stream;
 
 import com.celexus.conniption.foreman.ForemanConstants;
 import com.celexus.conniption.foreman.TKResponse;
 import com.celexus.conniption.foreman.util.APICall;
 import com.celexus.conniption.foreman.util.ResponseFormat;
-import com.celexus.conniption.model.Quote;
+import com.celexus.conniption.model.quotes.Quote;
 import com.celexus.conniption.model.util.JAXBUtils;
 import com.ning.http.client.AsyncHandler;
 import com.ning.http.client.AsyncHttpClient;
@@ -73,7 +73,8 @@ public class StreamingQuote {
 			    return AsyncHandler.STATE.CONTINUE;
 			}
 
-			Quote quote = JAXBUtils.getElement(q, null, Quote.class);
+			Quote quote = JAXBUtils.getElement("com.celexus.conniption.model.quotes",
+							   q, null, Quote.class);
 
 			handler.handle(quote);
 			quotes.add(quote);

@@ -18,10 +18,6 @@ import org.slf4j.LoggerFactory;
 public class JAXBUtils {
     static private final Logger log = LoggerFactory.getLogger(JAXBUtils.class);
 
-    static public <T> T getElement(String response, String root, Class<T> clazz) throws Exception {
-	return getElement("com.celexus.conniption.model", response, root, clazz);
-    }
-
     static public <T> T getElement(String path, String response, String root, Class<T> clazz) throws Exception {
 	log.trace(response);
 

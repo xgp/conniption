@@ -8,13 +8,13 @@ import com.celexus.conniption.foreman.util.builder.AccountsBuilder;
 import com.celexus.conniption.foreman.util.builder.APIBuilder;
 import com.celexus.conniption.foreman.util.builder.MarketBuilder;
 import com.celexus.conniption.foreman.util.builder.OrdersBuilder;
-import com.celexus.conniption.model.Accounts;
-import com.celexus.conniption.model.Clock;
-import com.celexus.conniption.model.Order;
-import com.celexus.conniption.model.Quote;
-import com.celexus.conniption.model.Quotes;
-import com.celexus.conniption.model.stream.StreamHandler;
-import com.celexus.conniption.model.stream.StreamingQuote;
+import com.celexus.conniption.model.accounts.AccountsResponse;
+import com.celexus.conniption.model.clock.ClockResponse;
+import com.celexus.conniption.model.order.OrderResponse;
+import com.celexus.conniption.model.quotes.Quote;
+import com.celexus.conniption.model.quotes.Quotes;
+import com.celexus.conniption.model.util.stream.StreamHandler;
+import com.celexus.conniption.model.util.stream.StreamingQuote;
 import static com.celexus.conniption.model.util.JAXBUtils.*;
 import com.celexus.conniption.model.util.fixml.*;
 import java.util.List;
@@ -34,15 +34,17 @@ public class TradeKing {
 	this.foreman = foreman;
     }
 
-    public Clock clock() {
+    public ClockResponse clock() {
 	return get(MarketBuilder.getClock(ResponseFormat.XML),
 		   null,
-		   Clock.class);
+                   "com.celexus.conniption.model.clock",
+		   ClockResponse.class);
     }
 
     public Quotes quotes(String... symbols) {
 	return get(MarketBuilder.getQuotes(ResponseFormat.XML, symbols),
 		   "quotes",
+                   "com.celexus.conniption.model.quotes",
 		   Quotes.class);
     }
 
@@ -51,35 +53,41 @@ public class TradeKing {
 	    .stream(handler, symbols);
     }
 
-    public Accounts accounts() {
+    public AccountsResponse accounts() {
 	return get(AccountsBuilder.getAccounts(ResponseFormat.XML),
-		   "accounts",
-		   Accounts.class);
+		   null,
+		   "com.celexus.conniption.model.accounts",
+		   AccountsResponse.class);
     }
 
-    public Order preview(String accountId, String fixml) {
+    public OrderResponse preview(String accountId, String fixml) {
         return get(OrdersBuilder.preview(accountId, fixml, ResponseFormat.XML),
 		   null,
-		   Order.class);
+                   "com.celexus.conniption.model.order",
+		   OrderResponse.class);
     }
 
-    public Order order(String accountId, String fixml) {
+    public OrderResponse order(String accountId, String fixml) {
         return get(OrdersBuilder.postOrder(accountId, fixml, ResponseFormat.XML),
 		   null,
-		   Order.class);
+                   "com.celexus.conniption.model.order",
+		   OrderResponse.class);
     }
 
-    public Order orders(String accountId, String fixml) {
+    /*
+    public OrdersResponse orders(String accountId, String fixml) {
 	return get(OrdersBuilder.getOrders(accountId, ResponseFormat.XML),
 		   "orderstatus",
-		   Order.class);
+                   "com.celexus.conniption.model.orders",
+		   OrdersResponse.class);
     }
+    */
 
-    private <T> T get(APIBuilder builder, String root, Class<T> clazz) {
+    private <T> T get(APIBuilder builder, String root, String pkg, Class<T> clazz) {
 	try {
 	    TKResponse response = foreman
 		.makeAPICall(builder);
-	    return getElement(response.toString(), root, clazz);
+	    return getElement(pkg, response.toString(), root, clazz);
 	} catch (Exception e) {
 	    throw new RuntimeException(e);
 	}
@@ -88,6 +96,7 @@ public class TradeKing {
     static public void main(String[] argv) throws Exception {
 	TradeKing tk = new TradeKing(new TradeKingForeman());
 
+	/*
 	FIXMLBuilder fixml = new FIXMLBuilder().
 	    id(ForemanConstants.TK_ACCOUNT_NO.toString())
 	    .timeInForce(TimeInForceField.DAY_ORDER)
@@ -102,7 +111,6 @@ public class TradeKing {
 			     fixml.build().toString());
 	log(o);
 
-	/*
 	Clock c = tk.clock();
 	log(c);
 
