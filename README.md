@@ -1,8 +1,8 @@
 ### NOTICE
-Fork of Ccook's [Conniption](https://github.com/Ccook/conniption) project. This is now significantly departed. We now use xjc to automatically build Java classes for the model with [XSD](https://github.com/xgp/conniption/blob/master/conniption-model/src/main/xsd/) built by hand from TradeKing's XML examples. Full FIXML parsing is also now supported using Java classes built from the [FIX Protocol](http://www.fixprotocol.org/) [FIXML](https://github.com/xgp/fixml) schemas.
+Fork of Ccook's [Conniption](https://github.com/Ccook/conniption) project. This is now significantly departed. We now use xjc to automatically build Java classes for the model with [XSD](https://github.com/xgp/tradeking/blob/master/tradeking-model/src/main/xsd/) built by hand from TradeKing's XML examples. Full FIXML parsing is also now supported using Java classes built from the [FIX Protocol](http://www.fixprotocol.org/) [FIXML](https://github.com/xgp/fixml) schemas.
 
-Conniption
-==========
+Tradeking
+=========
 
 The missing TradeKing API for Java.
 
@@ -32,23 +32,23 @@ For environment variables, put these lines in */etc/environment* or */etc/profil
 
 ## Building from souurce
 
-Use the maven clean install directive to compile and make sure everythng works. I highly recommend you do not use -DskipTests. The tests will check your connection to TradeKing
+Use the maven clean install directive to compile and make sure everythng works. I highly recommend you do not use -DskipTests. The tests will check your connection to TradeKing.
 
 ## Maven 
 
 ```xml
 <dependency>
-    <groupId>com.celexus</groupId>
-    <artifactId>conniption</artifactId>
+    <groupId>com.github.xgp</groupId>
+    <artifactId>tradeking-api</artifactId>
     <version>1.1.0</version>
 </dependency>
 ```
 
 ## Usage
 
-#### [TradeKing](https://github.com/xgp/conniption/blob/master/src/main/java/com/celexus/conniption/api/TradeKing.java)
+#### [TradeKing](https://github.com/xgp/tradeking/blob/master/src/main/java/com/celexus/conniption/api/TradeKing.java)
 
-This is the main entry point to using the API. The other classes you should care about are all in [model](https://github.com/xgp/conniption/blob/master/connption-model/). Usage is pretty straightforward:
+This is the main entry point to using the API. The other classes you should care about are all in [model](https://github.com/xgp/tradeking/blob/master/tradeking-model/). Usage is pretty straightforward:
 
 ```java
 TradeKing tk = new TradeKing(new TradeKingForeman());
@@ -89,10 +89,10 @@ OrdersResponse os = tk.orders(ForemanConstants.TK_ACCOUNT_NO);
 ```
 ## Warnings
 
-Conniption assumes the most simpliest of Accounts. Don't use if you're doing complex shit. I also haven't implemented options functionality yet. Use at your own risk.
+This assumes the most simpliest of Accounts. Don't use if you're doing complex shit. I also haven't implemented options functionality yet. Use at your own risk.
 
 ## License, Attribution, etc
 
-Conniption is licensed under the Apache License, version 2. It is in no way associated with TradeKing or TradeKing Group, Inc.
+This is licensed under the Apache License, version 2. It is in no way associated with TradeKing or TradeKing Group, Inc.
 
 Please read TradeKing's documentation carefully! Use only as they suggest.
