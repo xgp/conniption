@@ -1,3 +1,18 @@
+
+### khoanguyen0791's version
+
+This is a fork of Garth xgp's project, which is forked from ccook's Conniption project. The goal is:
+
+- [x] Add bash files to make testing faster (don't have to retype commands)
+- [ ] To update the dependency to latest version of scribejava. The version this project uses is 2.8 while scribejava is already 5.5.0
+- [ ] Update streaming to work with the new async-http-client version 2.3.0 and netty 4.1.25.Final
+- [ ] Make jaxb2-maven-plugin work.
+- [ ] Update xsd schema for various responses from Ally.
+- [ ] To implement option search. (high priority)
+- [ ] Pull request to xgp or Ccook Conniption's project
+- [ ] Explore how well the news feature works and how to search (low priority)
+
+
 ### NOTICE
 Fork of Ccook's [Conniption](https://github.com/Ccook/conniption) project. This is now significantly departed. We now use xjc to automatically build Java classes for the model with [XSD](https://github.com/xgp/tradeking/blob/master/tradeking-model/src/main/xsd/) built by hand from TradeKing's XML examples. Full FIXML parsing is also now supported using Java classes built from the [FIX Protocol](http://www.fixprotocol.org/) [FIXML](https://github.com/xgp/fixml) schemas.
 
