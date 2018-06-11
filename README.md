@@ -12,6 +12,16 @@ This is a fork of Garth xgp's project, which is forked from ccook's Conniption p
 - [ ] Pull request to xgp or Ccook Conniption's project
 - [ ] Explore how well the news feature works and how to search (low priority)
 
+## Version 1.2
+- Updated scribejava dependency to 5.5.0.
+- Added system environment variable.
+- Updated JAXB in POM so it works in Java 8. No guarantee it will work in Java 9 and beyond.
+- Added shell script to build classes from XSD files using XJC since jaxb2-maven-plugin refuse to work. To re-enable it, just uncomment it in POM file.
+
+**To-do:**
+- Going to update streaming to work with new version of Async-http-client soon.
+- Test the program with real data. Right now all tests for non-streaming pass.
+
 
 ### NOTICE
 Fork of Ccook's [Conniption](https://github.com/Ccook/conniption) project. This is now significantly departed. We now use xjc to automatically build Java classes for the model with [XSD](https://github.com/xgp/tradeking/blob/master/tradeking-model/src/main/xsd/) built by hand from TradeKing's XML examples. Full FIXML parsing is also now supported using Java classes built from the [FIX Protocol](http://www.fixprotocol.org/) [FIXML](https://github.com/xgp/fixml) schemas.
