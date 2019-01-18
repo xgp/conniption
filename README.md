@@ -1,4 +1,6 @@
-### NOTICE
+### NOTICES
+This has not been updated since Ally Financial bought Tradeking. Ally shut down my access because my use did not meet their policy. If someone is still building apps for Ally/Tradeking and wants to maintain this, please send me a message.
+
 Fork of Ccook's [Conniption](https://github.com/Ccook/conniption) project. This is now significantly departed. We now use xjc to automatically build Java classes for the model with [XSD](https://github.com/xgp/tradeking/blob/master/tradeking-model/src/main/xsd/) built by hand from TradeKing's XML examples. Full FIXML parsing is also now supported using Java classes built from the [FIX Protocol](http://www.fixprotocol.org/) [FIXML](https://github.com/xgp/fixml) schemas.
 
 Tradeking
